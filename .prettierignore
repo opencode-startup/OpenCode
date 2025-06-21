@@ -1,0 +1,5 @@
+build
+next
+.husky
+node_modules
+pnpm-lock.yaml
