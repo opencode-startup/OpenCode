@@ -15,6 +15,7 @@ export default function Home() {
           height={38}
           priority
         />
+        <span className={'text-red-900'}>Test text</span>
         <ol
           className="list-inside list-decimal text-center font-[family-name:var(--font-geist-mono)] text-sm/6
             sm:text-left"
