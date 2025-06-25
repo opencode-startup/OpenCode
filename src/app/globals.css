@@ -343,8 +343,13 @@
   --color-pink-1000: var(--pink-1000);
 }
 
+html {
+  font-size: 16px;
+}
+
 body {
-  background: var(--background-100);
   color: var(--gray-1000);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--background-100);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
