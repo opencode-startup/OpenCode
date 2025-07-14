@@ -29,6 +29,8 @@ This is a Next.js 15 application using the App Router, built with React 19, Type
 - **Type checking**: TypeScript with strict mode enabled
 - **Code quality**: ESLint with Next.js, TypeScript, and Prettier integration
 - **Git hooks**: Husky with lint-staged for pre-commit formatting
+- **Icon System**: Reusable Icon component with type-safe name prop system
+- **SVG Processing**: @svgr/webpack for SVG-to-React component conversion
 
 ## Git Workflow and Pull Requests
 
@@ -65,6 +67,46 @@ This is a Next.js 15 application using the App Router, built with React 19, Type
 - Accessibility checklist (semantic HTML, keyboard navigation, focus states, ARIA)
 - Code review checklist
 
+## Project Structure
+
+```
+src/
+├── app/                    # Next.js App Router pages
+│   ├── globals.css        # Global styles with Tailwind CSS
+│   ├── layout.tsx         # Root layout component
+│   └── page.tsx           # Home page component
+└── components/
+    ├── icons/             # Icon system components
+    │   ├── Icon.tsx       # Main Icon component
+    │   ├── icon-map.tsx   # Icon definitions mapping
+    │   ├── types.ts       # Icon TypeScript types
+    │   └── index.ts       # Icon exports
+    └── index.ts           # Component exports
+```
+
+## Icon System
+
+The project uses a centralized Icon component system with type-safe name props:
+
+### Usage
+```tsx
+import { Icon } from '@/components/icons';
+
+// Type-safe icon usage
+<Icon name="warning-fill" size={24} className="text-red-500" />
+<Icon name="arrow-right" size={16} />
+```
+
+### Adding New Icons
+1. Add the icon name to `IconName` type in `src/components/icons/types.ts`
+2. Add the SVG component to the icon map in `src/components/icons/icon-map.tsx`
+3. Icons use `currentColor` for proper color inheritance
+4. Default size is 16px, configurable via `size` prop
+
+### Available Icons
+- `warning-fill` - Warning triangle with exclamation mark
+- `arrow-right` - Right-pointing arrow
+
 ## Key Configuration
 
 - Uses `@/*` path aliasing pointing to `./src/*`
@@ -73,6 +115,8 @@ This is a Next.js 15 application using the App Router, built with React 19, Type
 - Husky runs Prettier on all JS/TS/TSX files before commits
 - Robots meta configured to prevent indexing (development setup)
 - GitHub and Jira integration for issue tracking
+- Turbopack configuration for stable build performance (moved from experimental)
+- @svgr/webpack for SVG processing in both webpack and turbopack modes
 
 ## Development Standards
 
