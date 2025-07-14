@@ -9,7 +9,11 @@
       "Bash(gh pr create:*)",
       "Bash(rm:*)",
       "mcp__figma-dev-mode-mcp-server__get_variable_defs",
-      "Bash(npm run code-check:*)"
+      "Bash(npm run code-check:*)",
+      "Bash(npm install:*)",
+      "Bash(sudo npm install --save-dev @svgr/webpack)",
+      "Bash(mkdir:*)",
+      "Bash(mv:*)"
     ],
     "deny": []
   }
