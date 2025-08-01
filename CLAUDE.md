@@ -14,6 +14,7 @@ This is a Next.js 15 application using the App Router, built with React 19, Type
 - `npm run code-check` - Run TypeScript check and ESLint (use this for validation)
 
 ### Jira Integration Script
+
 - `./get_jira_title.sh` - Get Jira issue title for PR creation
   - `-h, --help` - Display help message
   - `-q, --quiet` - Output only the PR title without additional text (use for commands)
@@ -35,15 +36,18 @@ This is a Next.js 15 application using the App Router, built with React 19, Type
 ## Git Workflow and Pull Requests
 
 ### Branch Naming Convention
+
 - **Feature branches**: `feature/[Jira-key]-[task-number]` (e.g., `feature/OC-17`)
 - **Bug fix branches**: `bugFix/[Jira-key]-[task-number]` (e.g., `bugFix/OC-25`)
 - **Jira key**: Always use `OC` as the project key
 
 ### Commit Message Format
+
 - Format: `[Jira-key]-[task-number] <summary of commit>`
 - Example: `OC-17 Add user authentication component`
 
 ### Pull Request Creation
+
 1. Use the PR template located at `.github/pull_request_template.md`
 2. Get the Jira issue title using: `./get_jira_title.sh -q`
 3. Create PR with GitHub CLI using the script output:
@@ -54,12 +58,14 @@ This is a Next.js 15 application using the App Router, built with React 19, Type
 5. Delete the filled template file after pushing changes
 
 ### Script Output Examples
+
 - **Default (verbose)**: Shows Jira key, issue title, and PR title format
 - **Quiet mode**: `[OC-32] - [FE] Remove app from Google crawling`
 - **Key only**: `OC-32`
 - **Title only**: `[FE] Remove app from Google crawling`
 
 ### PR Template Requirements
+
 - Description with context and reasoning
 - Change type selection (Feature/Bug fix/Refactor/Documentation/Testing/Other)
 - Screenshots for UI changes
@@ -89,6 +95,7 @@ src/
 The project uses a centralized Icon component system with type-safe name props:
 
 ### Usage
+
 ```tsx
 import { Icon } from '@/components/icons';
 
@@ -98,12 +105,14 @@ import { Icon } from '@/components/icons';
 ```
 
 ### Adding New Icons
+
 1. Add the icon name to `IconName` type in `src/components/icons/types.ts`
 2. Add the SVG component to the icon map in `src/components/icons/icon-map.tsx`
 3. Icons use `currentColor` for proper color inheritance
 4. Default size is 16px, configurable via `size` prop
 
 ### Available Icons
+
 - `warning-fill` - Warning triangle with exclamation mark
 - `arrow-right` - Right-pointing arrow
 
