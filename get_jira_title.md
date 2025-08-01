@@ -31,6 +31,7 @@ This script retrieves the Jira ticket title for the current branch and formats i
 ### Examples
 
 #### Default output (verbose)
+
 ```bash
 $ ./get_jira_title.sh
 Jira key: OC-32
@@ -39,18 +40,21 @@ PR title format: [OC-32] - [FE] Remove app from Google crawling
 ```
 
 #### Quiet output (for use in commands)
+
 ```bash
 $ ./get_jira_title.sh --quiet
 [OC-32] - [FE] Remove app from Google crawling
 ```
 
 #### Key only
+
 ```bash
 $ ./get_jira_title.sh --key-only
 OC-32
 ```
 
 #### Title only
+
 ```bash
 $ ./get_jira_title.sh --title-only
 [FE] Remove app from Google crawling
@@ -69,6 +73,7 @@ Where `filled_template.md` is a file containing your filled-in version of the PR
 ## Branch Naming Convention
 
 This script expects branch names to follow one of these formats:
+
 - `feature/OC-XX` for feature branches
 - `bugFix/OC-XX` for bug fix branches
 
