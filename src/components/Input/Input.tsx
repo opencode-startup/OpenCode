@@ -3,7 +3,7 @@
 import clsx from 'clsx';
 import { forwardRef, useId } from 'react';
 
-import { Icon } from '../icons';
+import { Icon } from '../Icon';
 import { InputProps } from './types';
 
 const sizeClasses = {

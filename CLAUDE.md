@@ -97,7 +97,7 @@ The project uses a centralized Icon component system with type-safe name props:
 ### Usage
 
 ```tsx
-import { Icon } from '@/components/icons';
+import { Icon } from '@/components/Icon';
 
 // Type-safe icon usage
 <Icon name="warning-fill" size={24} className="text-red-500" />

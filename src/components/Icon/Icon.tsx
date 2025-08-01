@@ -24,7 +24,7 @@ export const Icon: React.FC<IconProps> = ({
     return <IconComponent width={size} height={size} className={className} {...props} />;
   }
 
-  // Fallback to generic SVG wrapper for custom icons
+  // Fallback to generic SVG wrapper for custom Icon
   return (
     <svg width={size} height={size} className={className} {...props}>
       {children}
