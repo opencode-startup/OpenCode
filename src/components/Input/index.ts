@@ -1,2 +1,6 @@
 export { default as Input } from './Input';
-export type { InputProps } from './types';
+export { Helper } from './Helper';
+export { Label } from './Label';
+export { Prefix } from './Prefix';
+export { Suffix } from './Suffix';
+export type { HelperProps, InputProps, LabelProps, PrefixProps, SuffixProps } from './types';

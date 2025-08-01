@@ -7,7 +7,6 @@ export default function Home() {
     <div className={'flex h-screen flex-1 flex-col items-center justify-center gap-6 p-8'}>
       <Input
         size={'large'}
-        label={'Email'}
         placeholder={'johndoe@gmail.com'}
         helper={'Enter your email address'}
         prefix={<Icon name={'warning-fill'} />}

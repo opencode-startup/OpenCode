@@ -3,7 +3,10 @@
 import clsx from 'clsx';
 import { forwardRef, useId } from 'react';
 
-import { Icon } from '../Icon';
+import { Helper } from './Helper';
+import { Label } from './Label';
+import { Prefix } from './Prefix';
+import { Suffix } from './Suffix';
 import { InputProps } from './types';
 
 const sizeClasses = {
@@ -22,8 +25,10 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       prefix,
       suffix,
       size = 'medium',
-      className = '',
-      disabled = false,
+      className,
+      disabled,
+      prefixHasStyling = true,
+      suffixHasStyling = true,
       ...props
     },
     ref,
@@ -33,86 +38,54 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
 
     return (
       <div className="flex flex-col gap-1">
-        {label && (
-          <label
-            htmlFor={inputId}
-            className={clsx('text-label-12', {
-              'text-red-900': error,
-              'text-gray-900': !error,
-            })}
-          >
-            {label}
-          </label>
-        )}
+        <Label htmlFor={inputId} size={size} error={!!error}>
+          {label}
+        </Label>
 
         <div
           className={clsx(
-            'bg-background-200 flex items-center overflow-hidden rounded transition-shadow duration-200 ease-out',
+            'bg-background-100 flex items-center overflow-hidden rounded transition-shadow duration-200 ease-out',
             { 'bg-gray-100': disabled },
             sizeClasses[size],
             {
-              'cursor-not-allowed opacity-50': disabled,
+              'cursor-not-allowed': disabled,
               [`shadow-[0px_0px_0px_1px_var(--gray-alpha-400)]
               focus-within:!shadow-[0px_0px_0px_1px_var(--gray-alpha-800),0px_0px_0px_4px_var(--gray-alpha-400)]
               hover:shadow-[0px_0px_0px_1px_var(--gray-alpha-500)]`]: !disabled && !error,
               [`shadow-[0px_0px_0px_1px_var(--red-800),0px_0px_0px_4px_var(--red-400)]
               focus-within:shadow-[0px_0px_0px_1px_var(--red-900),0px_0px_0px_4px_var(--red-500)]
-              hover:shadow-[0px_0px_0px_1px_var(--red-900),0px_0px_0px_4px_var(--red-500)]`]:
+              hover:shadow-[0px_0px_0px_1px_var(--red-900),0px_0px_0px_4px_#df434880]`]:
                 error && !disabled,
               'shadow-[0px_0px_0px_1px_var(--gray-alpha-400)]': disabled,
             },
             className,
           )}
         >
-          {prefix && (
-            <div
-              className="bg-background-200 flex h-full items-center justify-center px-3
-                shadow-[1px_0px_0px_0px_var(--gray-alpha-400)]"
-            >
-              {typeof prefix === 'string' ? (
-                <Icon name={prefix as any} size={16} className="text-gray-700" />
-              ) : (
-                prefix
-              )}
-            </div>
-          )}
+          <Prefix size={size} disabled={disabled} hasStyling={prefixHasStyling}>
+            {prefix}
+          </Prefix>
 
           <input
             ref={ref}
             id={inputId}
             disabled={disabled}
-            className={`text-gray-1000 flex-1 px-3 py-0 leading-5 font-normal outline-none placeholder:text-gray-700
-              disabled:cursor-not-allowed`}
+            className={clsx(
+              `text-gray-1000 flex-1 bg-transparent py-0 leading-5 font-normal outline-none
+              placeholder:text-gray-700`,
+              'disabled:cursor-not-allowed disabled:text-gray-600',
+              'px-3',
+            )}
             {...props}
           />
 
-          {suffix && (
-            <div
-              className="bg-background-200 flex h-full items-center justify-center px-3
-                shadow-[-1px_0px_0px_0px_var(--gray-alpha-400)]"
-            >
-              {typeof suffix === 'string' ? (
-                <Icon name={suffix as any} size={16} className="text-gray-700" />
-              ) : (
-                suffix
-              )}
-            </div>
-          )}
+          <Suffix size={size} disabled={disabled} hasStyling={suffixHasStyling}>
+            {suffix}
+          </Suffix>
         </div>
 
-        {(helper || error) && (
-          <div className="flex items-center gap-1">
-            {error && <Icon name="warning-fill" size={12} className="text-red-900" />}
-            <span
-              className={clsx('text-label-12', {
-                'text-red-900': error,
-                'text-gray-900': !error,
-              })}
-            >
-              {error || helper}
-            </span>
-          </div>
-        )}
+        <Helper size={size} error={error}>
+          {helper}
+        </Helper>
       </div>
     );
   },
