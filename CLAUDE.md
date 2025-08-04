@@ -31,6 +31,7 @@ This is a Next.js 15 application using the App Router, built with React 19, Type
 - **Code quality**: ESLint with Next.js, TypeScript, and Prettier integration
 - **Git hooks**: Husky with lint-staged for pre-commit formatting
 - **Icon System**: Reusable Icon component with type-safe name prop system
+- **Input System**: Modular Input component with accessibility support, loading states, and sub-components
 - **SVG Processing**: @svgr/webpack for SVG-to-React component conversion
 
 ## Git Workflow and Pull Requests
@@ -82,11 +83,20 @@ src/
 │   ├── layout.tsx         # Root layout component
 │   └── page.tsx           # Home page component
 └── components/
-    ├── icons/             # Icon system components
+    ├── Icon/              # Icon system components
     │   ├── Icon.tsx       # Main Icon component
     │   ├── icon-map.tsx   # Icon definitions mapping
     │   ├── types.ts       # Icon TypeScript types
     │   └── index.ts       # Icon exports
+    ├── Input/             # Input system components
+    │   ├── Input.tsx      # Main Input component
+    │   ├── Label.tsx      # Label sub-component
+    │   ├── Helper.tsx     # Helper text sub-component
+    │   ├── Prefix.tsx     # Prefix content sub-component
+    │   ├── Suffix.tsx     # Suffix content sub-component
+    │   ├── types.ts       # Input TypeScript types
+    │   ├── utils.ts       # Input utility functions
+    │   └── index.ts       # Input exports
     └── index.ts           # Component exports
 ```
 
@@ -115,6 +125,74 @@ import { Icon } from '@/components/Icon';
 
 - `warning-fill` - Warning triangle with exclamation mark
 - `arrow-right` - Right-pointing arrow
+
+## Input System
+
+The project includes a comprehensive Input component system with modular sub-components and accessibility support:
+
+### Usage
+
+```tsx
+import { Input } from '@/components/Input';
+
+// Basic input
+<Input label="Email" placeholder="Enter your email" />
+
+// Input with helper text
+<Input 
+  label="Password" 
+  helper="Must be at least 8 characters" 
+  type="password" 
+/>
+
+// Input with error state
+<Input 
+  label="Username" 
+  error="Username is required" 
+  value={username}
+  onChange={handleChange}
+/>
+
+// Input with prefix and suffix
+<Input 
+  label="Price" 
+  prefix="$" 
+  suffix="USD" 
+  type="number"
+/>
+
+// Input with loading state
+<Input 
+  label="Search" 
+  loading={isSearching}
+  placeholder="Search..."
+/>
+```
+
+### Features
+
+- **Modular Architecture**: Separate sub-components (Label, Helper, Prefix, Suffix)
+- **Accessibility**: Full ARIA attribute support with automatic generation
+- **Loading States**: Built-in spinner for async operations
+- **Size Variants**: Small, medium (default), and large sizes
+- **Error Handling**: Visual error states with helper text
+- **Flexible Content**: Support for prefix/suffix with optional styling
+- **TypeScript**: Comprehensive type definitions with proper HTML input inheritance
+
+### Sub-components
+
+- `Label` - Form label with size and error state variants
+- `Helper` - Helper text that can display normal hints or error messages
+- `Prefix` - Left-side content (text, icons, etc.) with optional styling
+- `Suffix` - Right-side content (text, icons, etc.) with optional styling
+
+### Accessibility Features
+
+- Automatic ARIA attribute generation via utils
+- Screen reader support for loading states
+- Proper form associations between labels and inputs
+- Error state announcements
+- Required field indicators
 
 ## Key Configuration
 
