@@ -1,4 +1,5 @@
 {
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
   "permissions": {
     "allow": [
       "Bash(find:*)",
@@ -13,7 +14,13 @@
       "Bash(npm install:*)",
       "Bash(sudo npm install --save-dev @svgr/webpack)",
       "Bash(mkdir:*)",
-      "Bash(mv:*)"
+      "Bash(mv:*)",
+      "mcp__figma-dev-mode-mcp-server__get_code",
+      "mcp__figma-dev-mode-mcp-server__get_image",
+      "Bash(npx prettier:*)",
+      "Bash(grep:*)",
+      "Bash(ls:*)",
+      "Bash(npx tsc:*)"
     ],
     "deny": []
   }
