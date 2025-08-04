@@ -11,6 +11,13 @@ export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 
   size?: InputSize;
   prefixHasStyling?: boolean;
   suffixHasStyling?: boolean;
+  // Accessibility enhancements
+  loading?: boolean;
+  'aria-describedby'?: string;
+  'aria-invalid'?: boolean;
+  'aria-required'?: boolean;
+  'aria-label'?: string;
+  'aria-labelledby'?: string;
 }
 
 export interface LabelProps {
@@ -38,6 +45,7 @@ export interface SuffixProps {
 }
 
 export interface HelperProps {
+  id?: string;
   children?: ReactNode;
   error?: ReactNode;
   size?: InputSize;

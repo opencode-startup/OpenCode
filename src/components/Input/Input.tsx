@@ -8,6 +8,7 @@ import { Label } from './Label';
 import { Prefix } from './Prefix';
 import { Suffix } from './Suffix';
 import { InputProps } from './types';
+import { generateInputAriaAttributes } from './utils';
 
 const sizeClasses = {
   small: 'h-8 text-sm',
@@ -29,12 +30,33 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       disabled,
       prefixHasStyling = true,
       suffixHasStyling = true,
+      loading = false,
+      required,
+      'aria-describedby': ariaDescribedBy,
+      'aria-invalid': ariaInvalid,
+      'aria-required': ariaRequired,
+      'aria-label': ariaLabel,
+      'aria-labelledby': ariaLabelledBy,
       ...props
     },
     ref,
   ) => {
     const generatedId = useId();
     const inputId = id || generatedId;
+    const helperId = `${inputId}-helper`;
+    const hasHelperContent = !!(helper || error);
+
+    // Generate ARIA attributes using utils
+    const ariaAttributes = generateInputAriaAttributes({
+      helperId,
+      hasHelperContent,
+      userAriaDescribedBy: ariaDescribedBy,
+      error,
+      required,
+      loading,
+      userAriaInvalid: ariaInvalid,
+      userAriaRequired: ariaRequired,
+    });
 
     return (
       <div className="flex flex-col gap-1">
@@ -69,6 +91,13 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             ref={ref}
             id={inputId}
             disabled={disabled}
+            required={required}
+            aria-describedby={ariaAttributes['aria-describedby']}
+            aria-invalid={ariaAttributes['aria-invalid']}
+            aria-required={ariaAttributes['aria-required']}
+            aria-label={ariaLabel}
+            aria-labelledby={ariaLabelledBy}
+            aria-busy={ariaAttributes['aria-busy']}
             className={clsx(
               `text-gray-1000 flex-1 bg-transparent py-0 leading-5 font-normal outline-none
               placeholder:text-gray-700`,
@@ -78,12 +107,22 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             {...props}
           />
 
+          {loading && (
+            <div className="flex h-full items-center justify-center px-3">
+              <div
+                className="h-4 w-4 animate-spin rounded-full border-2 border-gray-300 border-t-gray-600"
+                role="status"
+                aria-label="Loading"
+              />
+            </div>
+          )}
+
           <Suffix size={size} disabled={disabled} hasStyling={suffixHasStyling}>
             {suffix}
           </Suffix>
         </div>
 
-        <Helper size={size} error={error}>
+        <Helper id={helperId} size={size} error={error}>
           {helper}
         </Helper>
       </div>

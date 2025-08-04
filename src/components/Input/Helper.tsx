@@ -9,11 +9,15 @@ const helperSizeClasses = {
   large: 'text-[0.875rem] leading-[1.25rem]', // 14px / 20px
 };
 
-export const Helper = ({ children, error, size = 'medium', className }: HelperProps) => {
+export const Helper = ({ id, children, error, size = 'medium', className }: HelperProps) => {
   if (!children && !error) return null;
 
   return (
-    <div className={clsx('flex items-center gap-1', className)}>
+    <div
+      id={id}
+      className={clsx('flex items-center gap-1', className)}
+      role={error ? 'alert' : undefined}
+    >
       {error && <Icon name="warning-fill" size={12} className="text-red-900" />}
       <span
         className={clsx('font-normal', helperSizeClasses[size], {
