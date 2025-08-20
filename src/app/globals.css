@@ -356,70 +356,70 @@ body {
 
 @layer components {
   /* Heading styles */
-  .text-heading-72 {
+  .typo-heading-72 {
     font-size: 4.5rem;
     line-height: 4.5rem;
     letter-spacing: -0.27rem;
     font-weight: 600;
   }
 
-  .text-heading-64 {
+  .typo-heading-64 {
     font-size: 4rem;
     line-height: 4rem;
     letter-spacing: -0.24rem;
     font-weight: 600;
   }
 
-  .text-heading-56 {
+  .typo-heading-56 {
     font-size: 3.5rem;
     line-height: 3.5rem;
     letter-spacing: -0.21rem;
     font-weight: 600;
   }
 
-  .text-heading-48 {
+  .typo-heading-48 {
     font-size: 3rem;
     line-height: 3.5rem;
     letter-spacing: -0.18rem;
     font-weight: 600;
   }
 
-  .text-heading-40 {
+  .typo-heading-40 {
     font-size: 2.5rem;
     line-height: 3rem;
     letter-spacing: -0.15rem;
     font-weight: 600;
   }
 
-  .text-heading-32 {
+  .typo-heading-32 {
     font-size: 2rem;
     line-height: 2.5rem;
     letter-spacing: -0.08rem;
     font-weight: 600;
   }
 
-  .text-heading-24 {
+  .typo-heading-24 {
     font-size: 1.5rem;
     line-height: 2rem;
     letter-spacing: -0.06rem;
     font-weight: 600;
   }
 
-  .text-heading-20 {
+  .typo-heading-20 {
     font-size: 1.25rem;
     line-height: 1.625rem;
     letter-spacing: -0.025rem;
     font-weight: 600;
   }
 
-  .text-heading-16 {
+  .typo-heading-16 {
     font-size: 1rem;
     line-height: 1.5rem;
     letter-spacing: -0.02rem;
     font-weight: 600;
   }
 
-  .text-heading-14 {
+  .typo-heading-14 {
     font-size: 0.875rem;
     line-height: 1.25rem;
     letter-spacing: -0.0175rem;
@@ -427,87 +427,87 @@ body {
   }
 
   /* Copy styles */
-  .text-copy-24 {
+  .typo-copy-24 {
     font-size: 1.5rem;
     line-height: 2.25rem;
     font-weight: 400;
   }
 
-  .text-copy-20 {
+  .typo-copy-20 {
     font-size: 1.25rem;
     line-height: 2.25rem;
     font-weight: 400;
   }
 
-  .text-copy-18 {
+  .typo-copy-18 {
     font-size: 1.125rem;
     line-height: 1.75rem;
     font-weight: 400;
   }
 
-  .text-copy-16 {
+  .typo-copy-16 {
     font-size: 1rem;
     line-height: 1.5rem;
     font-weight: 400;
   }
 
-  .text-copy-14 {
+  .typo-copy-14 {
     font-size: 0.875rem;
     line-height: 1.25rem;
     font-weight: 400;
   }
 
   /* Label utilities */
-  .text-label-20 {
+  .typo-label-20 {
     font-size: 1.25rem;
     line-height: 2rem;
     font-weight: 400;
   }
 
-  .text-label-18 {
+  .typo-label-18 {
     font-size: 1.125rem;
     line-height: 1.25rem;
     font-weight: 400;
   }
 
-  .text-label-16 {
+  .typo-label-16 {
     font-size: 1rem;
     line-height: 1.25rem;
     font-weight: 400;
   }
 
-  .text-label-14 {
+  .typo-label-14 {
     font-size: 0.875rem;
     line-height: 1.25rem;
     font-weight: 400;
   }
 
-  .text-label-12 {
+  .typo-label-12 {
     font-size: 0.75rem;
     line-height: 1rem;
     font-weight: 400;
   }
 
-  .text-label-10 {
+  .typo-label-10 {
     font-size: 0.625rem;
     line-height: 0.875rem;
     font-weight: 400;
   }
 
   /* Button styles */
-  .text-button-16 {
+  .typo-button-16 {
     font-size: 1rem;
     line-height: 1.25rem;
     font-weight: 500;
   }
 
-  .text-button-14 {
+  .typo-button-14 {
     font-size: 0.875rem;
     line-height: 1.25rem;
     font-weight: 500;
   }
 
-  .text-button-12 {
+  .typo-button-12 {
     font-size: 0.75rem;
     line-height: 1rem;
     font-weight: 500;
