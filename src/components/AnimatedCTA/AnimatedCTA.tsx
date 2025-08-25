@@ -2,7 +2,7 @@
 
 import './animation.css';
 
-import { forwardRef } from 'react';
+import { forwardRef, Ref } from 'react';
 
 import { Icon } from '@/components/Icon';
 
@@ -11,20 +11,37 @@ import { AnimatedCTAProps } from './types';
 import { getIconLayout } from './utils';
 import { sizeConfig, variants } from './variants';
 
-const AnimatedCTA = forwardRef<HTMLButtonElement, AnimatedCTAProps>(
-  ({ size = 'large', text, className, leftIcon, rightIcon, fullWidth = false, ...props }, ref) => {
+const AnimatedCTA = forwardRef(
+  (
+    {
+      size = 'large',
+      text,
+      className,
+      leftIcon,
+      rightIcon,
+      fullWidth = false,
+      as = 'button',
+      ...props
+    }: AnimatedCTAProps,
+    ref: Ref<HTMLButtonElement | HTMLAnchorElement>,
+  ) => {
     const { handleMouseEnter, isAnimating } = useAnimatedCTA({ text });
     const config = sizeConfig[size];
     const iconLayout = getIconLayout(leftIcon, rightIcon);
 
-    return (
-      <button
-        ref={ref}
-        className={`group relative ${isAnimating ? 'animating' : ''} ${variants({ size, iconLayout, fullWidth,
-          className, })}`}
-        onMouseEnter={handleMouseEnter}
-        {...props}
-      >
+    const commonProps = {
+      ref: ref as any,
+      className: `group relative ${isAnimating ? 'animating' : ''} ${variants({
+        size,
+        iconLayout,
+        fullWidth,
+        className,
+      })}`,
+      onMouseEnter: handleMouseEnter,
+    };
+
+    const renderContent = () => (
+      <>
         {leftIcon && (
           <div
             className={`bg-gray-1000 flex shrink-0 items-center justify-center rounded-full ${config.icon}`}
@@ -69,6 +86,20 @@ const AnimatedCTA = forwardRef<HTMLButtonElement, AnimatedCTAProps>(
             <Icon name={rightIcon} size={config.iconSize} className="text-background-200" />
           </div>
         )}
+      </>
+    );
+
+    if (as === 'link') {
+      return (
+        <a {...commonProps} {...(props as any)}>
+          {renderContent()}
+        </a>
+      );
+    }
+
+    return (
+      <button {...commonProps} {...(props as any)}>
+        {renderContent()}
       </button>
     );
   },
