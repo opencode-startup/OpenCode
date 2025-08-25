@@ -20,7 +20,12 @@
       "Bash(npx prettier:*)",
       "Bash(grep:*)",
       "Bash(ls:*)",
-      "Bash(npx tsc:*)"
+      "Bash(npx tsc:*)",
+      "Bash(env)",
+      "Bash(npx eslint:*)",
+      "WebFetch(domain:localhost)",
+      "Bash(cat:*)",
+      "mcp__ide__getDiagnostics"
     ],
     "deny": []
   }
