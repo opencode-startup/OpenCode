@@ -1,26 +1,28 @@
 'use client';
 
+import './animation.css';
+
 import { forwardRef } from 'react';
 
 import { Icon } from '@/components/Icon';
 
+import { useAnimatedCTA } from './hooks';
 import { AnimatedCTAProps } from './types';
 import { getIconLayout } from './utils';
 import { sizeConfig, variants } from './variants';
 
 const AnimatedCTA = forwardRef<HTMLButtonElement, AnimatedCTAProps>(
-  ({ size = 'large', children, className, leftIcon, rightIcon, ...props }, ref) => {
+  ({ size = 'large', text, className, leftIcon, rightIcon, fullWidth = false, ...props }, ref) => {
+    const { handleMouseEnter, isAnimating } = useAnimatedCTA({ text });
     const config = sizeConfig[size];
     const iconLayout = getIconLayout(leftIcon, rightIcon);
 
     return (
       <button
         ref={ref}
-        className={variants({
-          size,
-          iconLayout,
-          className,
-        })}
+        className={`group relative ${isAnimating ? 'animating' : ''} ${variants({ size, iconLayout, fullWidth,
+          className, })}`}
+        onMouseEnter={handleMouseEnter}
         {...props}
       >
         {leftIcon && (
@@ -31,8 +33,33 @@ const AnimatedCTA = forwardRef<HTMLButtonElement, AnimatedCTAProps>(
           </div>
         )}
 
-        <div className={`font-geist text-gray-1000 font-semibold text-nowrap ${config.text}`}>
-          {children}
+        <div className={'relative'}>
+          <div className={`text-gray-1000 text-nowrap ${config.text} relative`}>
+            {text.split('').map((letter: string, index: number) => (
+              <span
+                key={index}
+                className="animated-front-letter front-letter inline-block"
+                style={{
+                  transitionDelay: `${index * 50}ms`,
+                }}
+              >
+                {letter === ' ' ? '\u00A0' : letter}
+              </span>
+            ))}
+          </div>
+          <div className={`text-gray-1000 text-nowrap ${config.text} absolute top-0 left-0`}>
+            {text.split('').map((letter: string, index: number) => (
+              <span
+                key={index}
+                className="animated-back-letter back-letter inline-block"
+                style={{
+                  transitionDelay: `${50 + index * 50}ms`,
+                }}
+              >
+                {letter === ' ' ? '\u00A0' : letter}
+              </span>
+            ))}
+          </div>
         </div>
 
         {rightIcon && (

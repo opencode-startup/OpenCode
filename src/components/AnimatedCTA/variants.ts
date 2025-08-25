@@ -4,7 +4,8 @@ import { AnimatedCTASize } from './types';
 
 export const variants = tv({
   base: [
-    'relative inline-flex cursor-pointer items-center justify-center overflow-clip rounded-full',
+    `relative inline-flex min-w-fit cursor-pointer items-center justify-between overflow-clip
+    rounded-full`,
     'bg-background-200 border-gray-alpha-400 hover:bg-background-100 border',
     `focus-visible:ring-offset-background-100 focus-visible:ring-2 focus-visible:ring-blue-600
     focus-visible:ring-offset-2 focus-visible:outline-none`,
@@ -36,6 +37,10 @@ export const variants = tv({
         medium: 'px-3',
         large: 'px-[1.125rem]',
       },
+    },
+    fullWidth: {
+      true: 'w-full',
+      false: 'w-auto',
     },
   },
   compoundVariants: [

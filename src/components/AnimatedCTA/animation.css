@@ -1,0 +1,27 @@
+.front-letter {
+  filter: blur(0px);
+  opacity: 1;
+  transform: translateY(0px) rotateX(0deg);
+  transition: none;
+}
+
+.group.animating .animated-front-letter {
+  filter: blur(4px);
+  opacity: 0;
+  transform: translateY(-18px) rotateX(80deg);
+  transition: all 400ms ease-out;
+}
+
+.back-letter {
+  filter: blur(4px);
+  opacity: 0;
+  transform: translateY(18px) rotateX(270deg);
+  transition: none;
+}
+
+.group.animating .animated-back-letter {
+  filter: blur(0px);
+  opacity: 1;
+  transform: translateY(0px) rotateX(360deg);
+  transition: all 400ms ease-out;
+}
