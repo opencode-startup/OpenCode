@@ -139,31 +139,31 @@ import { Input } from '@/components/Input';
 <Input label="Email" placeholder="Enter your email" />
 
 // Input with helper text
-<Input 
-  label="Password" 
-  helper="Must be at least 8 characters" 
-  type="password" 
+<Input
+  label="Password"
+  helper="Must be at least 8 characters"
+  type="password"
 />
 
 // Input with error state
-<Input 
-  label="Username" 
-  error="Username is required" 
+<Input
+  label="Username"
+  error="Username is required"
   value={username}
   onChange={handleChange}
 />
 
 // Input with prefix and suffix
-<Input 
-  label="Price" 
-  prefix="$" 
-  suffix="USD" 
+<Input
+  label="Price"
+  prefix="$"
+  suffix="USD"
   type="number"
 />
 
 // Input with loading state
-<Input 
-  label="Search" 
+<Input
+  label="Search"
   loading={isSearching}
   placeholder="Search..."
 />
