@@ -5,8 +5,6 @@ import { useEffect, useState } from 'react';
 interface UseTypingAnimationOptions {
   text?: string;
   speed?: number;
-  delay?: number;
-  showCursor?: boolean;
   humanLike?: boolean;
 }
 
@@ -69,9 +67,7 @@ const keyboardLayout: Record<string, string[]> = {
 
 export function useTypingAnimation({
   text = '',
-  speed = 100,
-  delay = 0,
-  showCursor = true,
+  speed = 75,
   humanLike = true,
 }: UseTypingAnimationOptions): UseTypingAnimationReturn {
   const [displayText, setDisplayText] = useState('');
@@ -167,10 +163,10 @@ export function useTypingAnimation({
 
     const startTimeout = setTimeout(() => {
       setShowCursorState(true);
-    }, delay);
+    }, 0);
 
     return () => clearTimeout(startTimeout);
-  }, [delay, text]);
+  }, [text]);
 
   // Execute typing steps (human-like mode)
   useEffect(() => {
@@ -215,18 +211,18 @@ export function useTypingAnimation({
   // Cursor blinking effect
   const [cursorVisible, setCursorVisible] = useState(true);
   useEffect(() => {
-    if (!showCursor || !showCursorState) return;
+    if (!showCursorState) return;
 
     const cursorInterval = setInterval(() => {
       setCursorVisible((prev) => !prev);
     }, 530); // Terminal-like cursor blink speed
 
     return () => clearInterval(cursorInterval);
-  }, [showCursor, showCursorState]);
+  }, [showCursorState]);
 
   return {
     displayText,
     isComplete,
-    showCursor: showCursor && showCursorState && cursorVisible,
+    showCursor: showCursorState && cursorVisible,
   };
 }

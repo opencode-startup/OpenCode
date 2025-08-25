@@ -9,9 +9,10 @@ import { iconSizes, logoIconVariants, logoTextVariants, logoVariants } from './v
 
 const Logo = forwardRef(
   (
-    { size = 'large', showText, className, animated, text, as = 'div', ...props }: LogoProps,
+    { size = 'large', className, animated = true, text, as = 'link', ...props }: LogoProps,
     ref: Ref<HTMLDivElement | HTMLAnchorElement>,
   ) => {
+    const showText = Boolean(text);
     const iconSize = iconSizes[size];
     const { displayText, showCursor } = useTypingAnimation({
       text,
