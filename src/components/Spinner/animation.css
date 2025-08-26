@@ -1,0 +1,14 @@
+.spinner-line {
+  animation: spinner-animation var(--animation-duration) linear infinite;
+  animation-delay: var(--animation-delay);
+  border-radius: 1px;
+}
+
+@keyframes spinner-animation {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.15;
+  }
+}
