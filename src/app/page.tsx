@@ -1,11 +1,11 @@
 'use client';
 
-import { AnimatedCTA } from '@/components';
+import { Logo } from '@/components';
 
 export default function Home() {
   return (
     <div className={'flex h-screen flex-1 flex-col items-center justify-center gap-6 p-8'}>
-      <AnimatedCTA fullWidth size={'large'} rightIcon={'arrow-right'} text="Start Learning" />
+      <Logo href={'/'} size={'large'} text={'OpenCode'} />
     </div>
   );
 }
