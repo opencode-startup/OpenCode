@@ -1,8 +1,8 @@
 'use client';
 
-import { forwardRef, useId } from 'react';
+import { forwardRef, Ref, useCallback, useId, useRef } from 'react';
 
-import { useSwitch } from './hooks';
+import { useSwitch, useSwitchAnimation } from './hooks';
 import { SwitchProps } from './types';
 import { switchContainerVariants, switchOptionVariants } from './variants';
 
@@ -24,6 +24,7 @@ const Switch = forwardRef<HTMLDivElement, SwitchProps>(
     ref,
   ) => {
     const generatedId = useId();
+    const containerRef = useRef<HTMLDivElement>(null);
     const { currentValue, handleOptionClick, handleKeyDown } = useSwitch({
       options,
       value,
@@ -31,10 +32,28 @@ const Switch = forwardRef<HTMLDivElement, SwitchProps>(
       onChange,
       disabled,
     });
+    const { backgroundStyle, shouldAnimate } = useSwitchAnimation({
+      options,
+      currentValue,
+      containerRef,
+    });
+
+    // Merge refs utility
+    const mergedRef = useCallback(
+      (ref: Ref<HTMLDivElement>) => (node: HTMLDivElement | null) => {
+        containerRef.current = node;
+        if (typeof ref === 'function') {
+          ref(node);
+        } else if (ref) {
+          ref.current = node;
+        }
+      },
+      [],
+    );
 
     return (
       <div
-        ref={ref}
+        ref={mergedRef(ref)}
         role="radiogroup"
         aria-label={ariaLabel}
         aria-labelledby={ariaLabelledBy}
@@ -46,6 +65,15 @@ const Switch = forwardRef<HTMLDivElement, SwitchProps>(
         })}
         {...props}
       >
+        {/* Moving background indicator */}
+        <div
+          className={`pointer-events-none absolute top-1 bottom-1 rounded-[0.125rem] bg-gray-100
+            ${shouldAnimate ? 'transition-all duration-200 ease-out' : ''}`}
+          style={{
+            left: `${backgroundStyle.left}px`,
+            width: `${backgroundStyle.width}px`,
+          }}
+        />
         {options.map((option, index) => {
           const isSelected = currentValue === option.value;
           const isOptionDisabled = disabled || option.disabled;

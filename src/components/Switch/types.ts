@@ -1,4 +1,4 @@
-import { HTMLAttributes, ReactNode } from 'react';
+import { HTMLAttributes, ReactNode, RefObject } from 'react';
 
 export type SwitchSize = 'small' | 'medium' | 'large';
 
@@ -19,4 +19,23 @@ export interface SwitchProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onCha
   'aria-label'?: string;
   'aria-labelledby'?: string;
   'aria-describedby'?: string;
+}
+
+export interface UseSwitchProps {
+  options: SwitchOption[];
+  value?: string;
+  defaultValue?: string;
+  onChange?: (value: string) => void;
+  disabled?: boolean;
+}
+
+export interface UseSwitchAnimationProps {
+  options: SwitchOption[];
+  currentValue: string;
+  containerRef: RefObject<HTMLDivElement | null>;
+}
+
+export interface BackgroundStyle {
+  left: number;
+  width: number;
 }

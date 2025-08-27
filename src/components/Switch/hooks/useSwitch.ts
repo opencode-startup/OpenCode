@@ -1,14 +1,6 @@
 import { KeyboardEvent, useCallback, useState } from 'react';
 
-import { SwitchOption } from '../types';
-
-interface UseSwitchProps {
-  options: SwitchOption[];
-  value?: string;
-  defaultValue?: string;
-  onChange?: (value: string) => void;
-  disabled?: boolean;
-}
+import { UseSwitchProps } from '../types';
 
 export const useSwitch = ({
   options,

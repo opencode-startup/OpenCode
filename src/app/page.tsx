@@ -5,11 +5,14 @@ import { useState } from 'react';
 import { Switch } from '@/components';
 
 export default function Home() {
-  const [switchValue, setSwitchValue] = useState('option1');
+  const [switchValue, setSwitchValue] = useState('option3');
 
   const switchOptions = [
-    { value: 'option1', label: 'Option 1' },
-    { value: 'option2', label: 'Option 2' },
+    { value: 'option1', label: 'Option 1', disabled: true },
+    { value: 'option2', label: 'Option 22' },
+    { value: 'option3', label: 'Option 23', disabled: true },
+    { value: 'option24', label: 'Option 24' },
+    { value: 'option22', label: 'Option 25' },
   ];
 
   return (

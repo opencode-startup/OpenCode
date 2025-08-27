@@ -38,21 +38,15 @@ export const switchOptionVariants = tv({
       large: 'px-4 py-2.5 text-[1rem] leading-[1.5rem]',
     },
     selected: {
-      true: 'text-gray-1000 bg-gray-100',
-      false: 'hover:text-gray-1000 bg-transparent text-gray-900',
+      true: 'text-gray-1000 relative z-10 bg-transparent',
+      false: 'hover:text-gray-1000 relative z-10 bg-transparent text-gray-900',
     },
     disabled: {
       true: 'cursor-not-allowed opacity-50',
       false: 'cursor-pointer',
     },
   },
-  compoundVariants: [
-    {
-      selected: false,
-      disabled: false,
-      className: 'hover:bg-gray-100/20',
-    },
-  ],
+  compoundVariants: [],
   defaultVariants: {
     size: 'medium',
     selected: false,
