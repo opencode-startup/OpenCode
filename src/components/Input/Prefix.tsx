@@ -1,19 +1,6 @@
-import clsx from 'clsx';
-
 import { Icon } from '../Icon';
 import { PrefixProps } from './types';
-
-const prefixSizeClasses = {
-  small: 'px-2',
-  medium: 'px-3',
-  large: 'px-3',
-};
-
-const iconSizes = {
-  small: 14,
-  medium: 16,
-  large: 16,
-};
+import { iconSizeConfig, prefixVariants } from './variants';
 
 export const Prefix = ({
   children,
@@ -26,19 +13,15 @@ export const Prefix = ({
 
   return (
     <div
-      className={clsx(
-        'flex h-full items-center justify-center',
-        {
-          'shadow-[1px_0px_0px_0px_var(--gray-alpha-400)]': hasStyling,
-          'pr-0': !hasStyling,
-          'opacity-50': disabled,
-        },
-        prefixSizeClasses[size],
+      className={prefixVariants({
+        size,
+        disabled,
+        hasStyling,
         className,
-      )}
+      })}
     >
       {typeof children === 'string' ? (
-        <Icon name={children as any} size={iconSizes[size]} className="text-gray-700" />
+        <Icon name={children as any} size={iconSizeConfig[size]} className="text-gray-700" />
       ) : (
         children
       )}
