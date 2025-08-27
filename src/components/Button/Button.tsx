@@ -2,8 +2,10 @@
 
 import { forwardRef } from 'react';
 
+import { Spinner } from '@/components';
+
 import { ButtonProps } from './types';
-import { variants } from './variants';
+import { sizeConfig, variants } from './variants';
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
@@ -40,11 +42,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         {...props}
       >
         {loading && (
-          <div
-            className="h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent"
-            role="status"
-            aria-label="Loading"
-          />
+          <Spinner size={sizeConfig[size].spinnerSize} role={'status'} aria-label="Loading" />
         )}
 
         {!loading && leftIcon && <span className="flex shrink-0 items-center">{leftIcon}</span>}

@@ -1,5 +1,7 @@
 import { tv } from 'tailwind-variants';
 
+import { ButtonSize } from './types';
+
 export const variants = tv({
   base: [
     'relative inline-flex cursor-pointer items-center justify-center overflow-hidden font-medium',
@@ -42,3 +44,21 @@ export const variants = tv({
     loading: false,
   },
 });
+
+// Size-specific configuration for spinner sizes
+export const sizeConfig = {
+  small: {
+    spinnerSize: 16,
+  },
+  medium: {
+    spinnerSize: 20,
+  },
+  large: {
+    spinnerSize: 24,
+  },
+} as const satisfies Record<
+  ButtonSize,
+  {
+    spinnerSize: number;
+  }
+>;
