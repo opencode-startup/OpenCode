@@ -3,12 +3,15 @@
 import clsx from 'clsx';
 import { forwardRef, useId } from 'react';
 
+import { Spinner } from '@/components';
+
 import { Helper } from './Helper';
 import { Label } from './Label';
 import { Prefix } from './Prefix';
 import { Suffix } from './Suffix';
 import { InputProps } from './types';
 import { generateInputAriaAttributes } from './utils';
+import { sizeConfig } from './variants';
 
 const sizeClasses = {
   small: 'h-8 text-sm',
@@ -108,12 +111,8 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           />
 
           {loading && (
-            <div className="flex h-full items-center justify-center px-3">
-              <div
-                className="h-4 w-4 animate-spin rounded-full border-2 border-gray-300 border-t-gray-600"
-                role="status"
-                aria-label="Loading"
-              />
+            <div className="flex h-full items-center justify-center pr-3">
+              <Spinner size={sizeConfig[size].spinnerSize} role="status" aria-label="Loading" />
             </div>
           )}
 
