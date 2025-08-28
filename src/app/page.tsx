@@ -2,11 +2,12 @@
 
 import { useState } from 'react';
 
-import { Switch, Tabs } from '@/components';
+import { Switch, Tabs, Toggle } from '@/components';
 
 export default function Home() {
   const [switchValue, setSwitchValue] = useState('option3');
   const [tabValue, setTabValue] = useState('tab1');
+  const [toggleValue, setToggleValue] = useState(false);
 
   const switchOptions = [
     { value: 'option1', label: 'Option 1', disabled: true },
@@ -46,6 +47,30 @@ export default function Home() {
           size="small"
           aria-label="Small switch example"
         />
+      </div>
+
+      <div className="flex w-full max-w-2xl flex-col items-center gap-4">
+        <h2 className="text-xl font-semibold text-gray-900">Toggle Component</h2>
+        <div className="flex items-center gap-4">
+          <Toggle
+            checked={toggleValue}
+            onChange={setToggleValue}
+            size="small"
+            aria-label="Small toggle example"
+          />
+          <Toggle
+            checked={toggleValue}
+            onChange={setToggleValue}
+            size="medium"
+            aria-label="Medium toggle example"
+          />
+          <Toggle
+            checked={toggleValue}
+            onChange={setToggleValue}
+            size="large"
+            aria-label="Large toggle example"
+          />
+        </div>
       </div>
     </div>
   );
