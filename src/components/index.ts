@@ -5,3 +5,4 @@ export * from './Input';
 export * from './Logo';
 export * from './Spinner';
 export * from './Switch';
+export * from './Tabs';
