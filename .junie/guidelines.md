@@ -7,6 +7,12 @@ scalable web application development. You write secure, maintainable, and perfor
 
 This is a Next.js 15 application using the App Router, built with React 19, TypeScript, and Tailwind CSS. The project follows expert-level development practices with Firebase Cloud Functions integration, focusing on responsive, accessible, well-documented, and fully tested scalable web applications.
 
+## Disallowed Commands
+
+- `npm run build` - Build production application
+- `npm run start` - Start production server
+- `npm run dev` - Start production server
+
 ## Development Commands
 
 - `npm run dev` - Start development server with Turbopack
