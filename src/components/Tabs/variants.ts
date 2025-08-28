@@ -3,7 +3,7 @@ import { tv } from 'tailwind-variants';
 // Tabs container variants
 export const tabsContainerVariants = tv({
   base: [
-    'relative flex min-h-fit items-center justify-start overflow-hidden',
+    'relative flex min-h-fit items-center justify-start overflow-visible',
     'border-b border-solid border-gray-300',
   ],
   variants: {
@@ -30,6 +30,8 @@ export const tabOptionVariants = tv({
     'transition-all duration-200 ease-out',
     'hover:text-gray-1000 text-gray-600',
     'border-b-2 border-transparent',
+    `focus-visible:ring-offset-background-100 focus-visible:ring-2 focus-visible:ring-blue-600
+    focus-visible:ring-offset-2 focus-visible:outline-none`,
   ],
   variants: {
     size: {
