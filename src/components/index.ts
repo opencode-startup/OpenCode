@@ -2,6 +2,7 @@ export * from './AnimatedCTA';
 export * from './Button';
 export * from './Icon';
 export * from './Input';
+export * from './Link';
 export * from './Logo';
 export * from './Spinner';
 export * from './Switch';
