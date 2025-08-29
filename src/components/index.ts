@@ -1,5 +1,6 @@
 export * from './AnimatedCTA';
 export * from './Button';
+export * from './GuideCross';
 export * from './Icon';
 export * from './Input';
 export * from './Link';
