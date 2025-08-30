@@ -28,6 +28,8 @@ export const switchContainerVariants = tv({
 export const switchOptionVariants = tv({
   base: [
     'flex flex-col items-start justify-center overflow-hidden rounded-[0.125rem] px-3 py-2',
+    `focus-visible:ring-offset-background-100 focus-visible:ring-2 focus-visible:ring-blue-600
+    focus-visible:ring-offset-2 focus-visible:outline-none`,
     'cursor-pointer transition-all duration-200 ease-out',
     'text-[0.875rem] leading-[1.25rem]',
   ],
