@@ -25,7 +25,7 @@ const Tabs = forwardRef<HTMLDivElement, TabsProps>(
   ) => {
     const generatedId = useId();
     const containerRef = useRef<HTMLDivElement>(null);
-    const { currentValue, handleTabClick } = useTabs({
+    const { currentValue, handleTabClick, handleKeyDown } = useTabs({
       tabs,
       value,
       defaultValue,
@@ -84,6 +84,7 @@ const Tabs = forwardRef<HTMLDivElement, TabsProps>(
                 disabled: isTabDisabled,
               })}
               onClick={handleTabClick(tab.value)}
+              onKeyDown={handleKeyDown(tab.value)}
             >
               <div className="relative flex shrink-0 flex-col justify-center text-nowrap">
                 <span className="whitespace-pre">{tab.label}</span>
