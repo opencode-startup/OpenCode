@@ -512,4 +512,9 @@ body {
     line-height: 1rem;
     font-weight: 500;
   }
+
+  /* Focus utilities */
+  .focus-ring {
+    @apply focus-visible:ring-offset-background-100 focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 focus-visible:outline-none;
+  }
 }

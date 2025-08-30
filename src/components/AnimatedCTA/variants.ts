@@ -7,8 +7,7 @@ export const variants = tv({
     `relative inline-flex min-w-fit cursor-pointer items-center justify-between overflow-clip
     rounded-full`,
     'bg-background-200 border-gray-alpha-400 hover:bg-background-100 border',
-    `focus-visible:ring-offset-background-100 focus-visible:ring-2 focus-visible:ring-blue-600
-    focus-visible:ring-offset-2 focus-visible:outline-none`,
+    'focus-ring',
   ],
   variants: {
     size: {
