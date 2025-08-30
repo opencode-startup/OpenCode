@@ -6,8 +6,7 @@ export const variants = tv({
   base: [
     'relative inline-flex cursor-pointer items-center justify-center overflow-hidden font-medium',
     'transition-all duration-200 ease-out focus:outline-none',
-    `focus-visible:ring-offset-background-100 focus-visible:ring-2 focus-visible:ring-blue-600
-    focus-visible:ring-offset-2 focus-visible:outline-none`,
+    'focus-ring',
     `disabled:border-gray-alpha-400 disabled:cursor-not-allowed disabled:border disabled:bg-gray-100
     disabled:text-gray-700`,
   ],

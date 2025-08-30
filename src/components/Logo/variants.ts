@@ -3,11 +3,7 @@ import { tv } from 'tailwind-variants';
 import { LogoSize } from './types';
 
 export const logoVariants = tv({
-  base: [
-    'flex items-center rounded',
-    `focus-visible:ring-offset-background-100 focus-visible:ring-2 focus-visible:ring-blue-600
-    focus-visible:ring-offset-2 focus-visible:outline-none`,
-  ],
+  base: ['flex items-center rounded', 'focus-ring'],
   variants: {
     size: {
       small: 'gap-2',

@@ -30,8 +30,7 @@ export const tabOptionVariants = tv({
     'transition-all duration-200 ease-out',
     'hover:text-gray-1000 text-gray-600',
     'border-b-2 border-transparent',
-    `focus-visible:ring-offset-background-100 focus-visible:ring-2 focus-visible:ring-blue-600
-    focus-visible:ring-offset-2 focus-visible:outline-none`,
+    'focus-ring',
   ],
   variants: {
     size: {

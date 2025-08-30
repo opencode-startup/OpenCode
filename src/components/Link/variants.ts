@@ -4,8 +4,7 @@ export const linkVariants = tv({
   base: [
     'text-nowrap text-gray-600 transition-all duration-200 ease-out',
     'hover:text-gray-1000 relative cursor-pointer',
-    `focus-visible:ring-offset-background-100 focus-visible:rounded-sm focus-visible:ring-2
-    focus-visible:ring-blue-600 focus-visible:ring-offset-2 focus-visible:outline-none`,
+    'focus-ring focus-visible:rounded-sm',
     'disabled:cursor-not-allowed disabled:opacity-50',
   ],
   variants: {

@@ -5,8 +5,7 @@ export const toggleContainerVariants = tv({
   base: [
     'relative flex items-center justify-start overflow-hidden rounded-xl border border-solid',
     'cursor-pointer transition-all duration-200 ease-out',
-    `focus-visible:ring-offset-background-100 focus-visible:ring-2 focus-visible:ring-blue-600
-    focus-visible:ring-offset-2 focus-visible:outline-none`,
+    'focus-ring',
   ],
   variants: {
     size: {
