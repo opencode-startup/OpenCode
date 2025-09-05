@@ -35,7 +35,7 @@ export const selectTriggerVariants = tv({
 
 export const selectContentVariants = tv({
   base: [
-    'absolute z-50 min-w-full overflow-hidden rounded-xl border',
+    'min-w-full overflow-hidden rounded-xl border',
     'bg-background-100 border-gray-alpha-400 shadow-lg',
     'data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95',
     'data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95',
@@ -48,8 +48,8 @@ export const selectContentVariants = tv({
       large: 'p-2',
     },
     position: {
-      top: 'bottom-full mb-1',
-      bottom: 'top-full mt-1',
+      top: '',
+      bottom: '',
     },
   },
   defaultVariants: {

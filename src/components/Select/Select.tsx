@@ -4,7 +4,7 @@ import { forwardRef, useId } from 'react';
 
 import { Icon, Spinner } from '@/components';
 
-import { useSelect } from './hooks';
+import { useSelect, useSelectPosition } from './hooks';
 import { SelectProps } from './types';
 import {
   selectContentVariants,
@@ -61,6 +61,12 @@ const Select = forwardRef<HTMLButtonElement, SelectProps>(
       onOpenChange,
       disabled,
       loading,
+    });
+
+    const { position, contentStyle } = useSelectPosition({
+      isOpen,
+      triggerRef,
+      contentRef,
     });
 
     const displayText = selectedOption?.label || placeholder;
@@ -124,8 +130,11 @@ const Select = forwardRef<HTMLButtonElement, SelectProps>(
               id={listboxId}
               aria-label={ariaLabel || 'Options'}
               data-state="open"
+              data-side={position}
+              style={contentStyle}
               className={selectContentVariants({
                 size,
+                position,
               })}
             >
               {options.map((option, index) => (
