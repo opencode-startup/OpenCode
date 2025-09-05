@@ -75,14 +75,26 @@ export const selectItemVariants = tv({
       true: 'bg-gray-alpha-400 text-gray-1000',
       false: '',
     },
+    highlighted: {
+      true: 'bg-gray-alpha-300 text-gray-1000',
+      false: '',
+    },
     disabled: {
       true: 'cursor-not-allowed opacity-50',
       false: 'cursor-pointer',
     },
   },
+  compoundVariants: [
+    {
+      selected: true,
+      highlighted: true,
+      class: 'bg-gray-alpha-500 text-gray-1000',
+    },
+  ],
   defaultVariants: {
     size: 'large',
     selected: false,
+    highlighted: false,
     disabled: false,
   },
 });

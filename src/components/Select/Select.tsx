@@ -140,6 +140,7 @@ const Select = forwardRef<HTMLButtonElement, SelectProps>(
                   className={selectItemVariants({
                     size,
                     selected: option.value === selectedValue,
+                    highlighted: index === highlightedIndex,
                     disabled: option.disabled,
                   })}
                   onClick={() => handleSelectOption(option.value)}
