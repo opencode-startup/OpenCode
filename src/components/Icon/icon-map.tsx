@@ -80,4 +80,21 @@ export default {
       />
     </svg>
   ),
+  'chevron-down': (props) => (
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 16 16"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M14.06 5.5L13.53 6.03L8.707 10.854C8.51947 11.0415 8.26517 11.1468 8 11.1468C7.73484 11.1468 7.48053 11.0415 7.293 10.854L2.47 6.03L1.94 5.5L3 4.44L3.53 4.97L8 9.44L12.47 4.97L13 4.44L14.06 5.5Z"
+        fill="#A1A1A1"
+      />
+    </svg>
+  ),
 } as Record<IconName, React.FC<React.SVGProps<SVGSVGElement>>>;

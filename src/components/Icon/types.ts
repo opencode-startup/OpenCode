@@ -1,6 +1,6 @@
 import React from 'react';
 
-export type IconName = 'warning-fill' | 'arrow-right' | 'logo';
+export type IconName = 'warning-fill' | 'arrow-right' | 'logo' | 'chevron-down';
 
 export interface IconProps extends React.SVGProps<SVGSVGElement> {
   name: IconName;

@@ -2,7 +2,7 @@
 
 import { forwardRef, useId } from 'react';
 
-import { Spinner } from '@/components';
+import { Icon, Spinner } from '@/components';
 
 import { useSelect } from './hooks';
 import { SelectProps } from './types';
@@ -106,24 +106,13 @@ const Select = forwardRef<HTMLButtonElement, SelectProps>(
               )}
 
               {!loading && (
-                <div
+                <Icon
                   className={selectIconVariants({
                     size,
                     open: isOpen,
                   })}
-                >
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="h-full w-full"
-                  >
-                    <polyline points="6,9 12,15 18,9" />
-                  </svg>
-                </div>
+                  name={'chevron-down'}
+                />
               )}
             </div>
           </button>
