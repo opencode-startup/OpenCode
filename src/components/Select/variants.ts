@@ -4,8 +4,8 @@ import { SelectSize } from './types';
 
 export const selectTriggerVariants = tv({
   base: [
-    'relative flex cursor-pointer items-center justify-between gap-2',
-    'bg-background-100 border-gray-alpha-400 rounded-sm border',
+    'relative flex cursor-pointer justify-between gap-2',
+    'bg-background-100 border-gray-alpha-400 rounded-sm border hover:border-gray-500',
     'transition-all duration-200',
     'focus-ring',
     'disabled:cursor-not-allowed disabled:opacity-50',

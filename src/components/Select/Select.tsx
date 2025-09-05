@@ -28,6 +28,8 @@ const Select = forwardRef<HTMLButtonElement, SelectProps>(
       options = [],
       value,
       defaultValue,
+      leftIcon,
+      rightIcon,
       onValueChange,
       onOpenChange,
       name,
@@ -104,9 +106,13 @@ const Select = forwardRef<HTMLButtonElement, SelectProps>(
             {...ariaAttributes}
             {...props}
           >
-            <span className={`truncate ${sizeConfig[size].text}`}>{displayText}</span>
+            <div className="flex min-w-0 flex-1 items-center gap-2">
+              {leftIcon && <span className="flex shrink-0 items-center">{leftIcon}</span>}
+              <span className={`truncate ${sizeConfig[size].text}`}>{displayText}</span>
+              {rightIcon && <span className="flex shrink-0 items-center">{rightIcon}</span>}
+            </div>
 
-            <div className="flex items-center gap-2">
+            <div className="flex shrink-0 items-center gap-2">
               {loading && (
                 <Spinner size={sizeConfig[size].spinnerSize} role="status" aria-label="Loading" />
               )}
@@ -155,8 +161,15 @@ const Select = forwardRef<HTMLButtonElement, SelectProps>(
                   onClick={() => handleSelectOption(option.value)}
                   onMouseEnter={() => handleOptionMouseEnter(index)}
                 >
-                  {option.icon && <span className="flex shrink-0 items-center">{option.icon}</span>}
-                  <span className="truncate">{option.label}</span>
+                  <div className="flex min-w-0 flex-1 items-center gap-2">
+                    {option.leftIcon && (
+                      <span className="flex shrink-0 items-center">{option.leftIcon}</span>
+                    )}
+                    <span className="flex-1 truncate">{option.label}</span>
+                    {option.rightIcon && (
+                      <span className="flex shrink-0 items-center">{option.rightIcon}</span>
+                    )}
+                  </div>
                 </div>
               ))}
             </div>

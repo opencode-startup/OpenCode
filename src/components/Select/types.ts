@@ -6,7 +6,8 @@ export interface SelectOption {
   value: string;
   label: string;
   disabled?: boolean;
-  icon?: ReactNode;
+  leftIcon?: ReactNode;
+  rightIcon?: ReactNode;
 }
 
 export interface SelectProps {
@@ -20,6 +21,8 @@ export interface SelectProps {
   fullWidth?: boolean;
   required?: boolean;
   className?: string;
+  leftIcon?: ReactNode;
+  rightIcon?: ReactNode;
   onValueChange?: (value: string) => void;
   onOpenChange?: (open: boolean) => void;
   id?: string;
