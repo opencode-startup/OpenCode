@@ -1,9 +1,15 @@
 import { KeyboardEvent, useCallback, useEffect, useRef, useState } from 'react';
 
 import { SelectOption } from '../types';
+import {
+  flattenOptions,
+  getFlatIndexByValue,
+  getOptionByFlatIndex,
+  getTotalOptionsCount,
+} from '../utils';
 
 interface UseSelectProps {
-  options: SelectOption[];
+  options: SelectOption[] | SelectOption[][];
   value?: string;
   defaultValue?: string;
   onValueChange?: (value: string) => void;
@@ -28,8 +34,9 @@ export const useSelect = ({
   const triggerRef = useRef<HTMLButtonElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
 
-  // Find selected option
-  const selectedOption = options.find((option) => option.value === selectedValue);
+  // Find selected option (flatten grouped options first)
+  const flatOptions = flattenOptions(options);
+  const selectedOption = flatOptions.find((option) => option.value === selectedValue);
 
   // Handle value changes (controlled component support)
   useEffect(() => {
@@ -63,13 +70,13 @@ export const useSelect = ({
     setIsOpen(newOpen);
     onOpenChange?.(newOpen);
     if (newOpen) {
-      setHighlightedIndex(options.findIndex((option) => option.value === selectedValue));
+      setHighlightedIndex(getFlatIndexByValue(options, selectedValue));
     }
   }, [disabled, loading, isOpen, onOpenChange, options, selectedValue]);
 
   const handleSelectOption = useCallback(
     (optionValue: string) => {
-      const option = options.find((opt) => opt.value === optionValue);
+      const option = flatOptions.find((opt) => opt.value === optionValue);
       if (option && !option.disabled) {
         setSelectedValue(optionValue);
         onValueChange?.(optionValue);
@@ -78,7 +85,7 @@ export const useSelect = ({
         onOpenChange?.(false);
       }
     },
-    [options, onValueChange, onOpenChange],
+    [flatOptions, onValueChange, onOpenChange],
   );
 
   const handleKeyDown = useCallback(
@@ -90,7 +97,10 @@ export const useSelect = ({
         case ' ':
           event.preventDefault();
           if (isOpen && highlightedIndex >= 0) {
-            handleSelectOption(options[highlightedIndex].value);
+            const selectedOption = getOptionByFlatIndex(options, highlightedIndex);
+            if (selectedOption) {
+              handleSelectOption(selectedOption.value);
+            }
           } else {
             setIsOpen(!isOpen);
             onOpenChange?.(!isOpen);
@@ -107,7 +117,8 @@ export const useSelect = ({
             setIsOpen(true);
             onOpenChange?.(true);
           } else {
-            setHighlightedIndex((prev) => (prev < options.length - 1 ? prev + 1 : 0));
+            const totalOptions = getTotalOptionsCount(options);
+            setHighlightedIndex((prev) => (prev < totalOptions - 1 ? prev + 1 : 0));
           }
           break;
         case 'ArrowUp':
@@ -116,7 +127,8 @@ export const useSelect = ({
             setIsOpen(true);
             onOpenChange?.(true);
           } else {
-            setHighlightedIndex((prev) => (prev > 0 ? prev - 1 : options.length - 1));
+            const totalOptions = getTotalOptionsCount(options);
+            setHighlightedIndex((prev) => (prev > 0 ? prev - 1 : totalOptions - 1));
           }
           break;
         case 'Home':
@@ -128,7 +140,8 @@ export const useSelect = ({
         case 'End':
           event.preventDefault();
           if (isOpen) {
-            setHighlightedIndex(options.length - 1);
+            const totalOptions = getTotalOptionsCount(options);
+            setHighlightedIndex(totalOptions - 1);
           }
           break;
       }

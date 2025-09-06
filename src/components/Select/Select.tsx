@@ -5,11 +5,13 @@ import { forwardRef, useId } from 'react';
 import { Icon, Spinner } from '@/components';
 
 import { useSelect, useSelectPosition } from './hooks';
+import { OptionItem } from './OptionItem';
 import { SelectProps } from './types';
+import { isGroupedOptions } from './utils';
 import {
   selectContentVariants,
+  selectDividerVariants,
   selectIconVariants,
-  selectItemVariants,
   selectTriggerVariants,
   sizeConfig,
 } from './variants';
@@ -72,6 +74,57 @@ const Select = forwardRef<HTMLButtonElement, SelectProps>(
     });
 
     const displayText = selectedOption?.label || placeholder;
+
+    // Helper function to render options
+    const renderOptions = () => {
+      if (isGroupedOptions(options)) {
+        // Render grouped options with dividers (array of arrays)
+        return options.map((group, groupIndex) => {
+          let flatIndex = 0;
+          // Calculate starting flat index for this group
+          for (let i = 0; i < groupIndex; i++) {
+            flatIndex += options[i].length;
+          }
+
+          return (
+            <div key={`group-${groupIndex}`}>
+              {groupIndex > 0 && <div className={selectDividerVariants({ size })} />}
+              {group.map((option, optionIndex) => {
+                const currentFlatIndex = flatIndex + optionIndex;
+                return (
+                  <OptionItem
+                    key={option.value}
+                    option={option}
+                    index={currentFlatIndex}
+                    selectId={selectId}
+                    selectedValue={selectedValue}
+                    highlightedIndex={highlightedIndex}
+                    size={size}
+                    onSelectAction={handleSelectOption}
+                    onMouseEnterEventAction={handleOptionMouseEnter}
+                  />
+                );
+              })}
+            </div>
+          );
+        });
+      } else {
+        // Render flat options (backward compatibility)
+        return options.map((option, index) => (
+          <OptionItem
+            key={option.value}
+            option={option}
+            index={index}
+            selectId={selectId}
+            selectedValue={selectedValue}
+            highlightedIndex={highlightedIndex}
+            size={size}
+            onSelectAction={handleSelectOption}
+            onMouseEnterEventAction={handleOptionMouseEnter}
+          />
+        ));
+      }
+    };
 
     // Generate ARIA attributes
     const ariaAttributes = {
@@ -143,35 +196,7 @@ const Select = forwardRef<HTMLButtonElement, SelectProps>(
                 position,
               })}
             >
-              {options.map((option, index) => (
-                <div
-                  key={option.value}
-                  id={`${selectId}-option-${index}`}
-                  role="option"
-                  aria-selected={option.value === selectedValue}
-                  aria-disabled={option.disabled}
-                  data-highlighted={index === highlightedIndex}
-                  data-selected={option.value === selectedValue}
-                  className={selectItemVariants({
-                    size,
-                    selected: option.value === selectedValue,
-                    highlighted: index === highlightedIndex,
-                    disabled: option.disabled,
-                  })}
-                  onClick={() => handleSelectOption(option.value)}
-                  onMouseEnter={() => handleOptionMouseEnter(index)}
-                >
-                  <div className="flex min-w-0 flex-1 items-center gap-2">
-                    {option.leftIcon && (
-                      <span className="flex shrink-0 items-center">{option.leftIcon}</span>
-                    )}
-                    <span className="flex-1 truncate">{option.label}</span>
-                    {option.rightIcon && (
-                      <span className="flex shrink-0 items-center">{option.rightIcon}</span>
-                    )}
-                  </div>
-                </div>
-              ))}
+              {renderOptions()}
             </div>
           )}
         </div>

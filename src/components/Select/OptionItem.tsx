@@ -1,0 +1,40 @@
+'use client';
+
+import { OptionItemProps } from './types';
+import { selectItemVariants } from './variants';
+
+export const OptionItem = ({
+  option,
+  index,
+  selectId,
+  selectedValue,
+  highlightedIndex,
+  size,
+  onSelectAction,
+  onMouseEnterEventAction,
+}: OptionItemProps) => {
+  return (
+    <div
+      id={`${selectId}-option-${index}`}
+      role="option"
+      aria-selected={option.value === selectedValue}
+      aria-disabled={option.disabled}
+      data-highlighted={index === highlightedIndex}
+      data-selected={option.value === selectedValue}
+      className={selectItemVariants({
+        size,
+        selected: option.value === selectedValue,
+        highlighted: index === highlightedIndex,
+        disabled: option.disabled,
+      })}
+      onClick={() => onSelectAction(option.value)}
+      onMouseEnter={() => onMouseEnterEventAction(index)}
+    >
+      <div className="flex min-w-0 flex-1 items-center gap-2">
+        {option.leftIcon && <span className="flex shrink-0 items-center">{option.leftIcon}</span>}
+        <span className="flex-1 truncate">{option.label}</span>
+        {option.rightIcon && <span className="flex shrink-0 items-center">{option.rightIcon}</span>}
+      </div>
+    </div>
+  );
+};

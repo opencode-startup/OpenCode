@@ -1,6 +1,6 @@
 'use client';
 
-import { Icon, Select } from '@/components';
+import { Select } from '@/components';
 
 export default function Home() {
   return (
@@ -12,10 +12,26 @@ export default function Home() {
             size={'large'}
             placeholder="Select your choice..."
             options={[
-              { value: 'option1', label: 'Option 1', leftIcon: <Icon name={'warning-fill'} /> },
-              { value: 'option2', label: 'Option 2' },
-              { value: 'option3', label: 'Option 3' },
-              { value: 'option4', label: 'Option 4' },
+              // { value: 'option1', label: 'Option 1', leftIcon: <Icon name={'warning-fill'} /> },
+              // { value: 'option2', label: 'Option 2' },
+              // { value: 'option3', label: 'Option 3' },
+              [{ value: 'option4', label: 'Option 4' }],
+              // [
+              //   {
+              //     value: 'option5',
+              //     label: 'Option 5',
+              //   },
+              // ],
+              [
+                {
+                  value: 'option6',
+                  label: 'Option 6',
+                },
+                {
+                  value: 'option7',
+                  label: 'Option 7',
+                },
+              ],
             ]}
             onValueChange={(value: any) => console.log('Selected:', value)}
           />

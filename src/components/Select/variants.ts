@@ -43,9 +43,9 @@ export const selectContentVariants = tv({
   ],
   variants: {
     size: {
-      small: 'p-1',
-      medium: 'p-2',
-      large: 'p-2',
+      small: 'py-1',
+      medium: 'py-2',
+      large: 'py-2',
     },
     position: {
       top: '',
@@ -67,9 +67,9 @@ export const selectItemVariants = tv({
   ],
   variants: {
     size: {
-      small: 'typo-label-12 h-8',
-      medium: 'typo-label-14 h-9',
-      large: 'typo-label-14 h-10',
+      small: 'typo-label-12 mx-1 h-8',
+      medium: 'typo-label-14 mx-2 h-9',
+      large: 'typo-label-14 mx-2 h-10',
     },
     selected: {
       true: 'bg-gray-alpha-400 text-gray-1000',
@@ -115,6 +115,20 @@ export const selectIconVariants = tv({
   defaultVariants: {
     size: 'large',
     open: false,
+  },
+});
+
+export const selectDividerVariants = tv({
+  base: 'border-gray-alpha-300 border-t',
+  variants: {
+    size: {
+      small: 'my-1',
+      medium: 'my-1.5',
+      large: 'my-2',
+    },
+  },
+  defaultVariants: {
+    size: 'large',
   },
 });
 

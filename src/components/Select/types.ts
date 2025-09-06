@@ -11,7 +11,7 @@ export interface SelectOption {
 }
 
 export interface SelectProps {
-  options: SelectOption[];
+  options: SelectOption[] | SelectOption[][];
   value?: string;
   defaultValue?: string;
   placeholder?: string;
@@ -33,4 +33,15 @@ export interface SelectProps {
   'aria-describedby'?: string;
   'aria-invalid'?: boolean;
   'aria-required'?: boolean;
+}
+
+export interface OptionItemProps {
+  option: SelectOption;
+  index: number;
+  selectId: string;
+  selectedValue: string;
+  highlightedIndex: number;
+  size: SelectSize;
+  onSelectAction: (value: string) => void;
+  onMouseEnterEventAction: (index: number) => void;
 }
