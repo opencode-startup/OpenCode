@@ -132,6 +132,34 @@ export const selectDividerVariants = tv({
   },
 });
 
+export const selectHeaderVariants = tv({
+  base: ['border-gray-alpha-300 border-b', 'bg-gray-alpha-50 text-gray-700', 'flex items-center'],
+  variants: {
+    size: {
+      small: 'typo-label-12 mb-1 min-h-8 px-1 pb-1',
+      medium: 'typo-label-14 mb-2 min-h-9 px-2 pb-2',
+      large: 'typo-label-14 mb-2 min-h-10 px-2 pb-2',
+    },
+  },
+  defaultVariants: {
+    size: 'large',
+  },
+});
+
+export const selectFooterVariants = tv({
+  base: ['border-gray-alpha-300 border-t', 'bg-gray-alpha-50 text-gray-700', 'flex items-center'],
+  variants: {
+    size: {
+      small: 'typo-label-12 mt-1 min-h-8 px-1 pt-1',
+      medium: 'typo-label-14 mt-2 min-h-9 px-2 pt-2',
+      large: 'typo-label-14 mt-2 min-h-10 px-2 pt-2',
+    },
+  },
+  defaultVariants: {
+    size: 'large',
+  },
+});
+
 // Size-specific configuration
 export const sizeConfig = {
   small: {

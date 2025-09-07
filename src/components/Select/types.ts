@@ -23,6 +23,8 @@ export interface SelectProps {
   className?: string;
   leftIcon?: ReactNode;
   rightIcon?: ReactNode;
+  header?: ReactNode;
+  footer?: ReactNode;
   onValueChange?: (value: string) => void;
   onOpenChange?: (open: boolean) => void;
   id?: string;

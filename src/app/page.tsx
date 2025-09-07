@@ -1,15 +1,27 @@
 'use client';
 
-import { Select } from '@/components';
+import { Button, Select } from '@/components';
 
 export default function Home() {
   return (
-    <div className={'flex min-h-screen flex-1 flex-col items-center justify-center gap-8 p-8'}>
-      <div className="flex flex-col items-center gap-6">
-        <div className="flex flex-col items-center gap-2">
+    <div className={'flex min-h-screen flex-1 flex-col items-center gap-8 p-8'}>
+      <div className="flex flex-col gap-6">
+        <div className="flex flex-col gap-2">
           <h2 className="text-lg font-semibold">Select</h2>
           <Select
-            size={'large'}
+            size={'small'}
+            header={
+              <span style={{ display: 'inline-flex', flexDirection: 'column' }}>
+                <span>User name</span>
+                <span>User name</span>
+                <span>User name</span>
+              </span>
+            }
+            footer={
+              <Button size={'small'} fullWidth={true}>
+                Upgrade
+              </Button>
+            }
             placeholder="Select your choice..."
             options={[
               // { value: 'option1', label: 'Option 1', leftIcon: <Icon name={'warning-fill'} /> },

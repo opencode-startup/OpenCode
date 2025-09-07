@@ -11,6 +11,8 @@ import { isGroupedOptions } from './utils';
 import {
   selectContentVariants,
   selectDividerVariants,
+  selectFooterVariants,
+  selectHeaderVariants,
   selectIconVariants,
   selectTriggerVariants,
   sizeConfig,
@@ -32,6 +34,8 @@ const Select = forwardRef<HTMLButtonElement, SelectProps>(
       defaultValue,
       leftIcon,
       rightIcon,
+      header,
+      footer,
       onValueChange,
       onOpenChange,
       name,
@@ -196,7 +200,25 @@ const Select = forwardRef<HTMLButtonElement, SelectProps>(
                 position,
               })}
             >
+              {header && (
+                <div
+                  className={selectHeaderVariants({
+                    size,
+                  })}
+                >
+                  {header}
+                </div>
+              )}
               {renderOptions()}
+              {footer && (
+                <div
+                  className={selectFooterVariants({
+                    size,
+                  })}
+                >
+                  {footer}
+                </div>
+              )}
             </div>
           )}
         </div>
