@@ -32,3 +32,6 @@ export interface UseModalReturn {
   backdropRef: React.RefObject<HTMLDivElement | null>;
   handleBackdropClick: (event: React.MouseEvent<HTMLDivElement>) => void;
 }
+export interface UseModalAnimationProps {
+  isOpen: boolean;
+}

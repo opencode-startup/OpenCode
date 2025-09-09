@@ -1,11 +1,14 @@
 'use client';
 
+import './animation.css';
+
 import { forwardRef } from 'react';
 import { createPortal } from 'react-dom';
+import { twMerge } from 'tailwind-merge';
 
 import { Button } from '@/components';
 
-import { useModal, useModalBodyScroll } from './hooks';
+import { useModal, useModalAnimation, useModalBodyScroll } from './hooks';
 import { ModalProps } from './types';
 import { actionGroupVariants, backdropVariants } from './variants';
 
@@ -43,17 +46,21 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
       preventBodyScroll,
     });
 
-    if (!isOpen) return null;
+    const { isVisible, isAnimating } = useModalAnimation({
+      isOpen,
+    });
+
+    if (!isVisible) return null;
 
     const modalContent = (
       <div
         ref={backdropRef}
-        className={backdropVariants({
-          placement,
-          className: backdropClassName,
-        })}
+        className={twMerge(
+          isAnimating ? 'modal-backdrop-enter' : 'modal-backdrop-exit',
+          backdropVariants({ placement, className: backdropClassName }),
+        )}
         onClick={handleBackdropClick}
-        data-state={isOpen ? 'open' : 'closed'}
+        data-state={isAnimating ? 'open' : 'closed'}
         role="dialog"
         aria-modal="true"
         aria-labelledby={title ? 'modal-title' : undefined}
@@ -61,11 +68,13 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
       >
         <div
           ref={ref}
-          className={`data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95
-            data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95
-            bg-background-200 relative flex w-full max-w-lg flex-col overflow-hidden rounded-xl border
-            border-gray-400 shadow-2xl transition-all duration-200 ease-out ${className || ''}`}
-          data-state={isOpen ? 'open' : 'closed'}
+          className={twMerge(
+            isAnimating ? 'modal-enter' : 'modal-exit',
+            `bg-background-200 relative flex w-full max-w-lg flex-col overflow-hidden rounded-xl border
+            border-gray-400 shadow-2xl`,
+            className,
+          )}
+          data-state={isAnimating ? 'open' : 'closed'}
           {...props}
         >
           {/* Header */}

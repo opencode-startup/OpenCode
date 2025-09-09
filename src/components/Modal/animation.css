@@ -1,0 +1,119 @@
+/* Modal Animation Utilities */
+
+/* Animation base classes */
+.modal-animate-in {
+  animation-duration: 200ms;
+  animation-timing-function: ease-out;
+  animation-fill-mode: both;
+}
+
+.modal-animate-out {
+  animation-duration: 200ms;
+  animation-timing-function: ease-out;
+  animation-fill-mode: both;
+}
+
+/* Fade animations */
+.modal-fade-in {
+  animation-name: modal-fade-in-keyframes;
+}
+
+.modal-fade-out {
+  animation-name: modal-fade-out-keyframes;
+}
+
+/* Zoom animations */
+.modal-zoom-in-95 {
+  animation-name: modal-zoom-in-keyframes;
+  --modal-enter-scale: 0.95;
+}
+
+.modal-zoom-out-95 {
+  animation-name: modal-zoom-out-keyframes;
+  --modal-exit-scale: 0.95;
+}
+
+/* Combined animation classes */
+.modal-enter {
+  animation-name: modal-fade-in-keyframes, modal-zoom-in-keyframes;
+  animation-duration: 200ms;
+  animation-timing-function: ease-out;
+  animation-fill-mode: both;
+}
+
+.modal-exit {
+  animation-name: modal-fade-out-keyframes, modal-zoom-out-keyframes;
+  animation-duration: 200ms;
+  animation-timing-function: ease-out;
+  animation-fill-mode: both;
+}
+
+/* Backdrop animation classes */
+.modal-backdrop-enter {
+  animation-name: modal-backdrop-fade-in-keyframes;
+  animation-duration: 200ms;
+  animation-timing-function: ease-out;
+  animation-fill-mode: both;
+}
+
+.modal-backdrop-exit {
+  animation-name: modal-backdrop-fade-out-keyframes;
+  animation-duration: 200ms;
+  animation-timing-function: ease-out;
+  animation-fill-mode: both;
+}
+
+/* Keyframe definitions */
+@keyframes modal-fade-in-keyframes {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes modal-fade-out-keyframes {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes modal-zoom-in-keyframes {
+  from {
+    transform: scale(var(--modal-enter-scale, 0.95));
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes modal-zoom-out-keyframes {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(var(--modal-exit-scale, 0.95));
+  }
+}
+
+@keyframes modal-backdrop-fade-in-keyframes {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes modal-backdrop-fade-out-keyframes {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
