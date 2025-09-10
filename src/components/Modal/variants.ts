@@ -26,6 +26,7 @@ export const actionGroupVariants = tv({
   variants: {
     side: {
       left: 'flex-1 justify-start',
+      center: 'flex-1 justify-center',
       right: 'flex-1 justify-end',
     },
   },

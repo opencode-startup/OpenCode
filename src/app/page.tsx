@@ -72,25 +72,28 @@ export default function Home() {
         subtitle={
           'We use cookies and similar technologies to enhance your experience. You can choose to enable or disable their use.'
         }
-        leftActions={[
+        // leftActions={[
+        //   {
+        //     children: 'Deny',
+        //     variant: 'secondary',
+        //     onClick: handleCloseModal,
+        //   },
+        // ]}
+        centerActions={[
           {
-            children: 'Deny',
-            variant: 'secondary',
-            onClick: handleCloseModal,
-          },
-          {
+            fullWidth: true,
             children: 'Accept All',
-            variant: 'secondary',
-            onClick: handleCloseModal,
-          },
-        ]}
-        rightActions={[
-          {
-            children: 'Save',
             variant: 'primary',
             onClick: handleCloseModal,
           },
         ]}
+        // rightActions={[
+        //   {
+        //     children: 'Save',
+        //     variant: 'primary',
+        //     onClick: handleCloseModal,
+        //   },
+        // ]}
       >
         <p>
           Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has

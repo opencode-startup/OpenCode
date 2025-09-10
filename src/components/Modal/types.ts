@@ -14,6 +14,7 @@ export interface ModalProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'
   closeOnBackdropClick?: boolean;
   closeOnEscape?: boolean;
   leftActions?: ButtonProps[];
+  centerActions?: ButtonProps[];
   rightActions?: ButtonProps[];
   showActions?: boolean;
   className?: string;

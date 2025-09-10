@@ -24,6 +24,7 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
       closeOnBackdropClick = true,
       closeOnEscape = true,
       leftActions = [],
+      centerActions = [],
       rightActions = [],
       showActions = false,
       className,
@@ -97,31 +98,59 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
           {children && <div className="typo-copy-16 p-5">{children}</div>}
 
           {/* Actions */}
-          {showActions && (leftActions.length > 0 || rightActions.length > 0) && (
-            <div className="bg-background-100 flex h-[4.5rem] items-center justify-between gap-3 border-t border-gray-400 px-5">
+          {showActions && (
+            <div className="bg-background-100 flex h-[4.5rem] items-center gap-3 border-t border-gray-400 px-5">
               {/* Left Actions */}
-              <div className={actionGroupVariants({ side: 'left' })}>
-                {leftActions.map((action, index) => {
-                  const { children, variant = 'secondary', size = 'medium', ...restProps } = action;
-                  return (
-                    <Button key={index} size={size} variant={variant} {...restProps}>
-                      {children}
-                    </Button>
-                  );
-                })}
-              </div>
+              {!!leftActions.length && (
+                <div className={actionGroupVariants({ side: 'left' })}>
+                  {leftActions.map((action, index) => {
+                    const {
+                      children,
+                      variant = 'secondary',
+                      size = 'medium',
+                      ...restProps
+                    } = action;
+                    return (
+                      <Button key={index} size={size} variant={variant} {...restProps}>
+                        {children}
+                      </Button>
+                    );
+                  })}
+                </div>
+              )}
+
+              {/* Center Actions */}
+              {!!centerActions.length && (
+                <div className={actionGroupVariants({ side: 'center' })}>
+                  {centerActions.map((action, index) => {
+                    const {
+                      children,
+                      variant = 'secondary',
+                      size = 'medium',
+                      ...restProps
+                    } = action;
+                    return (
+                      <Button key={index} size={size} variant={variant} {...restProps}>
+                        {children}
+                      </Button>
+                    );
+                  })}
+                </div>
+              )}
 
               {/* Right Actions */}
-              <div className={actionGroupVariants({ side: 'right' })}>
-                {rightActions.map((action, index) => {
-                  const { children, variant = 'primary', size = 'medium', ...restProps } = action;
-                  return (
-                    <Button key={index} size={size} variant={variant} {...restProps}>
-                      {children}
-                    </Button>
-                  );
-                })}
-              </div>
+              {!!rightActions.length && (
+                <div className={actionGroupVariants({ side: 'right' })}>
+                  {rightActions.map((action, index) => {
+                    const { children, variant = 'primary', size = 'medium', ...restProps } = action;
+                    return (
+                      <Button key={index} size={size} variant={variant} {...restProps}>
+                        {children}
+                      </Button>
+                    );
+                  })}
+                </div>
+              )}
             </div>
           )}
         </div>
