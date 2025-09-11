@@ -5,6 +5,7 @@ export * from './Icon';
 export * from './Input';
 export * from './Link';
 export * from './Logo';
+export * from './Modal';
 export * from './Select';
 export * from './Spinner';
 export * from './Switch';
