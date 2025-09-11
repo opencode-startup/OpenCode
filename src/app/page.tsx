@@ -95,12 +95,24 @@ export default function Home() {
         //   },
         // ]}
       >
-        <p>
-          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-          been the industry&apos;s standard dummy text ever since the 1500s. Lorem Ipsum is simply
-          dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-          industry&apos;s standard dummy text ever since the 1500s.
-        </p>
+        <div className="space-y-4">
+          <p>
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
+            has been the industry&apos;s standard dummy text ever since the 1500s. Lorem Ipsum is
+            simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+            industry&apos;s standard dummy text ever since the 1500s.
+          </p>
+          <p>
+            This is additional content to test modal scrolling behavior when the modal content
+            exceeds the window height. We need to ensure the modal can scroll properly.
+          </p>
+          <p>
+            More content to make the modal taller. Lorem ipsum dolor sit amet, consectetur
+            adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+            enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+            commodo consequat.
+          </p>
+        </div>
       </Modal>
     </div>
   );

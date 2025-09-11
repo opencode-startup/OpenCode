@@ -6,8 +6,6 @@ export const backdropVariants = tv({
     'bg-black/30 backdrop-blur-[2px] backdrop-filter',
     'flex items-center justify-center',
     'transition-all duration-200 ease-out',
-    'data-[state=open]:animate-in data-[state=open]:fade-in-0',
-    'data-[state=closed]:animate-out data-[state=closed]:fade-out-0',
   ],
   variants: {
     placement: {

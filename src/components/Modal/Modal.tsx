@@ -71,8 +71,8 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
           ref={ref}
           className={twMerge(
             isAnimating ? 'modal-enter' : 'modal-exit',
-            `bg-background-200 relative flex w-full max-w-lg flex-col overflow-hidden rounded-xl border
-            border-gray-400 shadow-2xl`,
+            `bg-background-200 relative flex max-h-[calc(100vh-3rem)] w-full max-w-lg flex-col overflow-hidden
+            rounded-xl border border-gray-400 shadow-2xl`,
             className,
           )}
           data-state={isAnimating ? 'open' : 'closed'}
@@ -95,11 +95,13 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
           )}
 
           {/* Content */}
-          {children && <div className="typo-copy-16 p-5">{children}</div>}
+          {children && (
+            <div className="typo-copy-16 min-h-0 flex-1 overflow-y-auto p-5">{children}</div>
+          )}
 
           {/* Actions */}
           {showActions && (
-            <div className="bg-background-100 flex h-[4.5rem] items-center gap-3 border-t border-gray-400 px-5">
+            <div className="bg-background-100 flex min-h-[4.5rem] items-center gap-3 border-t border-gray-400 px-5">
               {/* Left Actions */}
               {!!leftActions.length && (
                 <div className={actionGroupVariants({ side: 'left' })}>
