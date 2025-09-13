@@ -4,7 +4,7 @@ import { Button, Icon } from '@/components';
 
 import { useToast } from './hooks';
 import { ToastProps } from './types';
-import { variants } from './variants';
+import { closeButtonIconVariants, closeButtonVariants, containerVariants } from './variants';
 
 const Toast: FC<ToastProps> = ({
   message,
@@ -20,7 +20,15 @@ const Toast: FC<ToastProps> = ({
   });
 
   return (
-    <div className={variants({ type, className })} role="alert" aria-live="polite" {...props}>
+    <div
+      className={containerVariants({
+        type,
+        className,
+      })}
+      role="alert"
+      aria-live="polite"
+      {...props}
+    >
       <div className="min-w-0 flex-1">{children || <p>{message}</p>}</div>
       {withCloseButton && (
         <Button
@@ -28,10 +36,19 @@ const Toast: FC<ToastProps> = ({
           size={'small'}
           variant={'tertiary'}
           onClick={onClose}
+          iconOnly
           onKeyDown={handleKeyDown}
           aria-label="Close notification"
+          className={closeButtonVariants({
+            type,
+          })}
         >
-          <Icon name={'cross'} />
+          <Icon
+            name={'cross'}
+            className={closeButtonIconVariants({
+              type,
+            })}
+          />
         </Button>
       )}
     </div>
