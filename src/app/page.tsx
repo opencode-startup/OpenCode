@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 
-import { Button, Modal, Select } from '@/components';
+import { Button, Modal, Select, Toast } from '@/components';
 
 export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -16,6 +16,20 @@ export default function Home() {
         <div className="flex flex-col gap-2">
           <h2 className="text-lg font-semibold">Modal Component</h2>
           <Button onClick={handleOpenModal}>Open Modal</Button>
+        </div>
+
+        <div className="flex flex-col gap-2">
+          <h2 className="text-lg font-semibold">Toast Component</h2>
+          <div className="flex flex-col gap-4">
+            <Toast message="Default toast message" />
+            <Toast type="success" message="Success toast message" />
+            <Toast type="warning" message="Warning toast message" />
+            <Toast
+              type="error"
+              message="Error toast message"
+              onClose={() => console.log('Toast closed')}
+            />
+          </div>
         </div>
 
         <div className="flex flex-col gap-2">

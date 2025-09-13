@@ -10,4 +10,5 @@ export * from './Select';
 export * from './Spinner';
 export * from './Switch';
 export * from './Tabs';
+export * from './Toast';
 export * from './Toggle';

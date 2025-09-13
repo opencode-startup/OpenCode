@@ -97,4 +97,21 @@ export default {
       />
     </svg>
   ),
+  cross: (props) => (
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 16 16"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M12.4699 13.5299L12.9999 14.0599L14.0599 12.9999L13.5299 12.4699L9.05994 7.99994L13.5299 3.52994L14.0599 2.99994L12.9999 1.93994L12.4699 2.46994L7.99994 6.93994L3.52994 2.46994L2.99994 1.93994L1.93994 2.99994L2.46994 3.52994L6.93994 7.99994L2.46994 12.4699L1.93994 12.9999L2.99994 14.0599L3.52994 13.5299L7.99994 9.05994L12.4699 13.5299Z"
+        fill="#EDEDED"
+      />
+    </svg>
+  ),
 } as Record<IconName, React.FC<React.SVGProps<SVGSVGElement>>>;
