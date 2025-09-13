@@ -24,6 +24,9 @@ export const variants = tv({
       medium: 'typo-button-16 h-10 gap-2 px-4',
       large: 'typo-button-16 h-12 gap-2 px-6',
     },
+    iconOnly: {
+      true: '',
+    },
     shape: {
       square: 'rounded-sm',
       rounded: 'rounded-full',
@@ -35,12 +38,30 @@ export const variants = tv({
       true: 'cursor-not-allowed opacity-60',
     },
   },
+  compoundVariants: [
+    {
+      size: 'small',
+      iconOnly: true,
+      className: 'w-8 px-0',
+    },
+    {
+      size: 'medium',
+      iconOnly: true,
+      className: 'w-10 px-0',
+    },
+    {
+      size: 'large',
+      iconOnly: true,
+      className: 'w-12 px-0',
+    },
+  ],
   defaultVariants: {
     variant: 'primary',
     size: 'medium',
     shape: 'square',
     fullWidth: false,
     loading: false,
+    iconOnly: false,
   },
 });
 

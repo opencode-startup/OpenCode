@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 
-import { Button, Modal, Select, Toast } from '@/components';
+import { Button, Icon, Modal, Select, Toast } from '@/components';
 
 export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -15,7 +15,9 @@ export default function Home() {
       <div className="flex flex-col gap-6">
         <div className="flex flex-col gap-2">
           <h2 className="text-lg font-semibold">Modal Component</h2>
-          <Button onClick={handleOpenModal}>Open Modal</Button>
+          <Button onClick={handleOpenModal} shape={'rounded'} size={'small'} iconOnly>
+            <Icon name={'arrow-right'} />
+          </Button>
         </div>
 
         <div className="flex flex-col gap-2">

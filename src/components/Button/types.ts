@@ -15,4 +15,5 @@ export interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement
   rightIcon?: ReactNode;
   children?: ReactNode;
   fullWidth?: boolean;
+  iconOnly?: boolean;
 }
