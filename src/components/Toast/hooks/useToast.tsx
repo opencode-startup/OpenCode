@@ -9,7 +9,12 @@ export const useToast = () => {
     sonnerToast.custom((id) => <Toast id={id} {...toast} />, data);
   }, []);
 
+  const closeToast = useCallback((id?: string | number) => {
+    sonnerToast.dismiss(id);
+  }, []);
+
   return {
     openToast,
+    closeToast,
   };
 };

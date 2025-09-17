@@ -1,15 +1,21 @@
-import { HTMLAttributes, ReactNode } from 'react';
+import { HTMLAttributes, MouseEvent, ReactNode } from 'react';
+
+import { ButtonProps } from '@/components/Button/types';
 
 export type ToastType = 'default' | 'success' | 'warning' | 'error';
 
-export type ToastActions = 'none' | 'two' | 'three';
+export interface ToastActionProps extends Omit<ButtonProps, 'onClick'> {
+  label: string;
+  dismiss?: boolean;
+  onClick?: (event: MouseEvent<HTMLButtonElement>, id?: string | number) => void;
+}
 
 export interface ToastProps extends Omit<HTMLAttributes<HTMLDivElement>, 'type' | 'id'> {
   id?: string | number;
   message?: string;
   type?: ToastType;
   withCloseButton?: boolean;
-  actions?: ToastActions;
+  actions?: ToastActionProps[];
   onClose?: () => void;
   children?: ReactNode;
 }
