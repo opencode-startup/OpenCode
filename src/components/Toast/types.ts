@@ -10,12 +10,12 @@ export interface ToastActionProps extends Omit<ButtonProps, 'onClick'> {
   onClick?: (event: MouseEvent<HTMLButtonElement>, id?: string | number) => void;
 }
 
-export interface ToastProps extends Omit<HTMLAttributes<HTMLDivElement>, 'type' | 'id'> {
+export interface ToastProps
+  extends Omit<HTMLAttributes<HTMLDivElement>, 'type' | 'id' | 'children'> {
   id?: string | number;
-  message?: string;
+  message?: ReactNode;
   type?: ToastType;
   withCloseButton?: boolean;
   actions?: ToastActionProps[];
   onClose?: () => void;
-  children?: ReactNode;
 }

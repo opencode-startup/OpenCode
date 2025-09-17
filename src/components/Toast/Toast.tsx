@@ -14,7 +14,6 @@ const Toast: FC<ToastProps> = ({
   actions = [],
   onClose,
   className,
-  children,
   ...props
 }) => {
   return (
@@ -28,7 +27,7 @@ const Toast: FC<ToastProps> = ({
       {...props}
     >
       <div className="flex items-center justify-between">
-        <div className="min-w-0 flex-1">{children || <p>{message}</p>}</div>
+        <div className="min-w-0 flex-1">{message}</div>
         {withCloseButton && (
           <Button
             shape={'square'}
