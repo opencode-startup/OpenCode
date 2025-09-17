@@ -1,11 +1,9 @@
 'use client';
 
 import { Button } from '@/components';
-import { useToast } from '@/components/Toast/hooks';
+import { closeToast, openToast } from '@/lib';
 
 export default function Home() {
-  const { openToast, closeToast } = useToast();
-
   return (
     <div className={'flex min-h-screen flex-1 flex-col items-center gap-8 p-8'}>
       <Button
