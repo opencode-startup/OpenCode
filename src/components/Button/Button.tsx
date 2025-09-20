@@ -18,6 +18,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       rightIcon,
       children,
       fullWidth = false,
+      iconOnly = false,
       disabled,
       className,
       ...props
@@ -36,6 +37,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           shape,
           fullWidth,
           loading,
+          iconOnly,
           className,
         })}
         aria-busy={loading}
@@ -45,11 +47,17 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           <Spinner size={sizeConfig[size].spinnerSize} role={'status'} aria-label="Loading" />
         )}
 
-        {!loading && leftIcon && <span className="flex shrink-0 items-center">{leftIcon}</span>}
+        {!loading && !iconOnly && leftIcon && (
+          <span className="flex shrink-0 items-center">{leftIcon}</span>
+        )}
 
-        {children && <span className="truncate">{children}</span>}
+        {iconOnly
+          ? !loading && children && <span className="flex shrink-0 items-center">{children}</span>
+          : children && <span className="truncate">{children}</span>}
 
-        {!loading && rightIcon && <span className="flex shrink-0 items-center">{rightIcon}</span>}
+        {!loading && !iconOnly && rightIcon && (
+          <span className="flex shrink-0 items-center">{rightIcon}</span>
+        )}
       </button>
     );
   },
