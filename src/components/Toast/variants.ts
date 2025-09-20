@@ -3,7 +3,7 @@ import { tv } from 'tailwind-variants';
 export const containerVariants = tv({
   base: [
     'box-border flex flex-col overflow-hidden py-4 pr-3 pl-4',
-    'relative w-[26.25rem] rounded-xl shadow-[0px_0px_0px_1px_var(--gray-400)]',
+    'relative rounded-xl shadow-[0px_0px_0px_1px_var(--gray-400)]',
     'typo-label-14 transition-all duration-300 ease-out',
   ],
   variants: {

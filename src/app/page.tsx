@@ -11,7 +11,6 @@ export default function Home() {
           openToast(
             {
               type: 'default',
-              className: 'w-[500px]',
               withCloseButton: false,
               message:
                 'We use cookies and similar technologies to analyze traffic, improve user experience, and measure the effectiveness of our content. You can accept all or manage your preferences.',
