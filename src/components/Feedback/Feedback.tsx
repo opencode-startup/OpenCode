@@ -25,6 +25,7 @@ const Feedback: FC<FeedbackProps> = ({
     handleRatingSelect,
     handleSubmit,
     setComment,
+    containerRef,
   } = useFeedback({
     onRatingSelect,
     onSubmit,
@@ -51,14 +52,9 @@ const Feedback: FC<FeedbackProps> = ({
 
   return (
     <div className={'flex flex-col'}>
-      <div
-        className={feedbackTriggerVariants({
-          state,
-          disabled,
-        })}
-      >
+      <div ref={containerRef} className={feedbackTriggerVariants({ state, disabled })}>
         <div className={isExpanded ? 'flex w-full flex-col' : ''}>
-          <div className="flex items-center gap-2 overflow-hidden px-4 py-2">
+          <div className="flex items-center justify-center gap-2 overflow-hidden px-4 py-2">
             <div
               className="typo-label-14 relative flex shrink-0 flex-col justify-center text-sm leading-none font-normal
                 whitespace-nowrap text-gray-900"
@@ -70,35 +66,39 @@ const Feedback: FC<FeedbackProps> = ({
             </div>
           </div>
 
-          {isExpanded && (
-            <>
-              <div className="relative flex h-[6.25rem] w-full flex-col items-start justify-center gap-1 p-2.5">
-                <textarea
-                  className="bg-background-100 border-gray-alpha-400 relative flex h-full min-h-px w-full min-w-px grow basis-0
-                    resize-none items-start rounded border border-solid px-3 py-2.5 text-sm text-gray-700
-                    placeholder:text-gray-700 focus:border-transparent focus:ring-2 focus:ring-blue-700
-                    focus:outline-none"
-                  placeholder={textareaPlaceholder}
-                  value={comment}
-                  onChange={(e) => setComment(e.target.value)}
-                  disabled={disabled || state === 'submitted'}
-                />
-              </div>
-              <div
-                className="bg-gray-alpha-100 relative flex w-full flex-col items-end justify-center gap-2.5 border-t
-                  border-gray-400 p-2.5"
+          <div
+            className={`overflow-hidden transition-all duration-400 ease-in-out ${
+              isExpanded ? 'max-h-[14.4rem] opacity-100' : 'max-h-0 opacity-0' }`}
+          >
+            <div
+              className={`relative flex w-full flex-col items-start justify-center gap-1 p-2.5 transition-all duration-500
+                ease-in-out ${isExpanded ? 'h-[7.5rem]' : 'h-[6.25rem]'}`}
+            >
+              <textarea
+                className="bg-background-100 border-gray-alpha-400 relative flex h-full min-h-px w-full min-w-px grow basis-0
+                  resize-none items-start rounded border border-solid px-3 py-2.5 text-sm text-gray-700
+                  placeholder:text-gray-700 focus:border-transparent focus:ring-2 focus:ring-blue-700
+                  focus:outline-none"
+                placeholder={textareaPlaceholder}
+                value={comment}
+                onChange={(e) => setComment(e.target.value)}
+                disabled={disabled || state === 'submitted'}
+              />
+            </div>
+            <div
+              className="bg-gray-alpha-100 relative flex w-full flex-col items-end justify-center gap-2.5 border-t
+                border-gray-400 p-2.5"
+            >
+              <Button
+                type="submit"
+                size={'small'}
+                onClick={() => handleSubmit()}
+                disabled={disabled || !currentRating || state === 'submitted'}
               >
-                <Button
-                  type="submit"
-                  size={'small'}
-                  onClick={() => handleSubmit()}
-                  disabled={disabled || !currentRating || state === 'submitted'}
-                >
-                  {state === 'submitted' ? 'Sent' : sendButtonText}
-                </Button>
-              </div>
-            </>
-          )}
+                {state === 'submitted' ? 'Sent' : sendButtonText}
+              </Button>
+            </div>
+          </div>
         </div>
       </div>
     </div>

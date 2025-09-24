@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { FeedbackRating, FeedbackState, UseFeedbackProps } from '../types';
 
@@ -10,18 +10,27 @@ export default function useFeedback({
   const [rating, setRating] = useState<FeedbackRating | null>(null);
   const [state, setState] = useState<FeedbackState>('default');
   const [comment, setComment] = useState('');
-
+  const [initialWidth, setInitialWidth] = useState<number | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const isExpanded = state === 'expanded' || state === 'submitted';
 
   const handleRatingSelect = useCallback(
-    (rating: FeedbackRating) => {
+    (newRating: FeedbackRating) => {
       if (disabled) return;
 
-      setRating(rating);
-      onRatingSelect?.(rating);
-      setState('expanded');
+      // If clicking on the same rating, deselect it and collapse
+      if (rating === newRating) {
+        setRating(null);
+        setComment('');
+        setState('default');
+        onRatingSelect?.(null);
+      } else {
+        setRating(newRating);
+        onRatingSelect?.(newRating);
+        setState('expanded');
+      }
     },
-    [disabled, onRatingSelect],
+    [disabled, onRatingSelect, rating],
   );
 
   const handleSubmit = useCallback(
@@ -40,6 +49,19 @@ export default function useFeedback({
     setState('default');
   }, []);
 
+  useEffect(() => {
+    if (containerRef.current && initialWidth === null) {
+      setInitialWidth(containerRef.current.offsetWidth);
+    }
+  }, [initialWidth]);
+
+  useEffect(() => {
+    if (containerRef.current && initialWidth) {
+      const element = containerRef.current;
+      element.style.width = isExpanded ? `${initialWidth * 1.2}px` : `${initialWidth}px`;
+    }
+  }, [initialWidth, isExpanded]);
+
   return {
     state,
     comment,
@@ -50,5 +72,6 @@ export default function useFeedback({
     setComment,
     setState,
     reset,
+    containerRef,
   };
 }

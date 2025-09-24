@@ -2,7 +2,7 @@ import { tv } from 'tailwind-variants';
 
 export const feedbackTriggerVariants = tv({
   base: `focus-ring relative overflow-hidden border border-solid border-gray-400 bg-transparent
-  transition-all duration-200`,
+  transition-all duration-500`,
   variants: {
     state: {
       default: 'rounded-[2rem]',

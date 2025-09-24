@@ -3,7 +3,7 @@ export type FeedbackState = 'default' | 'expanded' | 'submitted';
 export type FeedbackRating = 1 | 2 | 3 | 4;
 
 export interface FeedbackProps {
-  onRatingSelect?: (rating: FeedbackRating) => void;
+  onRatingSelect?: (rating: FeedbackRating | null) => void;
   onSubmit?: (rating: FeedbackRating, comment?: string) => void;
   className?: string;
   disabled?: boolean;
@@ -14,7 +14,7 @@ export interface FeedbackProps {
 }
 
 export interface UseFeedbackProps {
-  onRatingSelect?: (rating: FeedbackRating) => void;
+  onRatingSelect?: (rating: FeedbackRating | null) => void;
   onSubmit?: (rating: FeedbackRating, comment?: string) => void;
   disabled?: boolean;
 }
