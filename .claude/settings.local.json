@@ -25,7 +25,9 @@
       "Bash(npx eslint:*)",
       "WebFetch(domain:localhost)",
       "Bash(cat:*)",
-      "mcp__ide__getDiagnostics"
+      "mcp__ide__getDiagnostics",
+      "mcp__figma-dev-mode-mcp-server__get_screenshot",
+      "mcp__figma-dev-mode-mcp-server__get_metadata"
     ],
     "deny": []
   }
