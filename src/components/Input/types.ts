@@ -11,6 +11,10 @@ export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 
   size?: InputSize;
   prefixHasStyling?: boolean;
   suffixHasStyling?: boolean;
+  // Multiline support
+  multiline?: boolean;
+  rows?: number;
+  resize?: 'none' | 'both' | 'horizontal' | 'vertical';
   // Accessibility enhancements
   loading?: boolean;
   'aria-describedby'?: string;

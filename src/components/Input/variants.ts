@@ -4,14 +4,16 @@ import { InputSize } from './types';
 
 // Container variants for the input wrapper
 export const inputContainerVariants = tv({
-  base: [
-    'bg-background-100 flex items-center overflow-hidden rounded transition-shadow duration-200 ease-out',
-  ],
+  base: ['bg-background-100 flex overflow-hidden rounded transition-shadow duration-200 ease-out'],
   variants: {
     size: {
-      small: 'h-8 text-sm',
-      medium: 'h-10 text-sm',
-      large: 'h-12 text-base',
+      small: 'min-h-8 text-sm',
+      medium: 'min-h-10 text-sm',
+      large: 'min-h-12 text-base',
+    },
+    multiline: {
+      true: 'h-auto items-stretch',
+      false: 'items-center',
     },
     disabled: {
       true: 'cursor-not-allowed bg-gray-100',
@@ -45,22 +47,28 @@ export const inputContainerVariants = tv({
     size: 'medium',
     disabled: false,
     error: false,
+    multiline: false,
   },
 });
 
 // Input field variants
 export const inputFieldVariants = tv({
   base: [
-    'text-gray-1000 flex-1 bg-transparent py-0 leading-5 font-normal outline-none',
+    'text-gray-1000 flex-1 bg-transparent leading-5 font-normal outline-none',
     'px-3 placeholder:text-gray-700',
   ],
   variants: {
     disabled: {
       true: 'cursor-not-allowed text-gray-600',
     },
+    multiline: {
+      true: 'min-h-20 py-2',
+      false: 'py-0',
+    },
   },
   defaultVariants: {
     disabled: false,
+    multiline: false,
   },
 });
 
