@@ -2,7 +2,7 @@
 
 import { FC } from 'react';
 
-import { Button, Icon } from '@/components';
+import { Button, Icon, Input } from '@/components';
 
 import { ratingIcons } from './data';
 import { useFeedback } from './hooks';
@@ -70,15 +70,10 @@ const Feedback: FC<FeedbackProps> = ({
             className={`overflow-hidden transition-all duration-400 ease-in-out ${
               isExpanded ? 'max-h-[14.4rem] opacity-100' : 'max-h-0 opacity-0' }`}
           >
-            <div
-              className={`relative flex w-full flex-col items-start justify-center gap-1 p-2.5 transition-all duration-500
-                ease-in-out ${isExpanded ? 'h-[7.5rem]' : 'h-[6.25rem]'}`}
-            >
-              <textarea
-                className="bg-background-100 border-gray-alpha-400 relative flex h-full min-h-px w-full min-w-px grow basis-0
-                  resize-none items-start rounded border border-solid px-3 py-2.5 text-sm text-gray-700
-                  placeholder:text-gray-700 focus:border-transparent focus:ring-2 focus:ring-blue-700
-                  focus:outline-none"
+            <div className={'relative flex flex-1 flex-col p-2.5'}>
+              <Input
+                multiline
+                resize="none"
                 placeholder={textareaPlaceholder}
                 value={comment}
                 onChange={(e) => setComment(e.target.value)}
