@@ -1,5 +1,7 @@
 'use client';
 
+import './animation.css';
+
 import { FC } from 'react';
 
 import { Button, Icon, Input } from '@/components';
@@ -66,34 +68,46 @@ const Feedback: FC<FeedbackProps> = ({
             </div>
           </div>
 
-          <div
-            className={`overflow-hidden transition-all duration-400 ease-in-out ${
-              isExpanded ? 'max-h-[14.4rem] opacity-100' : 'max-h-0 opacity-0' }`}
-          >
-            <div className={'relative flex flex-1 flex-col p-2.5'}>
-              <Input
-                multiline
-                resize="none"
-                placeholder={textareaPlaceholder}
-                value={comment}
-                onChange={(e) => setComment(e.target.value)}
-                disabled={disabled || state === 'submitted'}
-              />
+          {state === 'submitted' ? (
+            <div className="flex h-[10.75rem] flex-col items-center justify-center gap-2 overflow-hidden p-10 transition-all">
+              <Icon name="check-circle-fill" size={32} className="animate-fade-slide-up" />
+              <p className="text-gray-1000 typo-label-14 animate-fade-slide-up text-center delay-200">
+                Your feedback has been received!
+              </p>
+              <p className="text-gray-1000 typo-label-14 animate-fade-slide-up text-center delay-400">
+                Thank you for your help.
+              </p>
             </div>
+          ) : (
             <div
-              className="bg-gray-alpha-100 relative flex w-full flex-col items-end justify-center gap-2.5 border-t
-                border-gray-400 p-2.5"
+              className={`overflow-hidden transition-all duration-400 ease-in-out ${
+                isExpanded ? 'max-h-[14.4rem] opacity-100' : 'max-h-0 opacity-0' }`}
             >
-              <Button
-                type="submit"
-                size={'small'}
-                onClick={() => handleSubmit()}
-                disabled={disabled || !currentRating || state === 'submitted'}
+              <div className={'relative flex flex-1 flex-col p-2.5'}>
+                <Input
+                  multiline
+                  resize="none"
+                  placeholder={textareaPlaceholder}
+                  value={comment}
+                  onChange={(e) => setComment(e.target.value)}
+                  disabled={disabled}
+                />
+              </div>
+              <div
+                className="bg-gray-alpha-100 relative flex w-full flex-col items-end justify-center gap-2.5 border-t
+                  border-gray-400 p-2.5"
               >
-                {state === 'submitted' ? 'Sent' : sendButtonText}
-              </Button>
+                <Button
+                  type="submit"
+                  size={'small'}
+                  onClick={() => handleSubmit()}
+                  disabled={disabled || !currentRating}
+                >
+                  {sendButtonText}
+                </Button>
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
     </div>

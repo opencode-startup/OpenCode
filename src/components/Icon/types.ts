@@ -9,7 +9,8 @@ export type IconName =
   | 'face-smile'
   | 'face-happy'
   | 'face-unhappy'
-  | 'face-sad';
+  | 'face-sad'
+  | 'check-circle-fill';
 
 export interface IconProps extends React.SVGProps<SVGSVGElement> {
   name: IconName;

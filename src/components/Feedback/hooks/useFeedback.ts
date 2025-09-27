@@ -58,7 +58,7 @@ export default function useFeedback({
   useEffect(() => {
     if (containerRef.current && initialWidth) {
       const element = containerRef.current;
-      element.style.width = isExpanded ? `${initialWidth * 1.2}px` : `${initialWidth}px`;
+      element.style.width = isExpanded ? `330px` : `${initialWidth}px`;
     }
   }, [initialWidth, isExpanded]);
 
