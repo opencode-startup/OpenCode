@@ -17,13 +17,19 @@
 }
 
 .animate-fade-slide-up {
-  animation: fade-in 500ms ease-in-out, slide-up 500ms ease-in-out;
+  animation:
+    fade-in 500ms ease-in-out,
+    slide-up 500ms ease-in-out;
 }
 
 .animate-fade-slide-up.delay-200 {
-  animation: fade-in 500ms ease-in-out 200ms both, slide-up 500ms ease-in-out 200ms both;
+  animation:
+    fade-in 500ms ease-in-out 200ms both,
+    slide-up 500ms ease-in-out 200ms both;
 }
 
 .animate-fade-slide-up.delay-400 {
-  animation: fade-in 500ms ease-in-out 400ms both, slide-up 500ms ease-in-out 400ms both;
+  animation:
+    fade-in 500ms ease-in-out 400ms both,
+    slide-up 500ms ease-in-out 400ms both;
 }
