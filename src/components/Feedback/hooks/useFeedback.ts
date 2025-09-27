@@ -12,6 +12,7 @@ export default function useFeedback({
   const [comment, setComment] = useState('');
   const [initialWidth, setInitialWidth] = useState<number | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLTextAreaElement>(null);
   const isExpanded = state === 'expanded' || state === 'submitted';
 
   const handleRatingSelect = useCallback(
@@ -62,6 +63,16 @@ export default function useFeedback({
     }
   }, [initialWidth, isExpanded]);
 
+  useEffect(() => {
+    if (state === 'expanded' && inputRef.current) {
+      // Add a small delay to ensure the input is visible before focusing
+      const timer = setTimeout(() => {
+        inputRef.current?.focus();
+      }, 100);
+      return () => clearTimeout(timer);
+    }
+  }, [state]);
+
   return {
     state,
     comment,
@@ -73,5 +84,6 @@ export default function useFeedback({
     setState,
     reset,
     containerRef,
+    inputRef,
   };
 }

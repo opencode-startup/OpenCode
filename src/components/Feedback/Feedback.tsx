@@ -28,6 +28,7 @@ const Feedback: FC<FeedbackProps> = ({
     handleSubmit,
     setComment,
     containerRef,
+    inputRef,
   } = useFeedback({
     onRatingSelect,
     onSubmit,
@@ -85,6 +86,7 @@ const Feedback: FC<FeedbackProps> = ({
             >
               <div className={'relative flex flex-1 flex-col p-2.5'}>
                 <Input
+                  ref={inputRef}
                   multiline
                   resize="none"
                   placeholder={textareaPlaceholder}
