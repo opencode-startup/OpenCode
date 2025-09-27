@@ -22,7 +22,6 @@ export default function useFeedback({
       // If clicking on the same rating, deselect it and collapse
       if (rating === newRating) {
         setRating(null);
-        setComment('');
         setState('default');
         onRatingSelect?.(null);
       } else {
@@ -81,7 +80,6 @@ export default function useFeedback({
         !containerRef.current.contains(event.target as Node)
       ) {
         setRating(null);
-        setComment('');
         setState('default');
         onRatingSelect?.(null);
       }
