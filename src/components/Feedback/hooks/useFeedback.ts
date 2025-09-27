@@ -73,6 +73,26 @@ export default function useFeedback({
     }
   }, [state]);
 
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        state === 'expanded' &&
+        containerRef.current &&
+        !containerRef.current.contains(event.target as Node)
+      ) {
+        setRating(null);
+        setComment('');
+        setState('default');
+        onRatingSelect?.(null);
+      }
+    };
+
+    if (state === 'expanded') {
+      document.addEventListener('mousedown', handleClickOutside);
+      return () => document.removeEventListener('mousedown', handleClickOutside);
+    }
+  }, [state, onRatingSelect]);
+
   return {
     state,
     comment,
