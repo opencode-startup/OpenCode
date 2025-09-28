@@ -239,4 +239,21 @@ export default {
       />
     </svg>
   ),
+  menu: (props) => (
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 16 16"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M2 4.5C2 4.22386 2.22386 4 2.5 4H13.5C13.7761 4 14 4.22386 14 4.5V5.5C14 5.77614 13.7761 6 13.5 6H2.5C2.22386 6 2 5.77614 2 5.5V4.5ZM2 7.5C2 7.22386 2.22386 7 2.5 7H13.5C13.7761 7 14 7.22386 14 7.5V8.5C14 8.77614 13.7761 9 13.5 9H2.5C2.22386 9 2 8.77614 2 8.5V7.5ZM2.5 10C2.22386 10 2 10.2239 2 10.5V11.5C2 11.7761 2.22386 12 2.5 12H13.5C13.7761 12 14 11.7761 14 11.5V10.5C14 10.2239 13.7761 10 13.5 10H2.5Z"
+        fill="currentColor"
+      />
+    </svg>
+  ),
 } as Record<IconName, React.FC<React.SVGProps<SVGSVGElement>>>;
