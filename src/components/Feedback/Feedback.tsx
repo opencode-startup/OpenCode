@@ -57,6 +57,54 @@ const Feedback: FC<FeedbackProps> = ({
     );
   };
 
+  const renderContent = () => {
+    switch (state) {
+      case 'submitted':
+        return (
+          <div className="flex h-[10.75rem] flex-col items-center justify-center gap-2 overflow-hidden p-10 transition-all">
+            <Icon name="check-circle-fill" size={32} className="animate-fade-slide-up" />
+            <p className="text-gray-1000 typo-label-14 animate-fade-slide-up text-center delay-200">
+              Your feedback has been received!
+            </p>
+            <p className="text-gray-1000 typo-label-14 animate-fade-slide-up text-center delay-400">
+              Thank you for your help.
+            </p>
+          </div>
+        );
+      case 'collapsed':
+        return (
+          <div>
+            <div className={'relative flex flex-1 flex-col p-2.5'}>
+              <Input
+                ref={inputRef}
+                multiline
+                resize="none"
+                placeholder={textareaPlaceholder}
+                value={comment}
+                onChange={(e) => setComment(e.target.value)}
+                disabled={disabled}
+              />
+            </div>
+            <div
+              className="bg-gray-alpha-100 relative flex w-full flex-col items-end justify-center gap-2.5 border-t
+                border-gray-400 p-2.5"
+            >
+              <Button
+                type="submit"
+                size={'small'}
+                onClick={() => handleSubmit()}
+                disabled={disabled || !currentRating}
+              >
+                {sendButtonText}
+              </Button>
+            </div>
+          </div>
+        );
+      default:
+        return null;
+    }
+  };
+
   return (
     <div className={'flex flex-col'}>
       <div
@@ -83,44 +131,7 @@ const Feedback: FC<FeedbackProps> = ({
             className={`overflow-hidden transition-all duration-400 ease-in-out ${
               isExpanded ? 'max-h-[14.4rem] opacity-100' : 'max-h-0 opacity-0' }`}
           >
-            {state === 'submitted' ? (
-              <div className="flex h-[10.75rem] flex-col items-center justify-center gap-2 overflow-hidden p-10 transition-all">
-                <Icon name="check-circle-fill" size={32} className="animate-fade-slide-up" />
-                <p className="text-gray-1000 typo-label-14 animate-fade-slide-up text-center delay-200">
-                  Your feedback has been received!
-                </p>
-                <p className="text-gray-1000 typo-label-14 animate-fade-slide-up text-center delay-400">
-                  Thank you for your help.
-                </p>
-              </div>
-            ) : (
-              <div>
-                <div className={'relative flex flex-1 flex-col p-2.5'}>
-                  <Input
-                    ref={inputRef}
-                    multiline
-                    resize="none"
-                    placeholder={textareaPlaceholder}
-                    value={comment}
-                    onChange={(e) => setComment(e.target.value)}
-                    disabled={disabled}
-                  />
-                </div>
-                <div
-                  className="bg-gray-alpha-100 relative flex w-full flex-col items-end justify-center gap-2.5 border-t
-                    border-gray-400 p-2.5"
-                >
-                  <Button
-                    type="submit"
-                    size={'small'}
-                    onClick={() => handleSubmit()}
-                    disabled={disabled || !currentRating}
-                  >
-                    {sendButtonText}
-                  </Button>
-                </div>
-              </div>
-            )}
+            {renderContent()}
           </div>
         </div>
       </div>
