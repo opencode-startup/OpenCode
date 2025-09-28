@@ -8,12 +8,12 @@ export default function useFeedback({
   disabled = false,
 }: UseFeedbackProps) {
   const [rating, setRating] = useState<FeedbackRating | null>(null);
-  const [state, setState] = useState<FeedbackState>('default');
+  const [state, setState] = useState<FeedbackState>('collapsed');
   const [comment, setComment] = useState('');
+  const [isExpanded, setIsExpanded] = useState(false);
   const [initialWidth, setInitialWidth] = useState<number | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
-  const isExpanded = state === 'expanded' || state === 'submitted';
 
   const handleRatingSelect = useCallback(
     (newRating: FeedbackRating) => {
@@ -22,12 +22,12 @@ export default function useFeedback({
       // If clicking on the same rating, deselect it and collapse
       if (rating === newRating) {
         setRating(null);
-        setState('default');
+        setIsExpanded(false);
         onRatingSelect?.(null);
       } else {
         setRating(newRating);
+        setIsExpanded(true);
         onRatingSelect?.(newRating);
-        setState('expanded');
       }
     },
     [disabled, onRatingSelect, rating],
@@ -46,8 +46,18 @@ export default function useFeedback({
   const reset = useCallback(() => {
     setRating(null);
     setComment('');
-    setState('default');
+    setIsExpanded(false);
+    setState('collapsed');
   }, []);
+
+  useEffect(() => {
+    if (state === 'submitted') {
+      setTimeout(() => {
+        setIsExpanded(false);
+        setTimeout(reset, 400);
+      }, 3000);
+    }
+  }, [state, reset]);
 
   useEffect(() => {
     if (containerRef.current && initialWidth === null) {
@@ -60,36 +70,36 @@ export default function useFeedback({
       const element = containerRef.current;
       element.style.width = isExpanded ? `330px` : `${initialWidth}px`;
     }
-  }, [initialWidth, isExpanded]);
+  }, [initialWidth, isExpanded, state]);
 
   useEffect(() => {
-    if (state === 'expanded' && inputRef.current) {
+    if (isExpanded && inputRef.current) {
       // Add a small delay to ensure the input is visible before focusing
       const timer = setTimeout(() => {
         inputRef.current?.focus();
       }, 100);
       return () => clearTimeout(timer);
     }
-  }, [state]);
+  }, [isExpanded]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
-        state === 'expanded' &&
+        isExpanded &&
         containerRef.current &&
         !containerRef.current.contains(event.target as Node)
       ) {
         setRating(null);
-        setState('default');
+        setIsExpanded(false);
         onRatingSelect?.(null);
       }
     };
 
-    if (state === 'expanded') {
+    if (state === 'collapsed') {
       document.addEventListener('mousedown', handleClickOutside);
       return () => document.removeEventListener('mousedown', handleClickOutside);
     }
-  }, [state, onRatingSelect]);
+  }, [isExpanded, state, onRatingSelect]);
 
   return {
     state,
@@ -99,6 +109,7 @@ export default function useFeedback({
     handleRatingSelect,
     handleSubmit,
     setComment,
+    setIsExpanded,
     setState,
     reset,
     containerRef,

@@ -1,4 +1,4 @@
-export type FeedbackState = 'default' | 'expanded' | 'submitted';
+export type FeedbackState = 'collapsed' | 'submitted';
 
 export type FeedbackRating = 1 | 2 | 3 | 4;
 

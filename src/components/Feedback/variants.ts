@@ -4,10 +4,9 @@ export const feedbackTriggerVariants = tv({
   base: `focus-ring relative overflow-hidden border border-solid border-gray-400 bg-transparent
   transition-all duration-500`,
   variants: {
-    state: {
-      default: 'rounded-[2rem]',
-      expanded: 'w-full rounded-[0.75rem] border-gray-500',
-      submitted: 'w-full rounded-[0.75rem] border-gray-500 opacity-75',
+    expanded: {
+      true: 'w-full rounded-[0.75rem] border-gray-500',
+      false: 'rounded-[2rem]',
     },
     disabled: {
       true: 'cursor-not-allowed opacity-50',
@@ -15,7 +14,8 @@ export const feedbackTriggerVariants = tv({
     },
   },
   defaultVariants: {
-    state: 'default',
+    state: 'collapsed',
+    expanded: false,
     disabled: false,
   },
 });
