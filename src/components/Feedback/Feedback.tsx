@@ -35,23 +35,27 @@ const Feedback: FC<FeedbackProps> = ({
     disabled,
   });
 
-  const renderRatingButton = (rating: FeedbackRating) => (
-    <Button
-      key={rating}
-      iconOnly
-      size={'small'}
-      disabled={disabled}
-      shape={'rounded'}
-      onClick={() => handleRatingSelect(rating)}
-      className={feedbackRatingButtonVariants({
-        selected: currentRating === rating,
-        disabled,
-      })}
-      aria-label={`Rate ${rating} out of 4`}
-    >
-      <Icon name={ratingIcons[rating]} size={16} />
-    </Button>
-  );
+  const renderRatingButton = (rating: FeedbackRating) => {
+    const isButtonDisabled = disabled || state === 'submitted';
+
+    return (
+      <Button
+        key={rating}
+        iconOnly
+        size={'small'}
+        disabled={isButtonDisabled}
+        shape={'rounded'}
+        onClick={() => handleRatingSelect(rating)}
+        className={feedbackRatingButtonVariants({
+          selected: currentRating === rating,
+          disabled: isButtonDisabled,
+        })}
+        aria-label={`Rate ${rating} out of 4`}
+      >
+        <Icon name={ratingIcons[rating]} size={16} />
+      </Button>
+    );
+  };
 
   return (
     <div className={'flex flex-col'}>

@@ -28,7 +28,7 @@ export const feedbackRatingButtonVariants = tv({
       false: 'bg-transparent hover:bg-blue-300',
     },
     disabled: {
-      true: 'cursor-not-allowed opacity-50',
+      true: 'cursor-not-allowed opacity-50 disabled:border-none disabled:bg-transparent',
       false: 'cursor-pointer',
     },
   },
