@@ -1,19 +1,27 @@
 'use client';
 
-import { forwardRef } from 'react';
+import { forwardRef, useState } from 'react';
 
 import { Button, Icon, Logo } from '@/components';
 
-import { MobileHeaderProps } from './types';
+import { HeaderProps } from './types';
 
-const MobileHeader = forwardRef<HTMLElement, MobileHeaderProps>(
-  ({ onMenuClick, ...props }, ref) => {
+const MobileHeader = forwardRef<HTMLElement, HeaderProps>(
+  ({ onSignUpClick, onLogInClick, onContactClick, onPricingClick, ...props }, ref) => {
+    const [isExpanded, setIsExpanded] = useState(false);
+
+    const handleMenuToggle = () => {
+      setIsExpanded((prev) => !prev);
+    };
+
     return (
       <header
         ref={ref}
-        className={
-          'fixed top-0 left-0 z-999 flex min-h-[var(--global-header-height)] w-full justify-center md:hidden'
-        }
+        className={`fixed top-0 left-0 z-999 flex w-full flex-col items-start md:hidden ${
+          isExpanded
+            ? 'bg-background-200 h-screen'
+            : 'min-h-[var(--global-header-height)] justify-center'
+          }`}
         {...props}
       >
         <div
@@ -21,10 +29,10 @@ const MobileHeader = forwardRef<HTMLElement, MobileHeaderProps>(
             backdrop-filter`}
         />
         <div
-          className={`absolute top-0 flex h-[var(--global-header-height)] w-full items-center justify-between
-            overflow-hidden px-4`}
+          className={`flex h-[var(--global-header-height)] w-full items-center justify-between overflow-hidden px-4 ${
+            isExpanded ? 'relative' : 'absolute top-0' }`}
         >
-          <div className="flex items-center gap-8">
+          <div className={'flex items-center overflow-hidden'}>
             <Logo size="small" text="OpenCode" />
           </div>
 
@@ -34,13 +42,47 @@ const MobileHeader = forwardRef<HTMLElement, MobileHeaderProps>(
               shape="rounded"
               iconOnly
               size="medium"
-              onClick={onMenuClick}
+              onClick={handleMenuToggle}
               className="h-10 w-10 rounded-full"
             >
-              <Icon name="menu" size={16} />
+              <Icon name={isExpanded ? 'cross' : 'menu'} size={16} />
             </Button>
           </div>
         </div>
+
+        {isExpanded && (
+          <div className="flex w-full flex-1 flex-col gap-6 overflow-hidden p-3">
+            <div className="flex w-full flex-col gap-3">
+              <Button variant="primary" size="medium" fullWidth onClick={onSignUpClick}>
+                Sign Up
+              </Button>
+              <Button variant="secondary" size="medium" onClick={onLogInClick} fullWidth>
+                Log In
+              </Button>
+            </div>
+
+            <div className="flex w-full flex-col gap-1">
+              <Button
+                variant="tertiary"
+                size="medium"
+                onClick={onPricingClick}
+                fullWidth
+                className="justify-start"
+              >
+                Pricing
+              </Button>
+              <Button
+                variant="tertiary"
+                size="medium"
+                fullWidth
+                onClick={onContactClick}
+                className="justify-start"
+              >
+                Contact
+              </Button>
+            </div>
+          </div>
+        )}
       </header>
     );
   },

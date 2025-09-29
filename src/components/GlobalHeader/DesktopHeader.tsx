@@ -4,9 +4,9 @@ import { forwardRef } from 'react';
 
 import { Button, Logo } from '@/components';
 
-import { DesktopHeaderProps } from './types';
+import { HeaderProps } from './types';
 
-const DesktopHeader = forwardRef<HTMLElement, DesktopHeaderProps>(
+const DesktopHeader = forwardRef<HTMLElement, HeaderProps>(
   ({ onSignUpClick, onLogInClick, onContactClick, onPricingClick, ...props }, ref) => {
     return (
       <header
