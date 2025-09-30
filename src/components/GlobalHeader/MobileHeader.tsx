@@ -1,5 +1,8 @@
 'use client';
 
+import './animations.css';
+
+import clsx from 'clsx';
 import { forwardRef } from 'react';
 
 import { Button, Icon, Logo } from '@/components';
@@ -14,22 +17,24 @@ const MobileHeader = forwardRef<HTMLElement, HeaderProps>(
     return (
       <header
         ref={ref}
-        className={`fixed top-0 left-0 z-999 flex w-full flex-col items-start md:hidden ${
-          isExpanded
-            ? 'bg-background-200 h-screen'
-            : 'min-h-[var(--global-header-height)] justify-center'
-          }`}
+        className={clsx(
+          'fixed top-0 left-0 z-999 flex min-h-[var(--global-header-height)] w-full flex-col items-start',
+          'justify-center transition-colors duration-500 md:hidden',
+          isExpanded && 'bg-background-200',
+        )}
         {...props}
       >
         <div
-          className={`absolute inset-0 bg-gradient-to-b from-[rgba(0,0,0,0.75)] to-[rgba(0,0,0,0)] backdrop-blur-sm
-            backdrop-filter`}
+          className="absolute inset-0 bg-gradient-to-b from-[rgba(0,0,0,0.75)] to-[rgba(0,0,0,0)] backdrop-blur-md
+            backdrop-filter"
         />
         <div
-          className={`flex h-[var(--global-header-height)] w-full items-center justify-between overflow-hidden px-4 ${
-            isExpanded ? 'relative' : 'absolute top-0' }`}
+          className={clsx(
+            'flex h-[var(--global-header-height)] w-full items-center justify-between overflow-hidden px-4',
+            isExpanded ? 'relative' : 'absolute top-0',
+          )}
         >
-          <div className={'flex items-center overflow-hidden'}>
+          <div className="flex items-center overflow-hidden">
             <Logo size="small" text="OpenCode" />
           </div>
 
@@ -47,13 +52,31 @@ const MobileHeader = forwardRef<HTMLElement, HeaderProps>(
           </div>
         </div>
 
-        {isExpanded && (
-          <div className="flex w-full flex-1 flex-col gap-6 overflow-auto p-3">
+        <div
+          className={clsx(
+            'bg-background-200 fixed top-[var(--global-header-height)] left-0 w-full overflow-hidden',
+            'transition-all duration-200 ease-out',
+            isExpanded ? 'h-[calc(100vh-var(--global-header-height))]' : 'h-0',
+          )}
+        >
+          <div className="flex h-full w-full flex-col gap-6 overflow-auto p-3">
             <div className="flex w-full flex-col gap-3">
-              <Button variant="primary" size="medium" fullWidth onClick={onSignUpClick}>
+              <Button
+                variant="primary"
+                size="medium"
+                fullWidth
+                onClick={onSignUpClick}
+                className={clsx(isExpanded && 'mobile-menu-item')}
+              >
                 Sign Up
               </Button>
-              <Button variant="secondary" size="medium" onClick={onLogInClick} fullWidth>
+              <Button
+                variant="secondary"
+                size="medium"
+                onClick={onLogInClick}
+                fullWidth
+                className={clsx(isExpanded && 'mobile-menu-item')}
+              >
                 Log In
               </Button>
             </div>
@@ -64,7 +87,7 @@ const MobileHeader = forwardRef<HTMLElement, HeaderProps>(
                 size="medium"
                 onClick={onPricingClick}
                 fullWidth
-                className="justify-start"
+                className={clsx('justify-start', isExpanded && 'mobile-menu-item')}
               >
                 Pricing
               </Button>
@@ -73,13 +96,13 @@ const MobileHeader = forwardRef<HTMLElement, HeaderProps>(
                 size="medium"
                 fullWidth
                 onClick={onContactClick}
-                className="justify-start"
+                className={clsx('justify-start', isExpanded && 'mobile-menu-item')}
               >
                 Contact
               </Button>
             </div>
           </div>
-        )}
+        </div>
       </header>
     );
   },

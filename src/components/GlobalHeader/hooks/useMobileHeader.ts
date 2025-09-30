@@ -16,6 +16,16 @@ export const useMobileHeader = () => {
   }, [isExpanded]);
 
   useEffect(() => {
+    if (isExpanded) {
+      // Set animation delays for menu items
+      const menuItems = document.querySelectorAll('.mobile-menu-item');
+      menuItems.forEach((item, index) => {
+        (item as HTMLElement).style.animationDelay = `${index * 50}ms`;
+      });
+    }
+  }, [isExpanded]);
+
+  useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 768 && isExpanded) {
         setIsExpanded(false);
