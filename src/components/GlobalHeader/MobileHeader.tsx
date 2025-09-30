@@ -1,18 +1,15 @@
 'use client';
 
-import { forwardRef, useState } from 'react';
+import { forwardRef } from 'react';
 
 import { Button, Icon, Logo } from '@/components';
 
+import { useMobileHeader } from './hooks';
 import { HeaderProps } from './types';
 
 const MobileHeader = forwardRef<HTMLElement, HeaderProps>(
   ({ onSignUpClick, onLogInClick, onContactClick, onPricingClick, ...props }, ref) => {
-    const [isExpanded, setIsExpanded] = useState(false);
-
-    const handleMenuToggle = () => {
-      setIsExpanded((prev) => !prev);
-    };
+    const { isExpanded, handleMenuToggle } = useMobileHeader();
 
     return (
       <header
