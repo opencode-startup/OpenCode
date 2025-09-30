@@ -15,6 +15,20 @@ export const useMobileHeader = () => {
     };
   }, [isExpanded]);
 
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 768 && isExpanded) {
+        setIsExpanded(false);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [isExpanded]);
+
   const handleMenuToggle = () => {
     setIsExpanded((prev) => !prev);
   };
