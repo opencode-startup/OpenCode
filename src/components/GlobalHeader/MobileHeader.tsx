@@ -48,7 +48,7 @@ const MobileHeader = forwardRef<HTMLElement, HeaderProps>(
         </div>
 
         {isExpanded && (
-          <div className="flex w-full flex-1 flex-col gap-6 overflow-hidden p-3">
+          <div className="flex w-full flex-1 flex-col gap-6 overflow-auto p-3">
             <div className="flex w-full flex-col gap-3">
               <Button variant="primary" size="medium" fullWidth onClick={onSignUpClick}>
                 Sign Up
