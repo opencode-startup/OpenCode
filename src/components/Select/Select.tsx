@@ -59,14 +59,12 @@ const Select = forwardRef<HTMLButtonElement, SelectProps>(
     const {
       isOpen,
       selectedValue,
-      highlightedIndex,
       selectedOption,
       triggerRef,
       contentRef,
       handleToggle,
       handleSelectOption,
       handleKeyDown,
-      handleOptionMouseEnter,
     } = useSelect({
       options,
       value,
@@ -131,11 +129,9 @@ const Select = forwardRef<HTMLButtonElement, SelectProps>(
                     index={currentFlatIndex}
                     selectId={selectId}
                     selectedValue={selectedValue}
-                    highlightedIndex={highlightedIndex}
                     size={actualButtonSize}
                     listboxSize={actualListboxSize}
                     onSelectAction={handleSelectOption}
-                    onMouseEnterEventAction={handleOptionMouseEnter}
                   />
                 );
               })}
@@ -151,11 +147,9 @@ const Select = forwardRef<HTMLButtonElement, SelectProps>(
             index={index}
             selectId={selectId}
             selectedValue={selectedValue}
-            highlightedIndex={highlightedIndex}
             size={actualButtonSize}
             listboxSize={actualListboxSize}
             onSelectAction={handleSelectOption}
-            onMouseEnterEventAction={handleOptionMouseEnter}
           />
         ));
       }
@@ -168,8 +162,6 @@ const Select = forwardRef<HTMLButtonElement, SelectProps>(
       'aria-expanded': isOpen,
       'aria-haspopup': 'listbox' as const,
       'aria-owns': isOpen ? listboxId : undefined,
-      'aria-activedescendant':
-        isOpen && highlightedIndex >= 0 ? `${selectId}-option-${highlightedIndex}` : undefined,
     };
 
     return (

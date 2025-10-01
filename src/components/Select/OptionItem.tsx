@@ -8,11 +8,9 @@ export const OptionItem = ({
   index,
   selectId,
   selectedValue,
-  highlightedIndex,
   size,
   listboxSize,
   onSelectAction,
-  onMouseEnterEventAction,
 }: OptionItemProps) => {
   const actualSize = listboxSize || size;
 
@@ -22,16 +20,13 @@ export const OptionItem = ({
       role="option"
       aria-selected={option.value === selectedValue}
       aria-disabled={option.disabled}
-      data-highlighted={index === highlightedIndex}
       data-selected={option.value === selectedValue}
       className={selectItemVariants({
         size: actualSize,
         selected: option.value === selectedValue,
-        highlighted: index === highlightedIndex,
         disabled: option.disabled,
       })}
       onClick={() => onSelectAction(option.value)}
-      onMouseEnter={() => onMouseEnterEventAction(index)}
     >
       <div className="flex min-w-0 flex-1 items-center gap-2">
         {option.leftIcon && <span className="flex shrink-0 items-center">{option.leftIcon}</span>}

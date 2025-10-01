@@ -46,9 +46,7 @@ export interface OptionItemProps {
   index: number;
   selectId: string;
   selectedValue: string;
-  highlightedIndex: number;
   size: SelectSize;
   listboxSize?: SelectSize;
   onSelectAction: (value: string) => void;
-  onMouseEnterEventAction: (index: number) => void;
 }

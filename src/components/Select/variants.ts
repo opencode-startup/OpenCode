@@ -67,11 +67,7 @@ export const selectItemVariants = tv({
       large: 'typo-label-14 mx-2 h-10',
     },
     selected: {
-      true: 'bg-gray-alpha-400 text-gray-1000',
-      false: '',
-    },
-    highlighted: {
-      true: 'bg-gray-alpha-300 text-gray-1000',
+      true: 'bg-gray-alpha-400 hover:bg-gray-alpha-400 text-gray-1000',
       false: '',
     },
     disabled: {
@@ -79,17 +75,9 @@ export const selectItemVariants = tv({
       false: 'cursor-pointer',
     },
   },
-  compoundVariants: [
-    {
-      selected: true,
-      highlighted: true,
-      class: 'bg-gray-alpha-500 text-gray-1000',
-    },
-  ],
   defaultVariants: {
     size: 'large',
     selected: false,
-    highlighted: false,
     disabled: false,
   },
 });
