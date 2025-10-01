@@ -82,7 +82,7 @@ const MobileHeader = ({
                       'justify-between',
                       isExpanded ? 'global-mobile-header-item' : 'global-mobile-header-item-exit',
                     )}
-                    rightIcon={<Icon name="settings-gear" size={12} />}
+                    rightIcon={<Icon name="settings-gear" size={16} />}
                   >
                     Account Settings
                   </Button>
@@ -98,7 +98,7 @@ const MobileHeader = ({
                       'justify-between',
                       isExpanded ? 'global-mobile-header-item' : 'global-mobile-header-item-exit',
                     )}
-                    rightIcon={<Icon name="logout" size={12} />}
+                    rightIcon={<Icon name="logout" size={16} />}
                   >
                     Log Out
                   </Button>
