@@ -18,7 +18,7 @@ export const useMobileHeader = () => {
   useEffect(() => {
     if (isExpanded) {
       // Set animation delays for menu items
-      const menuItems = document.querySelectorAll('.mobile-menu-item');
+      const menuItems = document.querySelectorAll('.global-mobile-header-item');
       menuItems.forEach((item, index) => {
         (item as HTMLElement).style.animationDelay = `${index * 50}ms`;
       });

@@ -20,10 +20,10 @@
   }
 }
 
-.mobile-menu-item {
+.global-mobile-header-item {
   animation: fade-slide-in 0.3s ease-out both;
 }
 
-.mobile-menu-item-exit {
+.global-mobile-header-item-exit {
   animation: fade-slide-out 0.2s ease-in both;
 }

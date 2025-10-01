@@ -65,7 +65,9 @@ const MobileHeader = ({
               size="medium"
               fullWidth
               onClick={onSignUpClick}
-              className={clsx(isExpanded ? 'mobile-menu-item' : 'mobile-menu-item-exit')}
+              className={clsx(
+                isExpanded ? 'global-mobile-header-item' : 'global-mobile-header-item-exit',
+              )}
             >
               Sign Up
             </Button>
@@ -74,7 +76,9 @@ const MobileHeader = ({
               size="medium"
               onClick={onLogInClick}
               fullWidth
-              className={clsx(isExpanded ? 'mobile-menu-item' : 'mobile-menu-item-exit')}
+              className={clsx(
+                isExpanded ? 'global-mobile-header-item' : 'global-mobile-header-item-exit',
+              )}
             >
               Log In
             </Button>
@@ -88,7 +92,7 @@ const MobileHeader = ({
               fullWidth
               className={clsx(
                 'justify-start',
-                isExpanded ? 'mobile-menu-item' : 'mobile-menu-item-exit',
+                isExpanded ? 'global-mobile-header-item' : 'global-mobile-header-item-exit',
               )}
             >
               Pricing
@@ -100,7 +104,7 @@ const MobileHeader = ({
               onClick={onContactClick}
               className={clsx(
                 'justify-start',
-                isExpanded ? 'mobile-menu-item' : 'mobile-menu-item-exit',
+                isExpanded ? 'global-mobile-header-item' : 'global-mobile-header-item-exit',
               )}
             >
               Contact
