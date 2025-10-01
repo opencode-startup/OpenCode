@@ -7,7 +7,7 @@ const GlobalHeader = () => {
   return (
     <>
       <DesktopHeader isLoggedIn />
-      <MobileHeader />
+      <MobileHeader isLoggedIn />
     </>
   );
 };
