@@ -4,8 +4,9 @@ import './animations.css';
 
 import clsx from 'clsx';
 
-import { Button, Icon, Logo } from '@/components';
+import { Button, Logo } from '@/components';
 
+import { BurgerIcon } from './BurgerIcon';
 import { MOBILE_HEADER_CONTENT_DURATION, MOBILE_HEADER_WRAPPER_DURATION } from './constants';
 import { HeaderWrapper } from './HeaderWrapper';
 import { useMobileHeader } from './hooks';
@@ -46,7 +47,7 @@ const MobileHeader = ({
             onClick={handleMenuToggle}
             className="h-10 w-10 rounded-full"
           >
-            <Icon name={isExpanded ? 'cross' : 'menu'} size={16} />
+            <BurgerIcon isOpen={isExpanded} />
           </Button>
         </div>
       </div>

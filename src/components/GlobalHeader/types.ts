@@ -10,3 +10,7 @@ export interface HeaderProps {
 export interface HeaderWrapperProps extends HTMLAttributes<HTMLElement> {
   children: ReactNode;
 }
+
+export interface BurgerIconProps {
+  isOpen: boolean;
+}
