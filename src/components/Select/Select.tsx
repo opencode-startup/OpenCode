@@ -39,6 +39,7 @@ const Select = forwardRef<HTMLButtonElement, SelectProps>(
       rightIcon,
       header,
       footer,
+      hideChevron = false,
       onValueChange,
       onOpenChange,
       name,
@@ -77,6 +78,33 @@ const Select = forwardRef<HTMLButtonElement, SelectProps>(
     });
 
     const displayText = selectedOption?.label || placeholder;
+
+    // Helper function to render right icon section
+    const renderRightIconSection = () => {
+      if (!loading && hideChevron) {
+        return null;
+      }
+
+      return (
+        <div className="flex shrink-0 items-center gap-2">
+          {loading ? (
+            <Spinner
+              size={sizeConfig[actualButtonSize].spinnerSize}
+              role="status"
+              aria-label="Loading"
+            />
+          ) : (
+            <Icon
+              className={selectIconVariants({
+                size: actualButtonSize,
+                open: isOpen,
+              })}
+              name={'chevron-down'}
+            />
+          )}
+        </div>
+      );
+    };
 
     // Helper function to render options
     const renderOptions = () => {
@@ -172,25 +200,7 @@ const Select = forwardRef<HTMLButtonElement, SelectProps>(
               {rightIcon && <span className="flex shrink-0 items-center">{rightIcon}</span>}
             </div>
 
-            <div className="flex shrink-0 items-center gap-2">
-              {loading && (
-                <Spinner
-                  size={sizeConfig[actualButtonSize].spinnerSize}
-                  role="status"
-                  aria-label="Loading"
-                />
-              )}
-
-              {!loading && (
-                <Icon
-                  className={selectIconVariants({
-                    size: actualButtonSize,
-                    open: isOpen,
-                  })}
-                  name={'chevron-down'}
-                />
-              )}
-            </div>
+            {renderRightIconSection()}
           </button>
 
           {isOpen && (

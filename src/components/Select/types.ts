@@ -28,6 +28,7 @@ export interface SelectProps {
   rightIcon?: ReactNode;
   header?: ReactNode;
   footer?: ReactNode;
+  hideChevron?: boolean;
   onValueChange?: (value: string) => void;
   onOpenChange?: (open: boolean) => void;
   id?: string;

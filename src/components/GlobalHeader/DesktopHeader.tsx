@@ -79,6 +79,7 @@ const DesktopHeader = ({
                 buttonSize="small"
                 listboxSize="large"
                 popupWidth={240}
+                hideChevron
                 placeholder={userName}
                 leftIcon={<Icon name="user" size={12} />}
                 options={userMenuOptions}
