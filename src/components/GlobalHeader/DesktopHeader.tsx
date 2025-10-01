@@ -76,7 +76,9 @@ const DesktopHeader = ({
                 My Progress
               </Button>
               <Select
-                size="small"
+                buttonSize="small"
+                listboxSize="large"
+                popupWidth={240}
                 placeholder={userName}
                 leftIcon={<Icon name="user" size={12} />}
                 options={userMenuOptions}

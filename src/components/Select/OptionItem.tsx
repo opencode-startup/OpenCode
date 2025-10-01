@@ -10,9 +10,12 @@ export const OptionItem = ({
   selectedValue,
   highlightedIndex,
   size,
+  listboxSize,
   onSelectAction,
   onMouseEnterEventAction,
 }: OptionItemProps) => {
+  const actualSize = listboxSize || size;
+
   return (
     <div
       id={`${selectId}-option-${index}`}
@@ -22,7 +25,7 @@ export const OptionItem = ({
       data-highlighted={index === highlightedIndex}
       data-selected={option.value === selectedValue}
       className={selectItemVariants({
-        size,
+        size: actualSize,
         selected: option.value === selectedValue,
         highlighted: index === highlightedIndex,
         disabled: option.disabled,

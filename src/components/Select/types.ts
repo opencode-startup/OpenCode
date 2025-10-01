@@ -16,6 +16,9 @@ export interface SelectProps {
   defaultValue?: string;
   placeholder?: string;
   size?: SelectSize;
+  buttonSize?: SelectSize;
+  listboxSize?: SelectSize;
+  popupWidth?: string | number;
   disabled?: boolean;
   loading?: boolean;
   fullWidth?: boolean;
@@ -44,6 +47,7 @@ export interface OptionItemProps {
   selectedValue: string;
   highlightedIndex: number;
   size: SelectSize;
+  listboxSize?: SelectSize;
   onSelectAction: (value: string) => void;
   onMouseEnterEventAction: (index: number) => void;
 }
