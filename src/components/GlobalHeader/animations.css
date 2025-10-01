@@ -9,6 +9,21 @@
   }
 }
 
+@keyframes fade-slide-out {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-0.5rem);
+  }
+}
+
 .mobile-menu-item {
   animation: fade-slide-in 0.3s ease-out both;
+}
+
+.mobile-menu-item-exit {
+  animation: fade-slide-out 0.2s ease-in both;
 }

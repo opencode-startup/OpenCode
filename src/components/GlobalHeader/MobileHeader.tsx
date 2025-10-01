@@ -52,8 +52,10 @@ const MobileHeader = ({
       <div
         className={clsx(
           'bg-background-200 fixed top-[var(--global-header-height)] left-0 w-full overflow-hidden',
-          'transition-all duration-200 ease-out',
-          isExpanded ? 'h-[calc(100vh-var(--global-header-height))]' : 'h-0',
+          'transition-all ease-out',
+          isExpanded
+            ? 'h-[calc(100vh-var(--global-header-height))] duration-200'
+            : 'h-0 duration-300',
         )}
       >
         <div className="flex h-full w-full flex-col gap-6 overflow-auto p-3">
@@ -63,7 +65,7 @@ const MobileHeader = ({
               size="medium"
               fullWidth
               onClick={onSignUpClick}
-              className={clsx(isExpanded && 'mobile-menu-item')}
+              className={clsx(isExpanded ? 'mobile-menu-item' : 'mobile-menu-item-exit')}
             >
               Sign Up
             </Button>
@@ -72,7 +74,7 @@ const MobileHeader = ({
               size="medium"
               onClick={onLogInClick}
               fullWidth
-              className={clsx(isExpanded && 'mobile-menu-item')}
+              className={clsx(isExpanded ? 'mobile-menu-item' : 'mobile-menu-item-exit')}
             >
               Log In
             </Button>
@@ -84,7 +86,10 @@ const MobileHeader = ({
               size="medium"
               onClick={onPricingClick}
               fullWidth
-              className={clsx('justify-start', isExpanded && 'mobile-menu-item')}
+              className={clsx(
+                'justify-start',
+                isExpanded ? 'mobile-menu-item' : 'mobile-menu-item-exit',
+              )}
             >
               Pricing
             </Button>
@@ -93,7 +98,10 @@ const MobileHeader = ({
               size="medium"
               fullWidth
               onClick={onContactClick}
-              className={clsx('justify-start', isExpanded && 'mobile-menu-item')}
+              className={clsx(
+                'justify-start',
+                isExpanded ? 'mobile-menu-item' : 'mobile-menu-item-exit',
+              )}
             >
               Contact
             </Button>
