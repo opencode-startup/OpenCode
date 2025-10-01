@@ -6,6 +6,7 @@ import clsx from 'clsx';
 
 import { Button, Icon, Logo } from '@/components';
 
+import { MOBILE_HEADER_CONTENT_DURATION, MOBILE_HEADER_WRAPPER_DURATION } from './constants';
 import { HeaderWrapper } from './HeaderWrapper';
 import { useMobileHeader } from './hooks';
 import { HeaderProps } from './types';
@@ -21,9 +22,10 @@ const MobileHeader = ({
   return (
     <HeaderWrapper
       className={clsx(
-        'flex flex-col items-start justify-center transition-colors duration-500 md:hidden',
+        'flex flex-col items-start justify-center transition-colors md:hidden',
         isExpanded && 'bg-background-200',
       )}
+      style={{ transitionDuration: `${MOBILE_HEADER_WRAPPER_DURATION}ms` }}
     >
       <div
         className={clsx(
@@ -53,10 +55,9 @@ const MobileHeader = ({
         className={clsx(
           'bg-background-200 fixed top-[var(--global-header-height)] left-0 w-full overflow-hidden',
           'transition-all ease-out',
-          isExpanded
-            ? 'h-[calc(100vh-var(--global-header-height))] duration-200'
-            : 'h-0 duration-300',
+          isExpanded ? 'h-[calc(100vh-var(--global-header-height))]' : 'h-0',
         )}
+        style={{ transitionDuration: `${MOBILE_HEADER_CONTENT_DURATION}ms` }}
       >
         <div className="flex h-full w-full flex-col gap-6 overflow-auto p-3">
           <div className="flex w-full flex-col gap-3">

@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { HTMLAttributes, ReactNode } from 'react';
 
 export interface HeaderProps {
   onSignUpClick?: () => void;
@@ -7,7 +7,6 @@ export interface HeaderProps {
   onPricingClick?: () => void;
 }
 
-export interface HeaderWrapperProps {
+export interface HeaderWrapperProps extends HTMLAttributes<HTMLElement> {
   children: ReactNode;
-  className?: string;
 }

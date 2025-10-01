@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 
+import { MAX_ANIMATION_DELAY, MOBILE_HEADER_CONTENT_DURATION } from '../constants';
+
 export const useMobileHeader = () => {
   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -19,8 +21,14 @@ export const useMobileHeader = () => {
     if (isExpanded) {
       // Set animation delays for menu items
       const menuItems = document.querySelectorAll('.global-mobile-header-item');
+      const itemCount = menuItems.length;
+      const delayPerItem = Math.min(
+        MOBILE_HEADER_CONTENT_DURATION / itemCount,
+        MAX_ANIMATION_DELAY,
+      );
+
       menuItems.forEach((item, index) => {
-        (item as HTMLElement).style.animationDelay = `${index * 50}ms`;
+        (item as HTMLElement).style.animationDelay = `${index * delayPerItem}ms`;
       });
     }
   }, [isExpanded]);
