@@ -5,6 +5,21 @@ import { MAX_ANIMATION_DELAY, MOBILE_HEADER_CONTENT_DURATION } from '../constant
 export const useMobileHeader = () => {
   const [isExpanded, setIsExpanded] = useState(false);
 
+  // Set viewport height CSS variable for mobile Safari
+  useEffect(() => {
+    const setVh = () => {
+      const vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty('--vh', `${vh}px`);
+    };
+
+    setVh();
+    window.addEventListener('resize', setVh);
+
+    return () => {
+      window.removeEventListener('resize', setVh);
+    };
+  }, []);
+
   useEffect(() => {
     if (isExpanded) {
       const scrollY = window.scrollY;

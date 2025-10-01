@@ -61,9 +61,11 @@ const MobileHeader = ({
         className={clsx(
           'bg-background-200 fixed top-[var(--global-header-height)] left-0 w-full overflow-hidden',
           'transition-all ease-out',
-          isExpanded ? 'h-[calc(100vh-var(--global-header-height))]' : 'h-0',
         )}
-        style={{ transitionDuration: `${MOBILE_HEADER_CONTENT_DURATION}ms` }}
+        style={{
+          transitionDuration: `${MOBILE_HEADER_CONTENT_DURATION}ms`,
+          height: isExpanded ? 'calc(var(--vh, 1vh) * 100 - var(--global-header-height))' : '0',
+        }}
       >
         <div className="flex h-full w-full flex-col justify-between overflow-auto">
           {isLoggedIn ? (
