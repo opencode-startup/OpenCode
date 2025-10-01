@@ -108,7 +108,7 @@ const MobileHeader = ({
               <div className="flex w-full flex-col px-5 py-2">
                 <Button
                   variant="success"
-                  size="small"
+                  size="large"
                   fullWidth
                   onClick={onUpgradeClick}
                   className={clsx(
