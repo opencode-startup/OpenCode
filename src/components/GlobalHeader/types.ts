@@ -1,10 +1,17 @@
 import { HTMLAttributes, ReactNode } from 'react';
 
 export interface HeaderProps {
+  isLoggedIn?: boolean;
+  userName?: string;
+  userEmail?: string;
   onSignUpClick?: () => void;
   onLogInClick?: () => void;
   onContactClick?: () => void;
   onPricingClick?: () => void;
+  onMyProgressClick?: () => void;
+  onAccountSettingsClick?: () => void;
+  onLogoutClick?: () => void;
+  onUpgradeClick?: () => void;
 }
 
 export interface HeaderWrapperProps extends HTMLAttributes<HTMLElement> {

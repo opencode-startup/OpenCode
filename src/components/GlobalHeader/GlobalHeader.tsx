@@ -6,7 +6,7 @@ import MobileHeader from './MobileHeader';
 const GlobalHeader = () => {
   return (
     <>
-      <DesktopHeader />
+      <DesktopHeader isLoggedIn />
       <MobileHeader />
     </>
   );
