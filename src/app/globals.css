@@ -116,6 +116,10 @@
 /*}*/
 
 :root {
+  /* Layout dimensions */
+  --global-header-height: 4rem;
+  --global-header-max-width: 80rem;
+
   /* Background colors - Dark mode */
   --background-100: #0a0a0a;
   --background-200: #000000;

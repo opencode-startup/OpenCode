@@ -16,6 +16,9 @@ export interface SelectProps {
   defaultValue?: string;
   placeholder?: string;
   size?: SelectSize;
+  buttonSize?: SelectSize;
+  listboxSize?: SelectSize;
+  popupWidth?: string | number;
   disabled?: boolean;
   loading?: boolean;
   fullWidth?: boolean;
@@ -25,6 +28,7 @@ export interface SelectProps {
   rightIcon?: ReactNode;
   header?: ReactNode;
   footer?: ReactNode;
+  hideChevron?: boolean;
   onValueChange?: (value: string) => void;
   onOpenChange?: (open: boolean) => void;
   id?: string;
@@ -42,8 +46,7 @@ export interface OptionItemProps {
   index: number;
   selectId: string;
   selectedValue: string;
-  highlightedIndex: number;
   size: SelectSize;
+  listboxSize?: SelectSize;
   onSelectAction: (value: string) => void;
-  onMouseEnterEventAction: (index: number) => void;
 }

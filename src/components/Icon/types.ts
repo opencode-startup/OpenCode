@@ -10,7 +10,12 @@ export type IconName =
   | 'face-happy'
   | 'face-unhappy'
   | 'face-sad'
-  | 'check-circle-fill';
+  | 'check-circle-fill'
+  | 'menu'
+  | 'chart-trending-up'
+  | 'user'
+  | 'settings-gear'
+  | 'logout';
 
 export interface IconProps extends React.SVGProps<SVGSVGElement> {
   name: IconName;

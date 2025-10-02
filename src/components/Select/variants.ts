@@ -29,12 +29,12 @@ export const selectTriggerVariants = tv({
     size: 'large',
     fullWidth: false,
     disabled: false,
-    open: false,
   },
 });
 
 export const selectContentVariants = tv({
   base: [
+    'absolute top-full right-0 z-50 mt-2',
     'min-w-full overflow-hidden rounded-xl border',
     'bg-background-100 border-gray-alpha-400 shadow-lg',
     'data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95',
@@ -47,14 +47,9 @@ export const selectContentVariants = tv({
       medium: 'py-2',
       large: 'py-2',
     },
-    position: {
-      top: '',
-      bottom: '',
-    },
   },
   defaultVariants: {
     size: 'large',
-    position: 'bottom',
   },
 });
 
@@ -72,11 +67,7 @@ export const selectItemVariants = tv({
       large: 'typo-label-14 mx-2 h-10',
     },
     selected: {
-      true: 'bg-gray-alpha-400 text-gray-1000',
-      false: '',
-    },
-    highlighted: {
-      true: 'bg-gray-alpha-300 text-gray-1000',
+      true: 'bg-gray-alpha-400 hover:bg-gray-alpha-400 text-gray-1000',
       false: '',
     },
     disabled: {
@@ -84,17 +75,9 @@ export const selectItemVariants = tv({
       false: 'cursor-pointer',
     },
   },
-  compoundVariants: [
-    {
-      selected: true,
-      highlighted: true,
-      class: 'bg-gray-alpha-500 text-gray-1000',
-    },
-  ],
   defaultVariants: {
     size: 'large',
     selected: false,
-    highlighted: false,
     disabled: false,
   },
 });

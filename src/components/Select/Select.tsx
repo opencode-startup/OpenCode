@@ -4,9 +4,9 @@ import { forwardRef, useId } from 'react';
 
 import { Icon, Spinner } from '@/components';
 
-import { useSelect, useSelectPosition } from './hooks';
+import { useSelect } from './hooks';
 import { OptionItem } from './OptionItem';
-import { SelectProps } from './types';
+import { SelectProps, SelectSize } from './types';
 import { isGroupedOptions } from './utils';
 import {
   selectContentVariants,
@@ -24,6 +24,9 @@ const Select = forwardRef<HTMLButtonElement, SelectProps>(
       id,
       placeholder = 'Select an option...',
       size = 'large',
+      buttonSize,
+      listboxSize,
+      popupWidth,
       className,
       disabled = false,
       loading = false,
@@ -36,6 +39,7 @@ const Select = forwardRef<HTMLButtonElement, SelectProps>(
       rightIcon,
       header,
       footer,
+      hideChevron = false,
       onValueChange,
       onOpenChange,
       name,
@@ -46,6 +50,8 @@ const Select = forwardRef<HTMLButtonElement, SelectProps>(
     },
     ref,
   ) => {
+    const actualButtonSize: SelectSize = buttonSize || size;
+    const actualListboxSize: SelectSize = listboxSize || size;
     const generatedId = useId();
     const selectId = id || generatedId;
     const listboxId = `${selectId}-listbox`;
@@ -53,14 +59,12 @@ const Select = forwardRef<HTMLButtonElement, SelectProps>(
     const {
       isOpen,
       selectedValue,
-      highlightedIndex,
       selectedOption,
       triggerRef,
       contentRef,
       handleToggle,
       handleSelectOption,
       handleKeyDown,
-      handleOptionMouseEnter,
     } = useSelect({
       options,
       value,
@@ -71,13 +75,34 @@ const Select = forwardRef<HTMLButtonElement, SelectProps>(
       loading,
     });
 
-    const { position, contentStyle } = useSelectPosition({
-      isOpen,
-      triggerRef,
-      contentRef,
-    });
-
     const displayText = selectedOption?.label || placeholder;
+
+    // Helper function to render right icon section
+    const renderRightIconSection = () => {
+      if (!loading && hideChevron) {
+        return null;
+      }
+
+      return (
+        <div className="flex shrink-0 items-center gap-2">
+          {loading ? (
+            <Spinner
+              size={sizeConfig[actualButtonSize].spinnerSize}
+              role="status"
+              aria-label="Loading"
+            />
+          ) : (
+            <Icon
+              className={selectIconVariants({
+                size: actualButtonSize,
+                open: isOpen,
+              })}
+              name={'chevron-down'}
+            />
+          )}
+        </div>
+      );
+    };
 
     // Helper function to render options
     const renderOptions = () => {
@@ -92,7 +117,9 @@ const Select = forwardRef<HTMLButtonElement, SelectProps>(
 
           return (
             <div key={`group-${groupIndex}`}>
-              {groupIndex > 0 && <div className={selectDividerVariants({ size })} />}
+              {groupIndex > 0 && (
+                <div className={selectDividerVariants({ size: actualListboxSize })} />
+              )}
               {group.map((option, optionIndex) => {
                 const currentFlatIndex = flatIndex + optionIndex;
                 return (
@@ -102,10 +129,9 @@ const Select = forwardRef<HTMLButtonElement, SelectProps>(
                     index={currentFlatIndex}
                     selectId={selectId}
                     selectedValue={selectedValue}
-                    highlightedIndex={highlightedIndex}
-                    size={size}
+                    size={actualButtonSize}
+                    listboxSize={actualListboxSize}
                     onSelectAction={handleSelectOption}
-                    onMouseEnterEventAction={handleOptionMouseEnter}
                   />
                 );
               })}
@@ -121,10 +147,9 @@ const Select = forwardRef<HTMLButtonElement, SelectProps>(
             index={index}
             selectId={selectId}
             selectedValue={selectedValue}
-            highlightedIndex={highlightedIndex}
-            size={size}
+            size={actualButtonSize}
+            listboxSize={actualListboxSize}
             onSelectAction={handleSelectOption}
-            onMouseEnterEventAction={handleOptionMouseEnter}
           />
         ));
       }
@@ -137,12 +162,10 @@ const Select = forwardRef<HTMLButtonElement, SelectProps>(
       'aria-expanded': isOpen,
       'aria-haspopup': 'listbox' as const,
       'aria-owns': isOpen ? listboxId : undefined,
-      'aria-activedescendant':
-        isOpen && highlightedIndex >= 0 ? `${selectId}-option-${highlightedIndex}` : undefined,
     };
 
     return (
-      <div className="flex w-full flex-col gap-1">
+      <div className="flex flex-col gap-1">
         <div className="relative">
           <button
             ref={ref || triggerRef}
@@ -151,7 +174,7 @@ const Select = forwardRef<HTMLButtonElement, SelectProps>(
             disabled={disabled}
             type="button"
             className={selectTriggerVariants({
-              size,
+              size: actualButtonSize,
               fullWidth,
               disabled,
               className,
@@ -165,25 +188,11 @@ const Select = forwardRef<HTMLButtonElement, SelectProps>(
           >
             <div className="flex min-w-0 flex-1 items-center gap-2">
               {leftIcon && <span className="flex shrink-0 items-center">{leftIcon}</span>}
-              <span className={`truncate ${sizeConfig[size].text}`}>{displayText}</span>
+              <span className={`truncate ${sizeConfig[actualButtonSize].text}`}>{displayText}</span>
               {rightIcon && <span className="flex shrink-0 items-center">{rightIcon}</span>}
             </div>
 
-            <div className="flex shrink-0 items-center gap-2">
-              {loading && (
-                <Spinner size={sizeConfig[size].spinnerSize} role="status" aria-label="Loading" />
-              )}
-
-              {!loading && (
-                <Icon
-                  className={selectIconVariants({
-                    size,
-                    open: isOpen,
-                  })}
-                  name={'chevron-down'}
-                />
-              )}
-            </div>
+            {renderRightIconSection()}
           </button>
 
           {isOpen && (
@@ -193,17 +202,19 @@ const Select = forwardRef<HTMLButtonElement, SelectProps>(
               id={listboxId}
               aria-label={ariaLabel || 'Options'}
               data-state="open"
-              data-side={position}
-              style={contentStyle}
+              style={{
+                ...(popupWidth && {
+                  width: typeof popupWidth === 'number' ? `${popupWidth}px` : popupWidth,
+                }),
+              }}
               className={selectContentVariants({
-                size,
-                position,
+                size: actualListboxSize,
               })}
             >
               {header && (
                 <div
                   className={selectHeaderVariants({
-                    size,
+                    size: actualListboxSize,
                   })}
                 >
                   {header}
@@ -213,7 +224,7 @@ const Select = forwardRef<HTMLButtonElement, SelectProps>(
               {footer && (
                 <div
                   className={selectFooterVariants({
-                    size,
+                    size: actualListboxSize,
                   })}
                 >
                   {footer}
