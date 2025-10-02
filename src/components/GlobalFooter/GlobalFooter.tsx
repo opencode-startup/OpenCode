@@ -8,8 +8,8 @@ const GlobalFooter = () => {
   return (
     <footer className="bg-background-100 border-t border-gray-400">
       <div
-        className="mx-auto box-border flex max-w-[1280px] flex-col items-center justify-center gap-9 px-4 py-4 lg:px-6
-          lg:py-6"
+        className="mx-auto box-border flex max-w-[var(--global-content-max-width)] flex-col items-center justify-center
+          gap-9 p-4"
       >
         <div className="flex w-full items-start justify-between">
           <div className="flex w-full grow flex-wrap items-start gap-6 lg:gap-2.5">
