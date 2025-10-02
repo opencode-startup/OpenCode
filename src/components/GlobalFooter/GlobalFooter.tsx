@@ -5,6 +5,8 @@ import { Link, Logo } from '@/components';
 import FooterColumn from './FooterColumn';
 
 const GlobalFooter = () => {
+  const fullYear = new Date().getFullYear();
+
   return (
     <footer className="bg-background-100 border-t border-gray-400">
       <div
@@ -47,7 +49,7 @@ const GlobalFooter = () => {
 
         <div className="flex w-full shrink-0 items-baseline justify-between">
           <p className="typo-label-14 text-center text-nowrap text-gray-600">
-            © 2025 OpenCode. All rights reserved.
+            © {fullYear} OpenCode. All rights reserved.
           </p>
           <div className="shrink-0"></div>
         </div>
