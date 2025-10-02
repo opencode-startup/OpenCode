@@ -4,7 +4,7 @@ import { Geist } from 'next/font/google';
 import { ReactNode } from 'react';
 import { Toaster } from 'sonner';
 
-import { GlobalHeader } from '@/components';
+import { GlobalFooter, GlobalHeader } from '@/components';
 export { DEFAULT_PAGE_META as metadata } from '@/lib';
 
 const geistSans = Geist({
@@ -18,6 +18,7 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
       <body>
         <GlobalHeader />
         <main className="pt-[var(--global-header-height)]">{children}</main>
+        <GlobalFooter />
         <Toaster />
       </body>
     </html>
