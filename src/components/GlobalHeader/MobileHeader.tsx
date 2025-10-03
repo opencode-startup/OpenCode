@@ -35,7 +35,8 @@ const MobileHeader = ({
     >
       <div
         className={clsx(
-          'flex h-[var(--global-header-height)] w-full items-center justify-between overflow-hidden px-4',
+          `flex h-[var(--global-header-height)] w-full items-center justify-between overflow-hidden border-b
+          border-gray-400 px-4`,
           isExpanded ? 'relative' : 'absolute top-0',
         )}
       >
