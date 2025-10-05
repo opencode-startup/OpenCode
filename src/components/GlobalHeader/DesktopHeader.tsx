@@ -53,7 +53,7 @@ const DesktopHeader = ({
   return (
     <HeaderWrapper className="hidden justify-center md:flex">
       <div
-        className={`absolute top-0 flex h-[var(--global-header-height)] w-full max-w-[var(--global-header-max-width)]
+        className={`absolute top-0 flex h-[var(--global-header-height)] w-full max-w-[var(--global-content-max-width)]
           items-center justify-between px-4`}
       >
         <div className="flex items-center gap-8">
