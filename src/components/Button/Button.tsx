@@ -5,53 +5,40 @@ import React, { forwardRef, Ref } from 'react';
 
 import { Spinner } from '@/components';
 
+import { useButton } from './hooks';
 import { ButtonProps } from './types';
-import { sizeConfig, variants } from './variants';
+import { sizeConfig } from './variants';
 
 const Button = forwardRef(
   (
     {
-      variant = 'primary',
       size = 'medium',
-      shape = 'square',
       loading = false,
       leftIcon,
       rightIcon,
       children,
-      fullWidth = false,
       iconOnly = false,
+      variant,
+      shape,
+      fullWidth,
       disabled,
       className,
       as = 'button',
-      ...props
+      ...restProps
     }: ButtonProps,
     ref: Ref<HTMLButtonElement | HTMLAnchorElement>,
   ) => {
-    const isDisabled = disabled || loading;
-
-    const commonProps = {
-      ref: ref as any,
-      className: variants({
-        variant,
-        size,
-        shape,
-        fullWidth,
-        loading,
-        iconOnly,
-        disabled: isDisabled,
-        className,
-      }),
-      'aria-busy': loading,
-      'aria-disabled': isDisabled,
-    };
-
-    const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-      if (isDisabled) {
-        e.preventDefault();
-        e.stopPropagation();
-        return;
-      }
-    };
+    const { isDisabled, commonProps, handleLinkClick, handleLinkKeyDown } = useButton({
+      variant,
+      size,
+      shape,
+      loading,
+      fullWidth,
+      iconOnly,
+      disabled,
+      className,
+      as,
+    } as ButtonProps);
 
     const renderContent = () => (
       <>
@@ -74,17 +61,26 @@ const Button = forwardRef(
     );
 
     if (as === 'link') {
-      const { href, ...linkProps } = props as any;
+      const { href, ...linkProps } = restProps as any;
 
       return (
-        <NextLink {...commonProps} href={href} onClick={handleLinkClick} {...linkProps}>
+        <NextLink
+          ref={ref as any}
+          {...commonProps}
+          href={href}
+          onClick={handleLinkClick}
+          onKeyDown={handleLinkKeyDown}
+          {...linkProps}
+        >
           {renderContent()}
         </NextLink>
       );
     }
 
+    const { type = 'button', ...buttonProps } = restProps as any;
+
     return (
-      <button {...commonProps} type="button" disabled={isDisabled} {...(props as any)}>
+      <button ref={ref as any} {...commonProps} type={type} disabled={isDisabled} {...buttonProps}>
         {renderContent()}
       </button>
     );
