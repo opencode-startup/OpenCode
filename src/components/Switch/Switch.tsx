@@ -96,7 +96,7 @@ const Switch = forwardRef<HTMLDivElement, SwitchProps>(
               onKeyDown={handleKeyDown(option.value)}
             >
               <div className="relative flex shrink-0 flex-col justify-center text-nowrap">
-                <p className="whitespace-pre">{option.label}</p>
+                <span className="whitespace-pre">{option.label}</span>
               </div>
             </div>
           );

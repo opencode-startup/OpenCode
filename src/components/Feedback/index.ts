@@ -1,2 +1,2 @@
 export { default as Feedback } from './Feedback';
-export type { FeedbackProps, FeedbackRating, FeedbackState } from './types';
+export type * from './types';

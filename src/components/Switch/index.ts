@@ -1,2 +1,2 @@
 export { default as Switch } from './Switch';
-export type { SwitchOption, SwitchProps, SwitchSize } from './types';
+export type * from './types';

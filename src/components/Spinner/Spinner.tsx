@@ -8,7 +8,7 @@ import { SpinnerProps } from './types';
 const ANIMATION_DURATION = 1200;
 const LINES_COUNT = 12;
 
-export const Spinner: React.FC<SpinnerProps> = ({ size = 32, className, style, ...props }) => {
+const Spinner: React.FC<SpinnerProps> = ({ size = 32, className, style, ...props }) => {
   const renderLines = () => {
     return Array.from({ length: LINES_COUNT }, (_, index) => {
       const angle = (index * 360) / LINES_COUNT;
@@ -57,3 +57,7 @@ export const Spinner: React.FC<SpinnerProps> = ({ size = 32, className, style, .
     </div>
   );
 };
+
+Spinner.displayName = 'Spinner';
+
+export default Spinner;

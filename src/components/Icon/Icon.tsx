@@ -5,7 +5,7 @@ import { IconProps } from './types';
 
 const DEFAULT_SIZE = 16;
 
-export const Icon: React.FC<IconProps> = ({
+const Icon: React.FC<IconProps> = ({
   name,
   size = DEFAULT_SIZE,
   className,
@@ -31,3 +31,7 @@ export const Icon: React.FC<IconProps> = ({
     </svg>
   );
 };
+
+Icon.displayName = 'Icon';
+
+export default Icon;

@@ -3,7 +3,7 @@ import { forwardRef } from 'react';
 import { GuideCrossProps } from './types';
 import { crossLineVariants, variants } from './variants';
 
-export const GuideCross = forwardRef<HTMLDivElement, GuideCrossProps>(
+const GuideCross = forwardRef<HTMLDivElement, GuideCrossProps>(
   ({ size, thickness, position, className, ...props }, ref) => {
     return (
       <div
@@ -35,3 +35,5 @@ export const GuideCross = forwardRef<HTMLDivElement, GuideCrossProps>(
 );
 
 GuideCross.displayName = 'GuideCross';
+
+export default GuideCross;

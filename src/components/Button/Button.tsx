@@ -44,7 +44,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         {...props}
       >
         {loading && (
-          <Spinner size={sizeConfig[size].spinnerSize} role={'status'} aria-label="Loading" />
+          <Spinner size={sizeConfig[size].spinnerSize} role="status" aria-label="Loading" />
         )}
 
         {!loading && !iconOnly && leftIcon && (
