@@ -28,7 +28,11 @@
       "mcp__ide__getDiagnostics",
       "mcp__figma-dev-mode-mcp-server__get_screenshot",
       "mcp__figma-dev-mode-mcp-server__get_metadata",
-      "Bash(git log:*)"
+      "Bash(git log:*)",
+      "Bash(for dir in src/components/*/)",
+      "Bash(do if [ ! -f \"$dirvariants.ts\" ])",
+      "Bash(fi)",
+      "Bash(done)"
     ],
     "deny": []
   }
