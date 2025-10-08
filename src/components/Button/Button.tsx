@@ -1,13 +1,14 @@
 'use client';
 
-import { forwardRef } from 'react';
+import NextLink from 'next/link';
+import React, { forwardRef, Ref } from 'react';
 
 import { Spinner } from '@/components';
 
 import { ButtonProps } from './types';
 import { sizeConfig, variants } from './variants';
 
-const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+const Button = forwardRef(
   (
     {
       variant = 'primary',
@@ -21,28 +22,39 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       iconOnly = false,
       disabled,
       className,
+      as = 'button',
       ...props
-    },
-    ref,
+    }: ButtonProps,
+    ref: Ref<HTMLButtonElement | HTMLAnchorElement>,
   ) => {
     const isDisabled = disabled || loading;
 
-    return (
-      <button
-        ref={ref}
-        disabled={isDisabled}
-        className={variants({
-          variant,
-          size,
-          shape,
-          fullWidth,
-          loading,
-          iconOnly,
-          className,
-        })}
-        aria-busy={loading}
-        {...props}
-      >
+    const commonProps = {
+      ref: ref as any,
+      className: variants({
+        variant,
+        size,
+        shape,
+        fullWidth,
+        loading,
+        iconOnly,
+        disabled: isDisabled,
+        className,
+      }),
+      'aria-busy': loading,
+      'aria-disabled': isDisabled,
+    };
+
+    const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+      if (isDisabled) {
+        e.preventDefault();
+        e.stopPropagation();
+        return;
+      }
+    };
+
+    const renderContent = () => (
+      <>
         {loading && (
           <Spinner size={sizeConfig[size].spinnerSize} role="status" aria-label="Loading" />
         )}
@@ -58,6 +70,22 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         {!loading && !iconOnly && rightIcon && (
           <span className="flex shrink-0 items-center">{rightIcon}</span>
         )}
+      </>
+    );
+
+    if (as === 'link') {
+      const { href, ...linkProps } = props as any;
+
+      return (
+        <NextLink {...commonProps} href={href} onClick={handleLinkClick} {...linkProps}>
+          {renderContent()}
+        </NextLink>
+      );
+    }
+
+    return (
+      <button {...commonProps} type="button" disabled={isDisabled} {...(props as any)}>
+        {renderContent()}
       </button>
     );
   },

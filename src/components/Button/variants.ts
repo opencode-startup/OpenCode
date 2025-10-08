@@ -7,8 +7,6 @@ export const variants = tv({
     'relative inline-flex cursor-pointer items-center justify-center overflow-hidden font-medium',
     'transition-all duration-200 ease-out focus:outline-none',
     'focus-ring',
-    `disabled:border-gray-alpha-400 disabled:cursor-not-allowed disabled:border disabled:bg-gray-100
-    disabled:text-gray-700`,
   ],
   variants: {
     variant: {
@@ -36,6 +34,9 @@ export const variants = tv({
     },
     loading: {
       true: 'cursor-not-allowed opacity-60',
+    },
+    disabled: {
+      true: 'border-gray-alpha-400 pointer-events-none cursor-not-allowed border bg-gray-100 text-gray-700',
     },
   },
   compoundVariants: [

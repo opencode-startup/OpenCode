@@ -44,7 +44,7 @@ export default function Home() {
         <h2 className="typo-heading-32 mb-6">Button Component</h2>
         <p className="typo-copy-16 mb-6 text-gray-700">
           Interactive button component with multiple variants, sizes, and states. Supports icons,
-          loading states, and full-width layouts.
+          loading states, full-width layouts, and can render as a Next.js Link.
         </p>
 
         <div className="flex flex-col gap-6">
@@ -99,6 +99,20 @@ export default function Home() {
               <Button loading>Loading</Button>
               <Button disabled>Disabled</Button>
               <Button fullWidth>Full Width</Button>
+            </div>
+          </div>
+
+          {/* As Link */}
+          <div>
+            <h3 className="typo-heading-20 mb-4">As Link</h3>
+            <div className="flex flex-wrap gap-3">
+              <Button onClick={() => alert(123)}>Button Link</Button>
+              <Button as="link" href="/" variant="secondary" leftIcon={<Icon name="arrow-right" />}>
+                Link with Icon
+              </Button>
+              <Button as="link" href="/" variant="success" size="large">
+                Large Link Button
+              </Button>
             </div>
           </div>
         </div>

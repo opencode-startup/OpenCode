@@ -68,7 +68,7 @@ const Toast: FC<ToastProps> = ({
 
                   onClick?.(event, id);
                 }}
-                {...buttonProps}
+                {...(buttonProps as any)}
               >
                 {label}
               </Button>
