@@ -24,6 +24,7 @@ const Button = forwardRef(
       disabled,
       className,
       as = 'button',
+      'data-testid': dataTestId,
       ...restProps
     }: ButtonProps,
     ref: Ref<HTMLButtonElement | HTMLAnchorElement>,
@@ -72,6 +73,7 @@ const Button = forwardRef(
           onClick={handleLinkClick}
           onTouchStart={handleLinkTouchStart}
           onKeyDown={handleLinkKeyDown}
+          data-testid={dataTestId}
           {...linkProps}
         >
           {renderContent()}
@@ -82,7 +84,14 @@ const Button = forwardRef(
     const { type = 'button', ...buttonProps } = restProps as any;
 
     return (
-      <button ref={ref as any} {...commonProps} type={type} disabled={isDisabled} {...buttonProps}>
+      <button
+        ref={ref as any}
+        {...commonProps}
+        type={type}
+        disabled={isDisabled}
+        data-testid={dataTestId}
+        {...buttonProps}
+      >
         {renderContent()}
       </button>
     );

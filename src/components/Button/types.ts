@@ -21,6 +21,7 @@ interface BaseButtonProps {
   iconOnly?: boolean;
   disabled?: boolean;
   as?: ButtonAs;
+  'data-testid'?: string;
 }
 
 // Button variant props

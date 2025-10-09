@@ -43,7 +43,7 @@ export const variants = tv({
       true: 'cursor-not-allowed opacity-60',
     },
     disabled: {
-      true: 'border-gray-alpha-400 pointer-events-none cursor-not-allowed border bg-gray-100 text-gray-700',
+      true: 'border-gray-alpha-400 cursor-not-allowed border bg-gray-100 text-gray-700',
     },
   },
   compoundVariants: [
