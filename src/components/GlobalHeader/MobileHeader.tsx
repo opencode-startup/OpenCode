@@ -52,6 +52,7 @@ const MobileHeader = ({
             size="medium"
             onClick={handleMenuToggle}
             className="h-10 w-10 rounded-full"
+            aria-label={isExpanded ? 'Close menu' : 'Open menu'}
           >
             <BurgerIcon isOpen={isExpanded} />
           </Button>
