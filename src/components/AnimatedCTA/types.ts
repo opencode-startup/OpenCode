@@ -34,6 +34,7 @@ interface LinkAnimatedCTAProps
 export interface UseAnimatedCTAParams {
   text: string;
 }
+
 export type AnimationState = 'idle' | 'animating' | 'completed';
 
 export type AnimatedCTAProps = ButtonAnimatedCTAProps | LinkAnimatedCTAProps;

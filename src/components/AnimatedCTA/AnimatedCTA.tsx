@@ -6,7 +6,7 @@ import { forwardRef, Ref } from 'react';
 
 import { Icon } from '@/components/Icon';
 
-import { useAnimatedCTA } from './hooks';
+import { LETTER_DELAY, useAnimatedCTA } from './hooks';
 import { AnimatedCTAProps } from './types';
 import { getIconLayout } from './utils';
 import { sizeConfig, variants } from './variants';
@@ -61,7 +61,7 @@ const AnimatedCTA = forwardRef(
                 key={index}
                 className="animated-front-letter front-letter inline-block"
                 style={{
-                  transitionDelay: `${index * 50}ms`,
+                  transitionDelay: `${index * LETTER_DELAY}ms`,
                 }}
               >
                 {letter === ' ' ? '\u00A0' : letter}
@@ -74,7 +74,7 @@ const AnimatedCTA = forwardRef(
                 key={index}
                 className="animated-back-letter back-letter inline-block"
                 style={{
-                  transitionDelay: `${50 + index * 50}ms`,
+                  transitionDelay: `${LETTER_DELAY + index * LETTER_DELAY}ms`,
                 }}
               >
                 {letter === ' ' ? '\u00A0' : letter}

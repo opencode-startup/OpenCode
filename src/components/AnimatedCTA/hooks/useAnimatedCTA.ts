@@ -3,6 +3,10 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { AnimationState, UseAnimatedCTAParams } from '../types';
 import { usePrefersReducedMotion } from './usePrefersReducedMotion';
 
+export const LETTER_DELAY = 50; // ms between each letter animation
+export const RESET_DELAY = 50; // ms delay before allowing next animation
+export const TRANSITION_DURATION = 400; // ms for CSS transition (matches animation.css)
+
 export function useAnimatedCTA({ text }: UseAnimatedCTAParams) {
   const [animationState, setAnimationState] = useState<AnimationState>('idle');
   const prefersReducedMotion = usePrefersReducedMotion();
@@ -10,7 +14,7 @@ export function useAnimatedCTA({ text }: UseAnimatedCTAParams) {
   const isAnimating = animationState === 'animating' && !prefersReducedMotion;
 
   // Calculate total animation duration: last letter delay + transition duration
-  const totalAnimationDuration = text.length * 50 + 400;
+  const totalAnimationDuration = text.length * LETTER_DELAY + TRANSITION_DURATION;
 
   const startAnimation = useCallback(() => {
     // Skip animation if user prefers reduced motion
@@ -33,7 +37,7 @@ export function useAnimatedCTA({ text }: UseAnimatedCTAParams) {
         // Short delay before allowing next animation
         setTimeout(() => {
           setAnimationState('idle');
-        }, 50);
+        }, RESET_DELAY);
 
         timeoutRef.current = null;
       }, totalAnimationDuration);
