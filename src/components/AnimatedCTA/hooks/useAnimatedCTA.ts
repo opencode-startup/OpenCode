@@ -1,12 +1,8 @@
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
-export type AnimationState = 'idle' | 'animating' | 'completed';
+import { AnimationState, UseAnimatedCTAParams } from '../types';
 
-export interface UseAnimatedCTAProps {
-  text: string;
-}
-
-export function useAnimatedCTA({ text }: UseAnimatedCTAProps) {
+export function useAnimatedCTA({ text }: UseAnimatedCTAParams) {
   const [animationState, setAnimationState] = useState<AnimationState>('idle');
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -35,6 +31,16 @@ export function useAnimatedCTA({ text }: UseAnimatedCTAProps) {
       }, totalAnimationDuration);
     }
   }, [animationState, totalAnimationDuration]);
+
+  // Cleanup timeout on unmount to prevent memory leaks
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+        timeoutRef.current = null;
+      }
+    };
+  }, []);
 
   return {
     animationState,
