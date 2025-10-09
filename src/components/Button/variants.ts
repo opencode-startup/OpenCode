@@ -7,6 +7,11 @@ export const variants = tv({
     'relative inline-flex cursor-pointer items-center justify-center overflow-hidden font-medium',
     'transition-all duration-200 ease-out focus:outline-none',
     'focus-ring',
+    // Safari mobile optimizations
+    'touch-manipulation', // Disables double-tap zoom
+    'select-none', // Prevents text selection on touch
+    '[-webkit-tap-highlight-color:transparent]', // Removes tap highlight
+    '[-webkit-touch-callout:none]', // Disables callout menu on long-press
   ],
   variants: {
     variant: {

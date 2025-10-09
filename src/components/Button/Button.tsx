@@ -28,17 +28,18 @@ const Button = forwardRef(
     }: ButtonProps,
     ref: Ref<HTMLButtonElement | HTMLAnchorElement>,
   ) => {
-    const { isDisabled, commonProps, handleLinkClick, handleLinkKeyDown } = useButton({
-      variant,
-      size,
-      shape,
-      loading,
-      fullWidth,
-      iconOnly,
-      disabled,
-      className,
-      as,
-    } as ButtonProps);
+    const { isDisabled, commonProps, handleLinkClick, handleLinkTouchStart, handleLinkKeyDown } =
+      useButton({
+        variant,
+        size,
+        shape,
+        loading,
+        fullWidth,
+        iconOnly,
+        disabled,
+        className,
+        as,
+      } as ButtonProps);
 
     const renderContent = () => (
       <>
@@ -69,6 +70,7 @@ const Button = forwardRef(
           {...commonProps}
           href={href}
           onClick={handleLinkClick}
+          onTouchStart={handleLinkTouchStart}
           onKeyDown={handleLinkKeyDown}
           {...linkProps}
         >

@@ -41,6 +41,13 @@ export const useButton = ({
     }
   };
 
+  const handleLinkTouchStart = (e: React.TouchEvent<HTMLAnchorElement>) => {
+    if (isDisabled) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+  };
+
   const handleLinkKeyDown = (e: React.KeyboardEvent<HTMLAnchorElement>) => {
     if (isDisabled) {
       e.preventDefault();
@@ -57,6 +64,7 @@ export const useButton = ({
     isDisabled,
     commonProps,
     handleLinkClick,
+    handleLinkTouchStart,
     handleLinkKeyDown,
   };
 };
