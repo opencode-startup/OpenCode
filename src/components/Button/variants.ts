@@ -15,12 +15,14 @@ export const variants = tv({
   ],
   variants: {
     variant: {
-      primary: ['bg-gray-1000 text-background-100 hover:bg-gray-900'],
-      secondary: ['bg-background-100 text-gray-1000 border border-gray-400 hover:bg-gray-200'],
-      tertiary: ['text-gray-1000 hover:bg-gray-alpha-200 bg-transparent'],
-      error: ['text-gray-1000 bg-red-800 hover:bg-red-700'],
-      warning: ['text-background-100 bg-amber-800 hover:bg-amber-700'],
-      success: ['text-gray-1000 bg-blue-800 hover:bg-blue-700'],
+      primary: ['bg-gray-1000 text-background-100 hover:bg-gray-900 active:bg-gray-800'],
+      secondary: [
+        'bg-background-100 text-gray-1000 border border-gray-400 hover:bg-gray-200 active:bg-gray-300',
+      ],
+      tertiary: ['text-gray-1000 hover:bg-gray-alpha-200 active:bg-gray-alpha-300 bg-transparent'],
+      error: ['text-gray-1000 bg-red-800 hover:bg-red-700 active:bg-red-600'],
+      warning: ['text-background-100 bg-amber-800 hover:bg-amber-700 active:bg-amber-600'],
+      success: ['text-gray-1000 bg-blue-800 hover:bg-blue-700 active:bg-blue-600'],
     },
     size: {
       small: 'typo-button-14 h-8 gap-2 px-3',
