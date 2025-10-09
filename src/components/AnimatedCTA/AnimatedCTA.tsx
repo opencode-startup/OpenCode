@@ -38,6 +38,7 @@ const AnimatedCTA = forwardRef(
         className,
       })}`,
       onMouseEnter: handleMouseEnter,
+      ...(as === 'link' && { role: 'button' }),
     };
 
     const renderContent = () => (
