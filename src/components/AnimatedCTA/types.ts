@@ -13,6 +13,7 @@ interface BaseAnimatedCTAProps {
   rightIcon?: IconName;
   fullWidth?: boolean;
   as?: AnimatedCTAAs;
+  'data-testid'?: string;
 }
 
 // Button variant props

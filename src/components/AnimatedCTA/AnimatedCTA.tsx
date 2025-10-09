@@ -21,6 +21,7 @@ const AnimatedCTA = forwardRef(
       rightIcon,
       fullWidth = false,
       as = 'button',
+      'data-testid': dataTestId,
       ...props
     }: AnimatedCTAProps,
     ref: Ref<HTMLButtonElement | HTMLAnchorElement>,
@@ -39,6 +40,7 @@ const AnimatedCTA = forwardRef(
       })}`,
       onMouseEnter: handleMouseEnter,
       ...(as === 'link' && { role: 'button' }),
+      'data-testid': dataTestId,
     };
 
     const renderContent = () => (
