@@ -7,11 +7,12 @@ export function useAnimatedCTA({ text }: UseAnimatedCTAParams) {
   const [animationState, setAnimationState] = useState<AnimationState>('idle');
   const prefersReducedMotion = usePrefersReducedMotion();
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const isAnimating = animationState === 'animating' && !prefersReducedMotion;
 
   // Calculate total animation duration: last letter delay + transition duration
   const totalAnimationDuration = text.length * 50 + 400;
 
-  const handleMouseEnter = useCallback(() => {
+  const startAnimation = useCallback(() => {
     // Skip animation if user prefers reduced motion
     if (prefersReducedMotion) {
       return;
@@ -39,6 +40,14 @@ export function useAnimatedCTA({ text }: UseAnimatedCTAParams) {
     }
   }, [animationState, totalAnimationDuration, prefersReducedMotion]);
 
+  const handleMouseEnter = useCallback(() => {
+    startAnimation();
+  }, [startAnimation]);
+
+  const handleTouchStart = useCallback(() => {
+    startAnimation();
+  }, [startAnimation]);
+
   // Cleanup timeout on unmount to prevent memory leaks
   useEffect(() => {
     return () => {
@@ -52,7 +61,8 @@ export function useAnimatedCTA({ text }: UseAnimatedCTAParams) {
   return {
     animationState,
     handleMouseEnter,
-    isAnimating: animationState === 'animating' && !prefersReducedMotion,
+    handleTouchStart,
+    isAnimating,
     prefersReducedMotion,
   };
 }

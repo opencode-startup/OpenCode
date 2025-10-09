@@ -26,7 +26,7 @@ const AnimatedCTA = forwardRef(
     }: AnimatedCTAProps,
     ref: Ref<HTMLButtonElement | HTMLAnchorElement>,
   ) => {
-    const { handleMouseEnter, isAnimating } = useAnimatedCTA({ text });
+    const { handleMouseEnter, handleTouchStart, isAnimating } = useAnimatedCTA({ text });
     const config = sizeConfig[size];
     const iconLayout = getIconLayout(leftIcon, rightIcon);
 
@@ -39,6 +39,7 @@ const AnimatedCTA = forwardRef(
         className,
       })}`,
       onMouseEnter: handleMouseEnter,
+      onTouchStart: handleTouchStart,
       ...(as === 'link' && { role: 'button' }),
       'data-testid': dataTestId,
     };
