@@ -1,5 +1,7 @@
 'use client';
 
+import { useEffect, useRef } from 'react';
+
 import { OptionItemProps } from './types';
 import { selectItemVariants } from './variants';
 
@@ -8,22 +10,38 @@ export const OptionItem = ({
   index,
   selectId,
   selectedValue,
+  focusedIndex,
   size,
   listboxSize,
   onSelectAction,
 }: OptionItemProps) => {
   const actualSize = listboxSize || size;
+  const isFocused = index === focusedIndex;
+  const optionRef = useRef<HTMLLIElement>(null);
+
+  // Scroll focused option into view
+  useEffect(() => {
+    if (isFocused && optionRef.current) {
+      optionRef.current.scrollIntoView({
+        block: 'nearest',
+        behavior: 'smooth',
+      });
+    }
+  }, [isFocused]);
 
   return (
     <li
+      ref={optionRef}
       id={`${selectId}-option-${index}`}
       role="option"
       aria-selected={option.value === selectedValue}
       aria-disabled={option.disabled}
       data-selected={option.value === selectedValue}
+      data-focused={isFocused}
       className={selectItemVariants({
         size: actualSize,
         selected: option.value === selectedValue,
+        focused: isFocused,
         disabled: option.disabled,
       })}
       onClick={() => onSelectAction(option.value)}

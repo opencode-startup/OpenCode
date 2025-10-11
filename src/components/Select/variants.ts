@@ -79,6 +79,10 @@ export const selectItemVariants = tv({
       true: 'bg-gray-alpha-400 hover:bg-gray-alpha-400 text-gray-1000',
       false: '',
     },
+    focused: {
+      true: 'bg-gray-alpha-300',
+      false: '',
+    },
     disabled: {
       true: 'cursor-not-allowed opacity-50',
       false: 'cursor-pointer',
@@ -87,6 +91,7 @@ export const selectItemVariants = tv({
   defaultVariants: {
     size: 'large',
     selected: false,
+    focused: false,
     disabled: false,
   },
 });

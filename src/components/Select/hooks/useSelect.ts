@@ -24,6 +24,7 @@ export const useSelect = ({
 }: UseSelectProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedValue, setSelectedValue] = useState(value || defaultValue || '');
+  const [focusedIndex, setFocusedIndex] = useState(-1);
 
   const triggerRef = useRef<HTMLButtonElement>(null);
   const contentRef = useRef<HTMLUListElement>(null);
@@ -38,6 +39,17 @@ export const useSelect = ({
       setSelectedValue(value);
     }
   }, [value, selectedValue]);
+
+  // Reset focused index when dropdown opens/closes
+  useEffect(() => {
+    if (isOpen) {
+      // Set focus to selected option or first option
+      const selectedIndex = flatOptions.findIndex((opt) => opt.value === selectedValue);
+      setFocusedIndex(selectedIndex >= 0 ? selectedIndex : 0);
+    } else {
+      setFocusedIndex(-1);
+    }
+  }, [isOpen, selectedValue, flatOptions]);
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -89,17 +101,34 @@ export const useSelect = ({
           if (!isOpen) {
             setIsOpen(true);
             onOpenChange?.(true);
+          } else if (focusedIndex >= 0 && focusedIndex < flatOptions.length) {
+            // Select the focused option
+            const focusedOption = flatOptions[focusedIndex];
+            if (focusedOption && !focusedOption.disabled) {
+              handleSelectOption(focusedOption.value);
+            }
           }
           break;
         case 'Escape':
+          event.preventDefault();
           setIsOpen(false);
           onOpenChange?.(false);
+          triggerRef.current?.focus();
           break;
         case 'ArrowDown':
           event.preventDefault();
           if (!isOpen) {
             setIsOpen(true);
             onOpenChange?.(true);
+          } else {
+            // Navigate to next non-disabled option
+            let nextIndex = focusedIndex + 1;
+            while (nextIndex < flatOptions.length && flatOptions[nextIndex]?.disabled) {
+              nextIndex++;
+            }
+            if (nextIndex < flatOptions.length) {
+              setFocusedIndex(nextIndex);
+            }
           }
           break;
         case 'ArrowUp':
@@ -107,17 +136,49 @@ export const useSelect = ({
           if (!isOpen) {
             setIsOpen(true);
             onOpenChange?.(true);
+          } else {
+            // Navigate to previous non-disabled option
+            let prevIndex = focusedIndex - 1;
+            while (prevIndex >= 0 && flatOptions[prevIndex]?.disabled) {
+              prevIndex--;
+            }
+            if (prevIndex >= 0) {
+              setFocusedIndex(prevIndex);
+            }
+          }
+          break;
+        case 'Home':
+          if (isOpen) {
+            event.preventDefault();
+            // Jump to first non-disabled option
+            const firstIndex = flatOptions.findIndex((opt) => !opt.disabled);
+            if (firstIndex >= 0) {
+              setFocusedIndex(firstIndex);
+            }
+          }
+          break;
+        case 'End':
+          if (isOpen) {
+            event.preventDefault();
+            // Jump to last non-disabled option
+            for (let i = flatOptions.length - 1; i >= 0; i--) {
+              if (!flatOptions[i]?.disabled) {
+                setFocusedIndex(i);
+                break;
+              }
+            }
           }
           break;
       }
     },
-    [disabled, loading, isOpen, onOpenChange],
+    [disabled, loading, isOpen, focusedIndex, flatOptions, onOpenChange, handleSelectOption],
   );
 
   return {
     isOpen,
     selectedValue,
     selectedOption,
+    focusedIndex,
     triggerRef,
     contentRef,
     handleToggle,

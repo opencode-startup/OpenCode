@@ -62,6 +62,7 @@ const Select = forwardRef<HTMLButtonElement, SelectProps>(
       isOpen,
       selectedValue,
       selectedOption,
+      focusedIndex,
       triggerRef,
       contentRef,
       handleToggle,
@@ -131,6 +132,7 @@ const Select = forwardRef<HTMLButtonElement, SelectProps>(
                     index={currentFlatIndex}
                     selectId={selectId}
                     selectedValue={selectedValue}
+                    focusedIndex={focusedIndex}
                     size={actualButtonSize}
                     listboxSize={actualListboxSize}
                     onSelectAction={handleSelectOption}
@@ -149,6 +151,7 @@ const Select = forwardRef<HTMLButtonElement, SelectProps>(
             index={index}
             selectId={selectId}
             selectedValue={selectedValue}
+            focusedIndex={focusedIndex}
             size={actualButtonSize}
             listboxSize={actualListboxSize}
             onSelectAction={handleSelectOption}
@@ -164,6 +167,8 @@ const Select = forwardRef<HTMLButtonElement, SelectProps>(
       'aria-expanded': isOpen,
       'aria-haspopup': 'listbox' as const,
       'aria-owns': isOpen ? listboxId : undefined,
+      'aria-activedescendant':
+        isOpen && focusedIndex >= 0 ? `${selectId}-option-${focusedIndex}` : undefined,
     };
 
     return (

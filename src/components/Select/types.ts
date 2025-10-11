@@ -50,6 +50,7 @@ export interface OptionItemProps {
   index: number;
   selectId: string;
   selectedValue: string;
+  focusedIndex: number;
   size: SelectSize;
   listboxSize?: SelectSize;
   onSelectAction: (value: string) => void;
