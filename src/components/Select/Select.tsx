@@ -46,6 +46,7 @@ const Select = forwardRef<HTMLButtonElement, SelectProps>(
       'aria-required': ariaRequired,
       'aria-label': ariaLabel,
       'aria-labelledby': ariaLabelledBy,
+      'data-testid': dataTestId,
       ...props
     },
     ref,
@@ -183,6 +184,7 @@ const Select = forwardRef<HTMLButtonElement, SelectProps>(
             onKeyDown={handleKeyDown}
             aria-label={ariaLabel}
             aria-labelledby={ariaLabelledBy}
+            data-testid={dataTestId}
             {...ariaAttributes}
             {...props}
           >

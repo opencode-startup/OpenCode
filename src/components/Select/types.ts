@@ -39,6 +39,8 @@ export interface SelectProps {
   'aria-describedby'?: string;
   'aria-invalid'?: boolean;
   'aria-required'?: boolean;
+  // Testing support
+  'data-testid'?: string;
 }
 
 export interface OptionItemProps {

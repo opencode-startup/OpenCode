@@ -9,6 +9,8 @@ export const selectTriggerVariants = tv({
     'transition-all duration-200',
     'focus-ring',
     'disabled:cursor-not-allowed disabled:opacity-50',
+    'touch-manipulation [-webkit-tap-highlight-color:transparent] [-webkit-text-size-adjust:100%]',
+    'active:border-gray-600',
   ],
   variants: {
     size: {
@@ -59,6 +61,8 @@ export const selectItemVariants = tv({
     'text-gray-1000 hover:bg-gray-alpha-200 hover:text-gray-1000',
     'focus:bg-gray-alpha-400 focus:text-gray-1000 focus:outline-none',
     'disabled:cursor-not-allowed disabled:opacity-50',
+    'active:bg-gray-alpha-500',
+    'touch-manipulation',
   ],
   variants: {
     size: {
