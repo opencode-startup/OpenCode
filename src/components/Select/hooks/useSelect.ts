@@ -26,7 +26,7 @@ export const useSelect = ({
   const [selectedValue, setSelectedValue] = useState(value || defaultValue || '');
 
   const triggerRef = useRef<HTMLButtonElement>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLUListElement>(null);
 
   // Find selected option (flatten grouped options first)
   const flatOptions = flattenOptions(options);

@@ -199,7 +199,7 @@ const Select = forwardRef<HTMLButtonElement, SelectProps>(
           </button>
 
           {isOpen && (
-            <div
+            <ul
               ref={contentRef}
               role="listbox"
               id={listboxId}
@@ -234,7 +234,7 @@ const Select = forwardRef<HTMLButtonElement, SelectProps>(
                   {footer}
                 </div>
               )}
-            </div>
+            </ul>
           )}
         </div>
       </div>

@@ -15,7 +15,7 @@ export const OptionItem = ({
   const actualSize = listboxSize || size;
 
   return (
-    <div
+    <li
       id={`${selectId}-option-${index}`}
       role="option"
       aria-selected={option.value === selectedValue}
@@ -33,6 +33,6 @@ export const OptionItem = ({
         <span className="flex-1 truncate">{option.label}</span>
         {option.rightIcon && <span className="flex shrink-0 items-center">{option.rightIcon}</span>}
       </div>
-    </div>
+    </li>
   );
 };
