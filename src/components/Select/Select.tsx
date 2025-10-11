@@ -1,5 +1,6 @@
 'use client';
 
+import clsx from 'clsx';
 import { forwardRef, useId } from 'react';
 
 import { Icon, Spinner } from '@/components';
@@ -197,7 +198,9 @@ const Select = forwardRef<HTMLButtonElement, SelectProps>(
           >
             <div className="flex min-w-0 flex-1 items-center gap-2">
               {leftIcon && <span className="flex shrink-0 items-center">{leftIcon}</span>}
-              <span className={`truncate ${sizeConfig[actualButtonSize].text}`}>{displayText}</span>
+              <span className={clsx('truncate', sizeConfig[actualButtonSize].text)}>
+                {displayText}
+              </span>
               {rightIcon && <span className="flex shrink-0 items-center">{rightIcon}</span>}
             </div>
 

@@ -2,6 +2,7 @@
 
 import './animation.css';
 
+import clsx from 'clsx';
 import { FC } from 'react';
 
 import { Button, Icon, Input } from '@/components';
@@ -114,7 +115,7 @@ const Feedback: FC<FeedbackProps> = ({
           disabled,
         })}
       >
-        <div className={isExpanded || state === 'submitted' ? 'flex w-full flex-col' : ''}>
+        <div className={clsx((isExpanded || state === 'submitted') && 'flex w-full flex-col')}>
           <div className="flex items-center justify-center gap-2 overflow-hidden px-4 py-2">
             <div
               className="typo-label-14 relative flex shrink-0 flex-col justify-center text-sm leading-none font-normal
@@ -128,8 +129,10 @@ const Feedback: FC<FeedbackProps> = ({
           </div>
 
           <div
-            className={`overflow-hidden transition-all duration-400 ease-in-out ${
-              isExpanded ? 'max-h-[14.4rem] opacity-100' : 'max-h-0 opacity-0' }`}
+            className={clsx(
+              'overflow-hidden transition-all duration-400 ease-in-out',
+              isExpanded ? 'max-h-[14.4rem] opacity-100' : 'max-h-0 opacity-0',
+            )}
           >
             {renderContent()}
           </div>

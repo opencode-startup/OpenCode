@@ -1,10 +1,14 @@
+import clsx from 'clsx';
+
 import { HeaderWrapperProps } from './types';
 
 export const HeaderWrapper = ({ children, className, ...props }: HeaderWrapperProps) => {
   return (
     <header
-      className={`fixed top-0 left-0 z-999 min-h-[var(--global-header-height)] w-full border-b border-gray-400
-        ${className || ''}`}
+      className={clsx(
+        'fixed top-0 left-0 z-999 min-h-[var(--global-header-height)] w-full border-b border-gray-400',
+        className,
+      )}
       {...props}
     >
       <div

@@ -1,5 +1,6 @@
 'use client';
 
+import clsx from 'clsx';
 import { forwardRef, Ref, useCallback, useId, useRef } from 'react';
 
 import { useSwitch, useSwitchAnimation } from './hooks';
@@ -67,8 +68,10 @@ const Switch = forwardRef<HTMLDivElement, SwitchProps>(
       >
         {/* Moving background indicator */}
         <div
-          className={`pointer-events-none absolute top-1 bottom-1 rounded-[0.125rem] bg-gray-100
-            ${shouldAnimate ? 'transition-all duration-200 ease-out' : ''}`}
+          className={clsx(
+            'pointer-events-none absolute top-1 bottom-1 rounded-[0.125rem] bg-gray-100',
+            shouldAnimate && 'transition-all duration-200 ease-out',
+          )}
           style={{
             left: `${backgroundStyle.left}px`,
             width: `${backgroundStyle.width}px`,

@@ -2,6 +2,7 @@
 
 import './animation.css';
 
+import clsx from 'clsx';
 import { forwardRef, Ref } from 'react';
 
 import { Icon } from '@/components/Icon';
@@ -32,12 +33,16 @@ const AnimatedCTA = forwardRef(
 
     const commonProps = {
       ref: ref as any,
-      className: `group relative ${isAnimating ? 'animating' : ''} ${variants({
-        size,
-        iconLayout,
-        fullWidth,
-        className,
-      })}`,
+      className: clsx(
+        'group relative',
+        isAnimating && 'animating',
+        variants({
+          size,
+          iconLayout,
+          fullWidth,
+          className,
+        }),
+      ),
       onMouseEnter: handleMouseEnter,
       onTouchStart: handleTouchStart,
       ...(as === 'link' && { role: 'button' }),
@@ -48,14 +53,17 @@ const AnimatedCTA = forwardRef(
       <>
         {leftIcon && (
           <div
-            className={`bg-gray-1000 flex shrink-0 items-center justify-center rounded-full ${config.icon}`}
+            className={clsx(
+              'bg-gray-1000 flex shrink-0 items-center justify-center rounded-full',
+              config.icon,
+            )}
           >
             <Icon name={leftIcon} size={config.iconSize} className="text-background-200" />
           </div>
         )}
 
-        <div className={'relative'}>
-          <div className={`text-gray-1000 text-nowrap ${config.text} relative`}>
+        <div className="relative">
+          <div className={clsx('text-gray-1000 relative text-nowrap', config.text)}>
             {text.split('').map((letter: string, index: number) => (
               <span
                 key={index}
@@ -68,7 +76,7 @@ const AnimatedCTA = forwardRef(
               </span>
             ))}
           </div>
-          <div className={`text-gray-1000 text-nowrap ${config.text} absolute top-0 left-0`}>
+          <div className={clsx('text-gray-1000 absolute top-0 left-0 text-nowrap', config.text)}>
             {text.split('').map((letter: string, index: number) => (
               <span
                 key={index}
@@ -85,7 +93,10 @@ const AnimatedCTA = forwardRef(
 
         {rightIcon && (
           <div
-            className={`bg-gray-1000 flex shrink-0 items-center justify-center rounded-full ${config.icon}`}
+            className={clsx(
+              'bg-gray-1000 flex shrink-0 items-center justify-center rounded-full',
+              config.icon,
+            )}
           >
             <Icon name={rightIcon} size={config.iconSize} className="text-background-200" />
           </div>
