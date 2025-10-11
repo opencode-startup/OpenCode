@@ -26,6 +26,7 @@ export interface SelectProps {
   fullWidth?: boolean;
   required?: boolean;
   className?: string;
+  contentClassName?: string;
   leftIcon?: ReactNode;
   rightIcon?: ReactNode;
   header?: ReactNode;

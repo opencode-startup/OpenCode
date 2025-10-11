@@ -37,7 +37,7 @@ export const selectTriggerVariants = tv({
 export const selectContentVariants = tv({
   base: [
     'absolute top-full z-50 mt-2',
-    'min-w-full overflow-hidden rounded-xl border',
+    'max-h-80 min-w-full overflow-x-hidden overflow-y-auto rounded-xl border',
     'bg-background-100 border-gray-alpha-400 shadow-lg',
     'data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95',
     'data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95',

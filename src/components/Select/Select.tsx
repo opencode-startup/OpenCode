@@ -29,6 +29,7 @@ const Select = forwardRef<HTMLButtonElement, SelectProps>(
       popupWidth,
       position = 'left',
       className,
+      contentClassName,
       disabled = false,
       loading = false,
       fullWidth = false,
@@ -218,6 +219,7 @@ const Select = forwardRef<HTMLButtonElement, SelectProps>(
               className={selectContentVariants({
                 size: actualListboxSize,
                 position,
+                className: contentClassName,
               })}
             >
               {header && (

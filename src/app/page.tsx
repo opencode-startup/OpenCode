@@ -214,11 +214,13 @@ export default function Home() {
               placeholder="Choose an option"
               value={selectValue}
               onValueChange={setSelectValue}
-              options={[
-                { label: 'Option 1', value: 'option1' },
-                { label: 'Option 2', value: 'option2' },
-                { label: 'Option 3', value: 'option3' },
-              ]}
+              options={Array(50)
+                .fill([
+                  { label: 'Option 1', value: 'option1' },
+                  { label: 'Option 2', value: 'option2' },
+                  { label: 'Option 3', value: 'option3' },
+                ])
+                .flat()}
             />
           </div>
 
