@@ -36,6 +36,7 @@ const Input = forwardRef<HTMLInputElement | HTMLTextAreaElement, InputProps>(
       'aria-required': ariaRequired,
       'aria-label': ariaLabel,
       'aria-labelledby': ariaLabelledBy,
+      'data-testid': dataTestId,
       ...props
     },
     ref,
@@ -68,6 +69,7 @@ const Input = forwardRef<HTMLInputElement | HTMLTextAreaElement, InputProps>(
       'aria-label': ariaLabel,
       'aria-labelledby': ariaLabelledBy,
       'aria-busy': ariaAttributes['aria-busy'],
+      'data-testid': dataTestId,
     };
 
     return (

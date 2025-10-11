@@ -22,6 +22,8 @@ export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 
   'aria-required'?: boolean;
   'aria-label'?: string;
   'aria-labelledby'?: string;
+  // Testing support
+  'data-testid'?: string;
 }
 
 export interface LabelProps {
