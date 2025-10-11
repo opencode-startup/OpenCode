@@ -27,6 +27,7 @@ const Select = forwardRef<HTMLButtonElement, SelectProps>(
       buttonSize,
       listboxSize,
       popupWidth,
+      position = 'left',
       className,
       disabled = false,
       loading = false,
@@ -166,7 +167,7 @@ const Select = forwardRef<HTMLButtonElement, SelectProps>(
     };
 
     return (
-      <div className="flex flex-col gap-1">
+      <div className="flex max-w-fit flex-col gap-1">
         <div className="relative">
           <button
             ref={ref || triggerRef}
@@ -211,6 +212,7 @@ const Select = forwardRef<HTMLButtonElement, SelectProps>(
               }}
               className={selectContentVariants({
                 size: actualListboxSize,
+                position,
               })}
             >
               {header && (

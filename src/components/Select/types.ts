@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
 
 export type SelectSize = 'small' | 'medium' | 'large';
+export type SelectPosition = 'left' | 'right';
 
 export interface SelectOption {
   value: string;
@@ -19,6 +20,7 @@ export interface SelectProps {
   buttonSize?: SelectSize;
   listboxSize?: SelectSize;
   popupWidth?: string | number;
+  position?: SelectPosition;
   disabled?: boolean;
   loading?: boolean;
   fullWidth?: boolean;
