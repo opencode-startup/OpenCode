@@ -6,8 +6,7 @@ import { InputSize } from './types';
 export const inputContainerVariants = tv({
   base: [
     'bg-background-100 flex overflow-hidden rounded transition-shadow duration-200 ease-out',
-    `touch-manipulation select-none [-webkit-tap-highlight-color:transparent]
-    [-webkit-text-size-adjust:100%]`,
+    'touch-manipulation [-webkit-tap-highlight-color:transparent] [-webkit-text-size-adjust:100%]',
   ],
   variants: {
     size: {
@@ -64,6 +63,7 @@ export const inputFieldVariants = tv({
     'px-3 placeholder:text-gray-700',
     'autofill:[-webkit-box-shadow:0_0_0_1000px_var(--background-100)_inset]',
     'autofill:[-webkit-text-fill-color:var(--gray-1000)]',
+    'select-text [-webkit-user-select:text]',
   ],
   variants: {
     disabled: {
