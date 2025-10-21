@@ -8,6 +8,7 @@ export const useSwitch = ({
   defaultValue,
   onChange,
   disabled = false,
+  baseId,
 }: UseSwitchProps) => {
   const [internalValue, setInternalValue] = useState(defaultValue || options[0]?.value || '');
 
@@ -46,11 +47,15 @@ export const useSwitch = ({
         onChange?.(newValue);
       };
 
-      const focusSelectedOption = () => {
+      const focusSelectedOption = (newValue: string) => {
+        if (!baseId) return;
+
         setTimeout(() => {
-          const selectedElement = document.querySelector(
-            '[role="radio"][aria-checked="true"]',
-          ) as HTMLElement;
+          const selectedIndex = options.findIndex((opt) => opt.value === newValue);
+          if (selectedIndex === -1) return;
+
+          const optionId = `${baseId}-option-${selectedIndex}`;
+          const selectedElement = document.getElementById(optionId);
           selectedElement?.focus();
         }, 0);
       };
@@ -70,7 +75,7 @@ export const useSwitch = ({
             const prevOption = enabledOptions[prevEnabledIndex];
             if (prevOption) {
               updateValue(prevOption.value);
-              focusSelectedOption();
+              focusSelectedOption(prevOption.value);
             }
           }
           break;
@@ -83,7 +88,7 @@ export const useSwitch = ({
             const nextOption = enabledOptions[nextEnabledIndex];
             if (nextOption) {
               updateValue(nextOption.value);
-              focusSelectedOption();
+              focusSelectedOption(nextOption.value);
             }
           }
           break;
@@ -93,7 +98,7 @@ export const useSwitch = ({
           const firstOption = enabledOptions[0];
           if (firstOption) {
             updateValue(firstOption.value);
-            focusSelectedOption();
+            focusSelectedOption(firstOption.value);
           }
           break;
         }
@@ -102,7 +107,7 @@ export const useSwitch = ({
           const lastOption = enabledOptions[enabledOptions.length - 1];
           if (lastOption) {
             updateValue(lastOption.value);
-            focusSelectedOption();
+            focusSelectedOption(lastOption.value);
           }
           break;
         }
@@ -110,7 +115,7 @@ export const useSwitch = ({
           break;
       }
     },
-    [disabled, options, currentValue, value, onChange, handleOptionClick, setInternalValue],
+    [disabled, options, currentValue, value, onChange, handleOptionClick, setInternalValue, baseId],
   );
 
   return {

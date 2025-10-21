@@ -14,6 +14,10 @@ export const useSwitchAnimation = ({
     width: 0,
   });
 
+  // Detect user's motion preference
+  const prefersReducedMotion =
+    typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
   // Track if value has changed from initial
   useEffect(() => {
     if (currentValue !== initialValueRef.current) {
@@ -49,6 +53,6 @@ export const useSwitchAnimation = ({
 
   return {
     backgroundStyle,
-    shouldAnimate: hasChangedRef.current,
+    shouldAnimate: hasChangedRef.current && !prefersReducedMotion,
   };
 };

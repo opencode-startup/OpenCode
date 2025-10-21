@@ -20,6 +20,7 @@ const Switch = forwardRef<HTMLDivElement, SwitchProps>(
       'aria-label': ariaLabel,
       'aria-labelledby': ariaLabelledBy,
       'aria-describedby': ariaDescribedBy,
+      'data-testid': dataTestId,
       ...props
     },
     ref,
@@ -32,6 +33,7 @@ const Switch = forwardRef<HTMLDivElement, SwitchProps>(
       defaultValue,
       onChange,
       disabled,
+      baseId: generatedId,
     });
     const { backgroundStyle, shouldAnimate } = useSwitchAnimation({
       options,
@@ -59,6 +61,7 @@ const Switch = forwardRef<HTMLDivElement, SwitchProps>(
         aria-label={ariaLabel}
         aria-labelledby={ariaLabelledBy}
         aria-describedby={ariaDescribedBy}
+        data-testid={dataTestId}
         className={switchContainerVariants({
           size,
           disabled,
