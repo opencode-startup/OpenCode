@@ -9,7 +9,15 @@ import { iconSizes, logoIconVariants, logoTextVariants, logoVariants } from './v
 
 const Logo = forwardRef(
   (
-    { size = 'large', className, animated = true, text, as = 'div', ...props }: LogoProps,
+    {
+      size = 'large',
+      className,
+      animated = true,
+      text,
+      as = 'div',
+      'data-testid': dataTestId,
+      ...props
+    }: LogoProps,
     ref: Ref<HTMLDivElement | HTMLAnchorElement>,
   ) => {
     const showText = Boolean(text);
@@ -21,7 +29,7 @@ const Logo = forwardRef(
     const renderContent = () => (
       <>
         <div className={logoIconVariants({ size })}>
-          <Icon name={'logo'} {...iconSize} />
+          <Icon name={'logo'} {...iconSize} aria-label="Logo icon" />
         </div>
         {showText && (
           <div className={logoTextVariants({ size })}>
@@ -62,6 +70,7 @@ const Logo = forwardRef(
           ref={ref as any}
           href={href}
           className={logoVariants({ size, showText, className })}
+          data-testid={dataTestId}
           {...linkProps}
         >
           {renderContent()}
@@ -73,6 +82,7 @@ const Logo = forwardRef(
       <div
         ref={ref as any}
         className={logoVariants({ size, showText, className })}
+        data-testid={dataTestId}
         {...(props as any)}
       >
         {renderContent()}

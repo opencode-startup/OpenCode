@@ -13,6 +13,7 @@ interface BaseLogoProps extends VariantProps<typeof logoVariants> {
   className?: string;
   text?: string;
   animated?: boolean;
+  'data-testid'?: string;
 }
 
 // Div variant props (default)
