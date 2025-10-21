@@ -1,15 +1,22 @@
 import './animation.css';
 
 import clsx from 'clsx';
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import { SpinnerProps } from './types';
 
 const ANIMATION_DURATION = 1200;
 const LINES_COUNT = 12;
 
-const Spinner: React.FC<SpinnerProps> = ({ size = 32, className, style, ...props }) => {
-  const renderLines = () => {
+const Spinner: React.FC<SpinnerProps> = ({
+  size = 32,
+  className,
+  style,
+  'data-testid': dataTestId,
+  ...props
+}) => {
+  // Memoize lines to prevent unnecessary recalculations
+  const lines = useMemo(() => {
     return Array.from({ length: LINES_COUNT }, (_, index) => {
       const angle = (index * 360) / LINES_COUNT;
       const delay = -((LINES_COUNT - index) * (ANIMATION_DURATION / LINES_COUNT));
@@ -28,7 +35,7 @@ const Spinner: React.FC<SpinnerProps> = ({ size = 32, className, style, ...props
         />
       );
     });
-  };
+  }, []);
 
   return (
     <div
@@ -39,9 +46,7 @@ const Spinner: React.FC<SpinnerProps> = ({ size = 32, className, style, ...props
         ...style,
       }}
       role="status"
-      aria-label="Loading"
-      data-geist-spinner=""
-      data-version="v1"
+      data-testid={dataTestId}
       {...props}
     >
       <div
@@ -51,7 +56,7 @@ const Spinner: React.FC<SpinnerProps> = ({ size = 32, className, style, ...props
           width: `${size}px`,
         }}
       >
-        {renderLines()}
+        {lines}
       </div>
       <span className="sr-only">Loading...</span>
     </div>

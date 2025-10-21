@@ -12,3 +12,20 @@
     opacity: 0.15;
   }
 }
+
+/* Respect user's motion preferences for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .spinner-line {
+    animation: spinner-animation-reduced 2s linear infinite;
+  }
+
+  @keyframes spinner-animation-reduced {
+    0%,
+    100% {
+      opacity: 0.5;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+}
