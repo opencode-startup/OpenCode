@@ -1,12 +1,3 @@
-/**
- * Utility functions for Input component
- */
-
-/**
- * Combines multiple aria-describedby values into a single string
- * @param values - Array of potential aria-describedby values
- * @returns Combined string or undefined if no valid values
- */
 export function combineAriaDescribedBy(
   ...values: (string | undefined | null)[]
 ): string | undefined {
@@ -14,11 +5,6 @@ export function combineAriaDescribedBy(
   return filtered.length > 0 ? filtered.join(' ') : undefined;
 }
 
-/**
- * Generates ARIA attributes for input element
- * @param options - Configuration options for ARIA attributes
- * @returns Object with computed ARIA attributes
- */
 export interface AriaAttributesOptions {
   helperId?: string;
   hasHelperContent?: boolean;
