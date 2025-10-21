@@ -11,6 +11,7 @@ interface UseSelectProps {
   onOpenChange?: (open: boolean) => void;
   disabled?: boolean;
   loading?: boolean;
+  disableSelection?: boolean;
 }
 
 export const useSelect = ({
@@ -21,6 +22,7 @@ export const useSelect = ({
   onOpenChange,
   disabled = false,
   loading = false,
+  disableSelection = false,
 }: UseSelectProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedValue, setSelectedValue] = useState(value || defaultValue || '');
@@ -81,13 +83,17 @@ export const useSelect = ({
     (optionValue: string) => {
       const option = flatOptions.find((opt) => opt.value === optionValue);
       if (option && !option.disabled) {
-        setSelectedValue(optionValue);
-        onValueChange?.(optionValue);
+        // Only update selected value if selection is enabled
+        if (!disableSelection) {
+          setSelectedValue(optionValue);
+          onValueChange?.(optionValue);
+        }
+        // Always close the dropdown
         setIsOpen(false);
         onOpenChange?.(false);
       }
     },
-    [flatOptions, onValueChange, onOpenChange],
+    [flatOptions, onValueChange, onOpenChange, disableSelection],
   );
 
   const handleKeyDown = useCallback(

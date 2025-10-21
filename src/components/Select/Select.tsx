@@ -35,6 +35,7 @@ const Select = forwardRef<HTMLButtonElement, SelectProps>(
       loading = false,
       fullWidth = false,
       required = false,
+      disableSelection = false,
       options = [],
       value,
       defaultValue,
@@ -78,6 +79,7 @@ const Select = forwardRef<HTMLButtonElement, SelectProps>(
       onOpenChange,
       disabled,
       loading,
+      disableSelection,
     });
 
     const displayText = selectedOption?.label || placeholder;
@@ -137,6 +139,7 @@ const Select = forwardRef<HTMLButtonElement, SelectProps>(
                     focusedIndex={focusedIndex}
                     size={actualButtonSize}
                     listboxSize={actualListboxSize}
+                    disableSelection={disableSelection}
                     onSelectAction={handleSelectOption}
                   />
                 );
@@ -156,6 +159,7 @@ const Select = forwardRef<HTMLButtonElement, SelectProps>(
             focusedIndex={focusedIndex}
             size={actualButtonSize}
             listboxSize={actualListboxSize}
+            disableSelection={disableSelection}
             onSelectAction={handleSelectOption}
           />
         ));

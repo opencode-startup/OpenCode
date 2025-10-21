@@ -9,6 +9,7 @@ export interface SelectOption {
   disabled?: boolean;
   leftIcon?: ReactNode;
   rightIcon?: ReactNode;
+  onClick?: () => void;
 }
 
 export interface SelectProps {
@@ -32,6 +33,7 @@ export interface SelectProps {
   header?: ReactNode;
   footer?: ReactNode;
   hideChevron?: boolean;
+  disableSelection?: boolean;
   onValueChange?: (value: string) => void;
   onOpenChange?: (open: boolean) => void;
   id?: string;
@@ -54,5 +56,6 @@ export interface OptionItemProps {
   focusedIndex: number;
   size: SelectSize;
   listboxSize?: SelectSize;
+  disableSelection?: boolean;
   onSelectAction: (value: string) => void;
 }
