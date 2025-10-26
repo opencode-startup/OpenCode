@@ -11,6 +11,9 @@ export interface FeedbackProps {
   label?: string;
   textareaPlaceholder?: string;
   sendButtonText?: string;
+  // Testing support
+  'data-testid'?: string;
+  baseId?: string;
 }
 
 export interface UseFeedbackProps {

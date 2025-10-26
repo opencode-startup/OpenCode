@@ -3,7 +3,7 @@
 import './animation.css';
 
 import clsx from 'clsx';
-import { FC } from 'react';
+import { FC, useId } from 'react';
 
 import { Button, Icon, Input } from '@/components';
 
@@ -19,7 +19,11 @@ const Feedback: FC<FeedbackProps> = ({
   label = 'Feedback',
   textareaPlaceholder = 'Your feedback...',
   sendButtonText = 'Send',
+  'data-testid': dataTestId,
+  baseId,
 }) => {
+  const generatedId = useId();
+  const feedbackId = baseId || generatedId;
   const {
     rating: currentRating,
     state,
@@ -38,10 +42,12 @@ const Feedback: FC<FeedbackProps> = ({
 
   const renderRatingButton = (rating: FeedbackRating) => {
     const isButtonDisabled = disabled || state === 'submitted';
+    const ratingButtonId = `${feedbackId}-rating-${rating}`;
 
     return (
       <Button
         key={rating}
+        id={ratingButtonId}
         iconOnly
         size={'small'}
         disabled={isButtonDisabled}
@@ -107,7 +113,7 @@ const Feedback: FC<FeedbackProps> = ({
   };
 
   return (
-    <div className={'flex flex-col'}>
+    <div className={'flex flex-col'} data-testid={dataTestId}>
       <div
         ref={containerRef}
         className={feedbackTriggerVariants({
