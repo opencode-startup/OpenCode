@@ -19,11 +19,14 @@ const Tabs = forwardRef<HTMLDivElement, TabsProps>(
       'aria-label': ariaLabel,
       'aria-labelledby': ariaLabelledBy,
       'aria-describedby': ariaDescribedBy,
+      'data-testid': dataTestId,
+      baseId,
       ...props
     },
     ref,
   ) => {
     const generatedId = useId();
+    const tabsId = baseId || generatedId;
     const containerRef = useRef<HTMLDivElement>(null);
     const { currentValue, handleTabClick, handleKeyDown } = useTabs({
       tabs,
@@ -58,6 +61,7 @@ const Tabs = forwardRef<HTMLDivElement, TabsProps>(
         aria-label={ariaLabel}
         aria-labelledby={ariaLabelledBy}
         aria-describedby={ariaDescribedBy}
+        data-testid={dataTestId}
         className={tabsContainerVariants({
           size,
           disabled,
@@ -68,7 +72,7 @@ const Tabs = forwardRef<HTMLDivElement, TabsProps>(
         {tabs.map((tab, index) => {
           const isSelected = currentValue === tab.value;
           const isTabDisabled = disabled || tab.disabled;
-          const tabId = `${generatedId}-tab-${index}`;
+          const tabId = `${tabsId}-tab-${index}`;
 
           return (
             <div

@@ -19,6 +19,9 @@ export interface TabsProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChang
   'aria-label'?: string;
   'aria-labelledby'?: string;
   'aria-describedby'?: string;
+  // Testing support
+  'data-testid'?: string;
+  baseId?: string;
 }
 
 export interface UseTabsProps {
