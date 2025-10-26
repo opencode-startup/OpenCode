@@ -86,6 +86,7 @@ const Tabs = forwardRef<HTMLDivElement, TabsProps>(
                 size,
                 selected: isSelected,
                 disabled: isTabDisabled,
+                shouldAnimate,
               })}
               onClick={handleTabClick(tab.value)}
               onKeyDown={handleKeyDown(tab.value)}
@@ -100,6 +101,7 @@ const Tabs = forwardRef<HTMLDivElement, TabsProps>(
         {/* Animated indicator */}
         <div
           className={tabIndicatorVariants({
+            shouldAnimate,
             className: shouldAnimate ? '' : 'opacity-0',
           })}
           style={{

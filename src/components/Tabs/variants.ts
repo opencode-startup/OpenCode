@@ -27,7 +27,6 @@ export const tabsContainerVariants = tv({
 export const tabOptionVariants = tv({
   base: [
     'relative flex cursor-pointer flex-col items-center justify-center',
-    'transition-all duration-200 ease-out',
     'hover:text-gray-1000 text-gray-600',
     'border-b-2 border-transparent',
     'focus-ring',
@@ -46,6 +45,10 @@ export const tabOptionVariants = tv({
       true: 'cursor-not-allowed text-gray-400 opacity-50',
       false: 'cursor-pointer',
     },
+    shouldAnimate: {
+      true: 'transition-all duration-200 ease-out',
+      false: '',
+    },
   },
   compoundVariants: [
     {
@@ -63,10 +66,20 @@ export const tabOptionVariants = tv({
     size: 'medium',
     selected: false,
     disabled: false,
+    shouldAnimate: true,
   },
 });
 
 // Tab indicator variants
 export const tabIndicatorVariants = tv({
-  base: ['bg-gray-1000 absolute bottom-0 h-0.5', 'transition-all duration-200 ease-out'],
+  base: ['bg-gray-1000 absolute bottom-0 h-0.5'],
+  variants: {
+    shouldAnimate: {
+      true: 'transition-all duration-200 ease-out',
+      false: '',
+    },
+  },
+  defaultVariants: {
+    shouldAnimate: true,
+  },
 });

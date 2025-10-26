@@ -1,14 +1,28 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+
+import { usePrefersReducedMotion } from '@/hooks';
 
 import { TabIndicatorStyle, UseTabsAnimationProps } from '../types';
 
 export const useTabsAnimation = ({ tabs, currentValue, containerRef }: UseTabsAnimationProps) => {
+  const hasChangedRef = useRef(false);
+  const initialValueRef = useRef(currentValue);
   const [indicatorStyle, setIndicatorStyle] = useState<TabIndicatorStyle>({
     left: 0,
     width: 0,
   });
-  const [shouldAnimate, setShouldAnimate] = useState(false);
 
+  // Detect user's motion preference for accessibility
+  const prefersReducedMotion = usePrefersReducedMotion();
+
+  // Track if value has changed from initial
+  useEffect(() => {
+    if (currentValue !== initialValueRef.current) {
+      hasChangedRef.current = true;
+    }
+  }, [currentValue]);
+
+  // Calculate indicator position and width
   useEffect(() => {
     if (!containerRef.current) return;
 
@@ -31,15 +45,10 @@ export const useTabsAnimation = ({ tabs, currentValue, containerRef }: UseTabsAn
     };
 
     setIndicatorStyle(newStyle);
-
-    // Enable animation after the first render
-    if (!shouldAnimate) {
-      setShouldAnimate(true);
-    }
-  }, [tabs, currentValue, containerRef, shouldAnimate]);
+  }, [tabs, currentValue, containerRef]);
 
   return {
     indicatorStyle,
-    shouldAnimate,
+    shouldAnimate: hasChangedRef.current && !prefersReducedMotion,
   };
 };
