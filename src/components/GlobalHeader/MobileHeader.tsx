@@ -23,15 +23,16 @@ const MobileHeader = ({
   onLogoutClick,
   onUpgradeClick,
 }: HeaderProps) => {
-  const { isExpanded, handleMenuToggle } = useMobileHeader();
+  const { isExpanded, handleMenuToggle, shouldAnimate } = useMobileHeader();
 
   return (
     <HeaderWrapper
       className={clsx(
-        'flex flex-col items-start justify-center transition-colors md:hidden',
+        'flex flex-col items-start justify-center md:hidden',
+        shouldAnimate && 'transition-colors',
         isExpanded && 'bg-background-200',
       )}
-      style={{ transitionDuration: `${MOBILE_HEADER_WRAPPER_DURATION}ms` }}
+      style={{ transitionDuration: shouldAnimate ? `${MOBILE_HEADER_WRAPPER_DURATION}ms` : '0ms' }}
     >
       <div
         className={clsx(
@@ -62,10 +63,10 @@ const MobileHeader = ({
       <div
         className={clsx(
           'bg-background-200 fixed top-[var(--global-header-height)] left-0 w-full overflow-hidden',
-          'transition-all ease-out',
+          shouldAnimate && 'transition-all ease-out',
         )}
         style={{
-          transitionDuration: `${MOBILE_HEADER_CONTENT_DURATION}ms`,
+          transitionDuration: shouldAnimate ? `${MOBILE_HEADER_CONTENT_DURATION}ms` : '0ms',
           height: isExpanded ? 'calc(var(--vh, 1vh) * 100 - var(--global-header-height))' : '0',
         }}
         role="menu"
@@ -87,7 +88,10 @@ const MobileHeader = ({
                     onClick={onAccountSettingsClick}
                     className={clsx(
                       'justify-between',
-                      isExpanded ? 'global-mobile-header-item' : 'global-mobile-header-item-exit',
+                      shouldAnimate &&
+                        (isExpanded
+                          ? 'global-mobile-header-item'
+                          : 'global-mobile-header-item-exit'),
                     )}
                     rightIcon={<Icon name="settings-gear" size={16} />}
                   >
@@ -103,7 +107,10 @@ const MobileHeader = ({
                     onClick={onLogoutClick}
                     className={clsx(
                       'justify-between',
-                      isExpanded ? 'global-mobile-header-item' : 'global-mobile-header-item-exit',
+                      shouldAnimate &&
+                        (isExpanded
+                          ? 'global-mobile-header-item'
+                          : 'global-mobile-header-item-exit'),
                     )}
                     rightIcon={<Icon name="logout" size={16} />}
                   >
@@ -119,7 +126,8 @@ const MobileHeader = ({
                   fullWidth
                   onClick={onUpgradeClick}
                   className={clsx(
-                    isExpanded ? 'global-mobile-header-item' : 'global-mobile-header-item-exit',
+                    shouldAnimate &&
+                      (isExpanded ? 'global-mobile-header-item' : 'global-mobile-header-item-exit'),
                   )}
                 >
                   Upgrade to Pro
@@ -135,7 +143,8 @@ const MobileHeader = ({
                   fullWidth
                   onClick={onSignUpClick}
                   className={clsx(
-                    isExpanded ? 'global-mobile-header-item' : 'global-mobile-header-item-exit',
+                    shouldAnimate &&
+                      (isExpanded ? 'global-mobile-header-item' : 'global-mobile-header-item-exit'),
                   )}
                 >
                   Sign Up
@@ -146,7 +155,8 @@ const MobileHeader = ({
                   onClick={onLogInClick}
                   fullWidth
                   className={clsx(
-                    isExpanded ? 'global-mobile-header-item' : 'global-mobile-header-item-exit',
+                    shouldAnimate &&
+                      (isExpanded ? 'global-mobile-header-item' : 'global-mobile-header-item-exit'),
                   )}
                 >
                   Log In
@@ -161,7 +171,8 @@ const MobileHeader = ({
                   fullWidth
                   className={clsx(
                     'justify-start',
-                    isExpanded ? 'global-mobile-header-item' : 'global-mobile-header-item-exit',
+                    shouldAnimate &&
+                      (isExpanded ? 'global-mobile-header-item' : 'global-mobile-header-item-exit'),
                   )}
                 >
                   Pricing
@@ -173,7 +184,8 @@ const MobileHeader = ({
                   onClick={onContactClick}
                   className={clsx(
                     'justify-start',
-                    isExpanded ? 'global-mobile-header-item' : 'global-mobile-header-item-exit',
+                    shouldAnimate &&
+                      (isExpanded ? 'global-mobile-header-item' : 'global-mobile-header-item-exit'),
                   )}
                 >
                   Contact

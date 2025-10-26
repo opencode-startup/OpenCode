@@ -27,3 +27,13 @@
 .global-mobile-header-item-exit {
   animation: fade-slide-out 0.2s ease-in both;
 }
+
+/* Respect user's motion preferences for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .global-mobile-header-item,
+  .global-mobile-header-item-exit {
+    animation: none;
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

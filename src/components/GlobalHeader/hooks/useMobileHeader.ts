@@ -1,9 +1,15 @@
 import { useEffect, useState } from 'react';
 
+import { usePrefersReducedMotion } from '@/hooks';
+
 import { MAX_ANIMATION_DELAY, MOBILE_HEADER_CONTENT_DURATION } from '../constants';
 
 export const useMobileHeader = () => {
   const [isExpanded, setIsExpanded] = useState(false);
+
+  // Detect user's motion preference for accessibility
+  const prefersReducedMotion = usePrefersReducedMotion();
+  const shouldAnimate = !prefersReducedMotion;
 
   // Set viewport height CSS variable for mobile Safari
   useEffect(() => {
@@ -41,8 +47,8 @@ export const useMobileHeader = () => {
   }, [isExpanded]);
 
   useEffect(() => {
-    if (isExpanded) {
-      // Set animation delays for menu items
+    if (isExpanded && shouldAnimate) {
+      // Set animation delays for menu items only when animations are enabled
       const menuItems = document.querySelectorAll('.global-mobile-header-item');
       const itemCount = menuItems.length;
       const delayPerItem = Math.min(
@@ -54,7 +60,7 @@ export const useMobileHeader = () => {
         (item as HTMLElement).style.animationDelay = `${index * delayPerItem}ms`;
       });
     }
-  }, [isExpanded]);
+  }, [isExpanded, shouldAnimate]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -77,5 +83,6 @@ export const useMobileHeader = () => {
   return {
     isExpanded,
     handleMenuToggle,
+    shouldAnimate,
   };
 };
