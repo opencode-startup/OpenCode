@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 
+import { usePrefersReducedMotion } from '@/hooks';
+
 import { FeedbackRating, FeedbackState, UseFeedbackProps } from '../types';
 
 export default function useFeedback({
@@ -14,6 +16,10 @@ export default function useFeedback({
   const [initialWidth, setInitialWidth] = useState<number | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
+
+  // Detect user's motion preference for accessibility
+  const prefersReducedMotion = usePrefersReducedMotion();
+  const shouldAnimate = !prefersReducedMotion;
 
   const handleRatingSelect = useCallback(
     (newRating: FeedbackRating) => {
@@ -114,5 +120,6 @@ export default function useFeedback({
     reset,
     containerRef,
     inputRef,
+    shouldAnimate,
   };
 }

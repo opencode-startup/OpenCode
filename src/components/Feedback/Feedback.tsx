@@ -27,6 +27,7 @@ const Feedback: FC<FeedbackProps> = ({
 }) => {
   const generatedId = useId();
   const feedbackId = baseId || generatedId;
+
   const {
     rating: currentRating,
     state,
@@ -37,6 +38,7 @@ const Feedback: FC<FeedbackProps> = ({
     setComment,
     containerRef,
     inputRef,
+    shouldAnimate,
   } = useFeedback({
     onRatingSelect,
     onSubmit,
@@ -60,6 +62,7 @@ const Feedback: FC<FeedbackProps> = ({
         className={feedbackRatingButtonVariants({
           selected: isSelected,
           disabled: isButtonDisabled,
+          shouldAnimate,
         })}
         role="radio"
         aria-checked={isSelected}
@@ -75,7 +78,10 @@ const Feedback: FC<FeedbackProps> = ({
       case 'submitted':
         return (
           <div
-            className="flex h-[10.75rem] flex-col items-center justify-center gap-2 overflow-hidden p-10 transition-all"
+            className={clsx(
+              'flex h-[10.75rem] flex-col items-center justify-center gap-2 overflow-hidden p-10',
+              shouldAnimate && 'transition-all',
+            )}
             role="status"
             aria-live="polite"
           >
@@ -136,6 +142,7 @@ const Feedback: FC<FeedbackProps> = ({
         className={feedbackTriggerVariants({
           expanded: isExpanded,
           disabled,
+          shouldAnimate,
         })}
       >
         <div className={clsx((isExpanded || state === 'submitted') && 'flex w-full flex-col')}>
@@ -157,7 +164,8 @@ const Feedback: FC<FeedbackProps> = ({
 
           <div
             className={clsx(
-              'overflow-hidden transition-all duration-400 ease-in-out',
+              'overflow-hidden',
+              shouldAnimate && 'transition-all duration-400 ease-in-out',
               isExpanded ? 'max-h-[14.4rem] opacity-100' : 'max-h-0 opacity-0',
             )}
           >
