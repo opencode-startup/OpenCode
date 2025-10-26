@@ -12,6 +12,9 @@ export interface HeaderProps {
   onAccountSettingsClick?: () => void;
   onLogoutClick?: () => void;
   onUpgradeClick?: () => void;
+  // Testing support
+  'data-testid'?: string;
+  baseId?: string;
 }
 
 export interface HeaderWrapperProps extends HTMLAttributes<HTMLElement> {

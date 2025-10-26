@@ -1,5 +1,7 @@
 'use client';
 
+import { useId } from 'react';
+
 import { Button, Icon, Logo, Select } from '@/components';
 
 import { HeaderWrapper } from './HeaderWrapper';
@@ -17,7 +19,11 @@ const DesktopHeader = ({
   onAccountSettingsClick,
   onLogoutClick,
   onUpgradeClick,
+  'data-testid': dataTestId,
+  baseId,
 }: HeaderProps) => {
+  const generatedId = useId();
+  const headerId = baseId || generatedId;
   const userMenuOptions = [
     [
       {
@@ -51,7 +57,7 @@ const DesktopHeader = ({
   };
 
   return (
-    <HeaderWrapper className="hidden justify-center md:flex">
+    <HeaderWrapper data-testid={dataTestId} className="hidden justify-center md:flex">
       <div
         className="absolute top-0 flex h-[var(--global-header-height)] w-full max-w-[var(--global-content-max-width)]
           items-center justify-between px-4"
@@ -63,7 +69,13 @@ const DesktopHeader = ({
             role="group"
             aria-label="Site navigation"
           >
-            <Button variant="tertiary" shape="rounded" size="small" onClick={onPricingClick}>
+            <Button
+              id={`${headerId}-pricing`}
+              variant="tertiary"
+              shape="rounded"
+              size="small"
+              onClick={onPricingClick}
+            >
               Pricing
             </Button>
           </div>
@@ -72,6 +84,7 @@ const DesktopHeader = ({
           {isLoggedIn ? (
             <>
               <Button
+                id={`${headerId}-my-progress`}
                 leftIcon={<Icon name="chart-trending-up" size={12} />}
                 variant="tertiary"
                 size="small"
@@ -80,6 +93,7 @@ const DesktopHeader = ({
                 My Progress
               </Button>
               <Select
+                data-testid={`${headerId}-user-menu`}
                 buttonSize="small"
                 listboxSize="large"
                 popupWidth={240}
@@ -89,7 +103,13 @@ const DesktopHeader = ({
                 options={userMenuOptions}
                 onValueChange={handleUserMenuChange}
                 footer={
-                  <Button variant="success" size="small" fullWidth onClick={onUpgradeClick}>
+                  <Button
+                    id={`${headerId}-upgrade`}
+                    variant="success"
+                    size="small"
+                    fullWidth
+                    onClick={onUpgradeClick}
+                  >
                     Upgrade to Pro
                   </Button>
                 }
@@ -97,13 +117,28 @@ const DesktopHeader = ({
             </>
           ) : (
             <>
-              <Button variant="secondary" size="small" onClick={onLogInClick}>
+              <Button
+                id={`${headerId}-log-in`}
+                variant="secondary"
+                size="small"
+                onClick={onLogInClick}
+              >
                 Log In
               </Button>
-              <Button variant="secondary" size="small" onClick={onContactClick}>
+              <Button
+                id={`${headerId}-contact`}
+                variant="secondary"
+                size="small"
+                onClick={onContactClick}
+              >
                 Contact
               </Button>
-              <Button variant="primary" size="small" onClick={onSignUpClick}>
+              <Button
+                id={`${headerId}-sign-up`}
+                variant="primary"
+                size="small"
+                onClick={onSignUpClick}
+              >
                 Sign Up
               </Button>
             </>

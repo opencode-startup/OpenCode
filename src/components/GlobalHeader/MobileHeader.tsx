@@ -3,6 +3,7 @@
 import './animations.css';
 
 import clsx from 'clsx';
+import { useId } from 'react';
 
 import { Button, Icon, Logo } from '@/components';
 
@@ -22,11 +23,16 @@ const MobileHeader = ({
   onAccountSettingsClick,
   onLogoutClick,
   onUpgradeClick,
+  'data-testid': dataTestId,
+  baseId,
 }: HeaderProps) => {
+  const generatedId = useId();
+  const headerId = baseId || generatedId;
   const { isExpanded, handleMenuToggle, shouldAnimate } = useMobileHeader();
 
   return (
     <HeaderWrapper
+      data-testid={dataTestId}
       className={clsx(
         'flex flex-col items-start justify-center md:hidden',
         shouldAnimate && 'transition-colors',
@@ -47,6 +53,7 @@ const MobileHeader = ({
 
         <div className="flex items-center gap-3">
           <Button
+            id={`${headerId}-menu-toggle`}
             variant="secondary"
             shape="rounded"
             iconOnly
@@ -82,6 +89,7 @@ const MobileHeader = ({
                     <span className="typo-label-16 text-gray-1000 truncate">{userEmail}</span>
                   </div>
                   <Button
+                    id={`${headerId}-account-settings`}
                     variant="tertiary"
                     size="medium"
                     fullWidth
@@ -101,6 +109,7 @@ const MobileHeader = ({
 
                 <div className="border-gray-alpha-400 flex w-full flex-col border-b p-2">
                   <Button
+                    id={`${headerId}-logout`}
                     variant="tertiary"
                     size="medium"
                     fullWidth
@@ -121,6 +130,7 @@ const MobileHeader = ({
 
               <div className="flex w-full flex-col px-5 py-2">
                 <Button
+                  id={`${headerId}-upgrade`}
                   variant="success"
                   size="large"
                   fullWidth
@@ -138,6 +148,7 @@ const MobileHeader = ({
             <div className="flex h-full w-full flex-col gap-6 p-3" aria-label="Guest navigation">
               <div className="flex w-full flex-col gap-3" aria-label="Authentication actions">
                 <Button
+                  id={`${headerId}-sign-up`}
                   variant="primary"
                   size="medium"
                   fullWidth
@@ -150,6 +161,7 @@ const MobileHeader = ({
                   Sign Up
                 </Button>
                 <Button
+                  id={`${headerId}-log-in`}
                   variant="secondary"
                   size="medium"
                   onClick={onLogInClick}
@@ -165,6 +177,7 @@ const MobileHeader = ({
 
               <div className="flex w-full flex-col gap-1" aria-label="Site navigation">
                 <Button
+                  id={`${headerId}-pricing`}
                   variant="tertiary"
                   size="medium"
                   onClick={onPricingClick}
@@ -178,6 +191,7 @@ const MobileHeader = ({
                   Pricing
                 </Button>
                 <Button
+                  id={`${headerId}-contact`}
                   variant="tertiary"
                   size="medium"
                   fullWidth
