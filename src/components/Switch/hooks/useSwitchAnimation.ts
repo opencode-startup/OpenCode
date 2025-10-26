@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 
+import { usePrefersReducedMotion } from '@/hooks';
+
 import { BackgroundStyle, UseSwitchAnimationProps } from '../types';
 
 export const useSwitchAnimation = ({
@@ -15,8 +17,7 @@ export const useSwitchAnimation = ({
   });
 
   // Detect user's motion preference
-  const prefersReducedMotion =
-    typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const prefersReducedMotion = usePrefersReducedMotion();
 
   // Track if value has changed from initial
   useEffect(() => {

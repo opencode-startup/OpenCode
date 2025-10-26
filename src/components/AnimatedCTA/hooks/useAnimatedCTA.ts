@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 
+import { usePrefersReducedMotion } from '@/hooks';
+
 import { AnimationState, UseAnimatedCTAParams } from '../types';
-import { usePrefersReducedMotion } from './usePrefersReducedMotion';
 
 export const LETTER_DELAY = 50; // ms between each letter animation
 export const RESET_DELAY = 50; // ms delay before allowing next animation

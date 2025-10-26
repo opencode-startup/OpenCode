@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from 'react';
 
+import { usePrefersReducedMotion } from '@/hooks';
+
 interface UseTypingAnimationOptions {
   text?: string;
   speed?: number;
@@ -77,8 +79,7 @@ export function useTypingAnimation({
   const [typingSteps, setTypingSteps] = useState<TypingStep[]>([]);
 
   // Detect user's motion preference
-  const prefersReducedMotion =
-    typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const prefersReducedMotion = usePrefersReducedMotion();
 
   // If user prefers reduced motion, show text immediately
   useEffect(() => {

@@ -1,5 +1,7 @@
 import { KeyboardEvent, useCallback, useState } from 'react';
 
+import { usePrefersReducedMotion } from '@/hooks';
+
 import { UseToggleProps } from '../types';
 
 export const useToggle = ({
@@ -14,8 +16,7 @@ export const useToggle = ({
   const currentChecked = checked !== undefined ? checked : internalChecked;
 
   // Detect user's motion preference for accessibility
-  const prefersReducedMotion =
-    typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const prefersReducedMotion = usePrefersReducedMotion();
   const shouldAnimate = !prefersReducedMotion;
 
   const handleToggle = useCallback(() => {
