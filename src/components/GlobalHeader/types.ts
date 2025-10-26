@@ -16,6 +16,7 @@ export interface HeaderProps {
 
 export interface HeaderWrapperProps extends HTMLAttributes<HTMLElement> {
   children: ReactNode;
+  'aria-label'?: string;
 }
 
 export interface BurgerIconProps {

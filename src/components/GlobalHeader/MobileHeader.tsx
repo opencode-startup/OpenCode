@@ -68,11 +68,14 @@ const MobileHeader = ({
           transitionDuration: `${MOBILE_HEADER_CONTENT_DURATION}ms`,
           height: isExpanded ? 'calc(var(--vh, 1vh) * 100 - var(--global-header-height))' : '0',
         }}
+        role="menu"
+        aria-label="Mobile navigation menu"
+        aria-hidden={!isExpanded}
       >
         <div className="flex h-full w-full flex-col justify-between overflow-auto">
           {isLoggedIn ? (
             <>
-              <div className="flex w-full flex-col">
+              <div className="flex w-full flex-col" aria-label="User account navigation">
                 <div className="border-gray-alpha-400 flex w-full flex-col gap-4 border-b px-2 pt-4 pb-2">
                   <div className="flex items-center px-4">
                     <span className="typo-label-16 text-gray-1000 truncate">{userEmail}</span>
@@ -124,8 +127,8 @@ const MobileHeader = ({
               </div>
             </>
           ) : (
-            <div className="flex h-full w-full flex-col gap-6 p-3">
-              <div className="flex w-full flex-col gap-3">
+            <div className="flex h-full w-full flex-col gap-6 p-3" aria-label="Guest navigation">
+              <div className="flex w-full flex-col gap-3" aria-label="Authentication actions">
                 <Button
                   variant="primary"
                   size="medium"
@@ -150,7 +153,7 @@ const MobileHeader = ({
                 </Button>
               </div>
 
-              <div className="flex w-full flex-col gap-1">
+              <div className="flex w-full flex-col gap-1" aria-label="Site navigation">
                 <Button
                   variant="tertiary"
                   size="medium"

@@ -58,13 +58,17 @@ const DesktopHeader = ({
       >
         <div className="flex items-center gap-8">
           <Logo size="small" text="OpenCode" as={'link'} href={'/'} />
-          <div className="flex flex-col items-start gap-2.5">
+          <div
+            className="flex flex-col items-start gap-2.5"
+            role="group"
+            aria-label="Site navigation"
+          >
             <Button variant="tertiary" shape="rounded" size="small" onClick={onPricingClick}>
               Pricing
             </Button>
           </div>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3" role="group" aria-label="User actions">
           {isLoggedIn ? (
             <>
               <Button
