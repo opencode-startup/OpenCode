@@ -13,6 +13,11 @@ export const useToggle = ({
   // Use controlled value if provided, otherwise use internal state
   const currentChecked = checked !== undefined ? checked : internalChecked;
 
+  // Detect user's motion preference for accessibility
+  const prefersReducedMotion =
+    typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const shouldAnimate = !prefersReducedMotion;
+
   const handleToggle = useCallback(() => {
     if (disabled) return;
 
@@ -41,5 +46,6 @@ export const useToggle = ({
     currentChecked,
     handleToggle,
     handleKeyDown,
+    shouldAnimate,
   };
 };

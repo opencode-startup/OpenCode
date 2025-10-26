@@ -27,7 +27,7 @@ const Toggle = forwardRef<HTMLButtonElement, ToggleProps>(
     const generatedId = useId();
     const toggleId = baseId || generatedId;
 
-    const { currentChecked, handleToggle, handleKeyDown } = useToggle({
+    const { currentChecked, handleToggle, handleKeyDown, shouldAnimate } = useToggle({
       checked,
       defaultChecked,
       onChange,
@@ -50,6 +50,7 @@ const Toggle = forwardRef<HTMLButtonElement, ToggleProps>(
           size,
           checked: currentChecked,
           disabled,
+          shouldAnimate,
           className,
         })}
         onClick={handleToggle}
@@ -61,6 +62,7 @@ const Toggle = forwardRef<HTMLButtonElement, ToggleProps>(
             size,
             checked: currentChecked,
             disabled,
+            shouldAnimate,
           })}
         />
       </button>
