@@ -11,6 +11,10 @@ export interface FeedbackProps {
   label?: string;
   textareaPlaceholder?: string;
   sendButtonText?: string;
+  // Accessibility enhancements
+  'aria-label'?: string;
+  'aria-labelledby'?: string;
+  'aria-describedby'?: string;
   // Testing support
   'data-testid'?: string;
   baseId?: string;

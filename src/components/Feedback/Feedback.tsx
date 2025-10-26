@@ -19,6 +19,9 @@ const Feedback: FC<FeedbackProps> = ({
   label = 'Feedback',
   textareaPlaceholder = 'Your feedback...',
   sendButtonText = 'Send',
+  'aria-label': ariaLabel,
+  'aria-labelledby': ariaLabelledBy,
+  'aria-describedby': ariaDescribedBy,
   'data-testid': dataTestId,
   baseId,
 }) => {
@@ -43,6 +46,7 @@ const Feedback: FC<FeedbackProps> = ({
   const renderRatingButton = (rating: FeedbackRating) => {
     const isButtonDisabled = disabled || state === 'submitted';
     const ratingButtonId = `${feedbackId}-rating-${rating}`;
+    const isSelected = currentRating === rating;
 
     return (
       <Button
@@ -54,9 +58,11 @@ const Feedback: FC<FeedbackProps> = ({
         shape={'rounded'}
         onClick={() => handleRatingSelect(rating)}
         className={feedbackRatingButtonVariants({
-          selected: currentRating === rating,
+          selected: isSelected,
           disabled: isButtonDisabled,
         })}
+        role="radio"
+        aria-checked={isSelected}
         aria-label={`Rate ${rating} out of 4`}
       >
         <Icon name={ratingIcons[rating]} size={16} />
@@ -68,7 +74,11 @@ const Feedback: FC<FeedbackProps> = ({
     switch (state) {
       case 'submitted':
         return (
-          <div className="flex h-[10.75rem] flex-col items-center justify-center gap-2 overflow-hidden p-10 transition-all">
+          <div
+            className="flex h-[10.75rem] flex-col items-center justify-center gap-2 overflow-hidden p-10 transition-all"
+            role="status"
+            aria-live="polite"
+          >
             <Icon name="check-circle-fill" size={32} className="animate-fade-slide-up" />
             <p className="text-gray-1000 typo-label-14 animate-fade-slide-up text-center delay-200">
               Your feedback has been received!
@@ -113,7 +123,14 @@ const Feedback: FC<FeedbackProps> = ({
   };
 
   return (
-    <div className={'flex flex-col'} data-testid={dataTestId}>
+    <div
+      className={'flex flex-col'}
+      role="group"
+      aria-label={ariaLabel || 'Feedback widget'}
+      aria-labelledby={ariaLabelledBy}
+      aria-describedby={ariaDescribedBy}
+      data-testid={dataTestId}
+    >
       <div
         ref={containerRef}
         className={feedbackTriggerVariants({
@@ -129,7 +146,11 @@ const Feedback: FC<FeedbackProps> = ({
             >
               <p className="leading-5 whitespace-pre">{label}</p>
             </div>
-            <div className="relative flex shrink-0 items-center gap-0.5">
+            <div
+              className="relative flex shrink-0 items-center gap-0.5"
+              role="radiogroup"
+              aria-label="Rating options"
+            >
               {([1, 2, 3, 4] as FeedbackRating[]).map(renderRatingButton)}
             </div>
           </div>
