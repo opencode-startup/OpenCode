@@ -52,7 +52,7 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
       preventBodyScroll,
     });
 
-    const { isVisible, isAnimating } = useModalAnimation({
+    const { isVisible, isAnimating, shouldAnimate } = useModalAnimation({
       isOpen,
     });
 
@@ -62,8 +62,8 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
       <div
         ref={backdropRef}
         className={twMerge(
-          isAnimating ? 'modal-backdrop-enter' : 'modal-backdrop-exit',
-          backdropVariants({ placement, className: backdropClassName }),
+          shouldAnimate && (isAnimating ? 'modal-backdrop-enter' : 'modal-backdrop-exit'),
+          backdropVariants({ placement, shouldAnimate, className: backdropClassName }),
         )}
         onClick={handleBackdropClick}
         data-state={isAnimating ? 'open' : 'closed'}
@@ -76,7 +76,7 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
         <div
           ref={ref}
           className={twMerge(
-            isAnimating ? 'modal-enter' : 'modal-exit',
+            shouldAnimate && (isAnimating ? 'modal-enter' : 'modal-exit'),
             `bg-background-200 relative flex max-h-[calc(100vh-3rem)] w-full max-w-lg flex-col overflow-hidden
             rounded-xl border border-gray-400 shadow-2xl`,
             className,
