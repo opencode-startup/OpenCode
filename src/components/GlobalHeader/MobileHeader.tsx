@@ -6,6 +6,7 @@ import clsx from 'clsx';
 import { useId } from 'react';
 
 import { Button, Icon, Logo } from '@/components';
+import { content } from '@/lib';
 
 import { BurgerIcon } from './BurgerIcon';
 import { MOBILE_HEADER_CONTENT_DURATION, MOBILE_HEADER_WRAPPER_DURATION } from './constants';
@@ -15,7 +16,7 @@ import { HeaderProps } from './types';
 
 const MobileHeader = ({
   isLoggedIn = false,
-  userEmail = 'johndoe@gmail.com',
+  userEmail = content.header.defaults.userEmail,
   onSignUpClick,
   onLogInClick,
   onContactClick,
@@ -48,7 +49,7 @@ const MobileHeader = ({
         )}
       >
         <div className="flex items-center overflow-hidden">
-          <Logo size="small" text="OpenCode" />
+          <Logo size="small" text={content.app.name} />
         </div>
 
         <div className="flex items-center gap-3">
@@ -60,7 +61,7 @@ const MobileHeader = ({
             size="medium"
             onClick={handleMenuToggle}
             className="h-10 w-10 rounded-full"
-            aria-label={isExpanded ? 'Close menu' : 'Open menu'}
+            aria-label={isExpanded ? content.header.menu.closeMenu : content.header.menu.openMenu}
           >
             <BurgerIcon isOpen={isExpanded} />
           </Button>
@@ -77,13 +78,16 @@ const MobileHeader = ({
           height: isExpanded ? 'calc(var(--vh, 1vh) * 100 - var(--global-header-height))' : '0',
         }}
         role="menu"
-        aria-label="Mobile navigation menu"
+        aria-label={content.header.navigation.mobileMenu}
         aria-hidden={!isExpanded}
       >
         <div className="flex h-full w-full flex-col justify-between overflow-auto">
           {isLoggedIn ? (
             <>
-              <div className="flex w-full flex-col" aria-label="User account navigation">
+              <div
+                className="flex w-full flex-col"
+                aria-label={content.header.navigation.userAccountNavigation}
+              >
                 <div className="border-gray-alpha-400 flex w-full flex-col gap-4 border-b px-2 pt-4 pb-2">
                   <div className="flex items-center px-4">
                     <span className="typo-label-16 text-gray-1000 truncate">{userEmail}</span>
@@ -103,7 +107,7 @@ const MobileHeader = ({
                     )}
                     rightIcon={<Icon name="settings-gear" size={16} />}
                   >
-                    Account Settings
+                    {content.header.buttons.accountSettings}
                   </Button>
                 </div>
 
@@ -123,7 +127,7 @@ const MobileHeader = ({
                     )}
                     rightIcon={<Icon name="logout" size={16} />}
                   >
-                    Log Out
+                    {content.header.buttons.logOut}
                   </Button>
                 </div>
               </div>
@@ -140,13 +144,19 @@ const MobileHeader = ({
                       (isExpanded ? 'global-mobile-header-item' : 'global-mobile-header-item-exit'),
                   )}
                 >
-                  Upgrade to Pro
+                  {content.header.buttons.upgradeToPro}
                 </Button>
               </div>
             </>
           ) : (
-            <div className="flex h-full w-full flex-col gap-6 p-3" aria-label="Guest navigation">
-              <div className="flex w-full flex-col gap-3" aria-label="Authentication actions">
+            <div
+              className="flex h-full w-full flex-col gap-6 p-3"
+              aria-label={content.header.navigation.guestNavigation}
+            >
+              <div
+                className="flex w-full flex-col gap-3"
+                aria-label={content.header.navigation.authenticationActions}
+              >
                 <Button
                   id={`${headerId}-sign-up`}
                   variant="primary"
@@ -158,7 +168,7 @@ const MobileHeader = ({
                       (isExpanded ? 'global-mobile-header-item' : 'global-mobile-header-item-exit'),
                   )}
                 >
-                  Sign Up
+                  {content.header.buttons.signUp}
                 </Button>
                 <Button
                   id={`${headerId}-log-in`}
@@ -171,11 +181,14 @@ const MobileHeader = ({
                       (isExpanded ? 'global-mobile-header-item' : 'global-mobile-header-item-exit'),
                   )}
                 >
-                  Log In
+                  {content.header.buttons.logIn}
                 </Button>
               </div>
 
-              <div className="flex w-full flex-col gap-1" aria-label="Site navigation">
+              <div
+                className="flex w-full flex-col gap-1"
+                aria-label={content.header.navigation.siteNavigation}
+              >
                 <Button
                   id={`${headerId}-pricing`}
                   variant="tertiary"
@@ -188,7 +201,7 @@ const MobileHeader = ({
                       (isExpanded ? 'global-mobile-header-item' : 'global-mobile-header-item-exit'),
                   )}
                 >
-                  Pricing
+                  {content.header.buttons.pricing}
                 </Button>
                 <Button
                   id={`${headerId}-contact`}
@@ -202,7 +215,7 @@ const MobileHeader = ({
                       (isExpanded ? 'global-mobile-header-item' : 'global-mobile-header-item-exit'),
                   )}
                 >
-                  Contact
+                  {content.header.buttons.contact}
                 </Button>
               </div>
             </div>

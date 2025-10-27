@@ -3,14 +3,15 @@
 import { useId } from 'react';
 
 import { Button, Icon, Logo, Select } from '@/components';
+import { content } from '@/lib';
 
 import { HeaderWrapper } from './HeaderWrapper';
 import { HeaderProps } from './types';
 
 const DesktopHeader = ({
   isLoggedIn = false,
-  userName = 'John Doe',
-  userEmail = 'johndoe@gmail.com',
+  userName = content.header.defaults.userName,
+  userEmail = content.header.defaults.userEmail,
   onSignUpClick,
   onLogInClick,
   onContactClick,
@@ -32,14 +33,14 @@ const DesktopHeader = ({
       },
       {
         value: 'account-settings',
-        label: 'Account Settings',
+        label: content.header.buttons.accountSettings,
         rightIcon: <Icon name="settings-gear" size={12} />,
       },
     ],
     [
       {
         value: 'logout',
-        label: 'Log Out',
+        label: content.header.buttons.logOut,
         rightIcon: <Icon name="logout" size={12} />,
       },
     ],
@@ -63,11 +64,11 @@ const DesktopHeader = ({
           items-center justify-between px-4"
       >
         <div className="flex items-center gap-8">
-          <Logo size="small" text="OpenCode" as={'link'} href={'/'} />
+          <Logo size="small" text={content.app.name} as={'link'} href={content.links.home} />
           <div
             className="flex flex-col items-start gap-2.5"
             role="group"
-            aria-label="Site navigation"
+            aria-label={content.header.navigation.siteNavigation}
           >
             <Button
               id={`${headerId}-pricing`}
@@ -76,11 +77,15 @@ const DesktopHeader = ({
               size="small"
               onClick={onPricingClick}
             >
-              Pricing
+              {content.header.buttons.pricing}
             </Button>
           </div>
         </div>
-        <div className="flex items-center gap-3" role="group" aria-label="User actions">
+        <div
+          className="flex items-center gap-3"
+          role="group"
+          aria-label={content.header.navigation.userActions}
+        >
           {isLoggedIn ? (
             <>
               <Button
@@ -90,7 +95,7 @@ const DesktopHeader = ({
                 size="small"
                 onClick={onMyProgressClick}
               >
-                My Progress
+                {content.header.buttons.myProgress}
               </Button>
               <Select
                 data-testid={`${headerId}-user-menu`}
@@ -112,7 +117,7 @@ const DesktopHeader = ({
                     fullWidth
                     onClick={onUpgradeClick}
                   >
-                    Upgrade to Pro
+                    {content.header.buttons.upgradeToPro}
                   </Button>
                 }
               />
@@ -125,7 +130,7 @@ const DesktopHeader = ({
                 size="small"
                 onClick={onLogInClick}
               >
-                Log In
+                {content.header.buttons.logIn}
               </Button>
               <Button
                 id={`${headerId}-contact`}
@@ -133,7 +138,7 @@ const DesktopHeader = ({
                 size="small"
                 onClick={onContactClick}
               >
-                Contact
+                {content.header.buttons.contact}
               </Button>
               <Button
                 id={`${headerId}-sign-up`}
@@ -141,7 +146,7 @@ const DesktopHeader = ({
                 size="small"
                 onClick={onSignUpClick}
               >
-                Sign Up
+                {content.header.buttons.signUp}
               </Button>
             </>
           )}

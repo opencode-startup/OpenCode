@@ -3,6 +3,7 @@
 import { useId } from 'react';
 
 import { Link, Logo } from '@/components';
+import { content } from '@/lib';
 
 import FooterColumn from './FooterColumn';
 import { GlobalFooterProps } from './types';
@@ -15,7 +16,7 @@ const GlobalFooter = ({ 'data-testid': dataTestId, baseId }: GlobalFooterProps =
   return (
     <footer
       className="bg-background-100 border-t border-gray-400"
-      aria-label="Site footer"
+      aria-label={content.footer.ariaLabels.siteFooter}
       data-testid={dataTestId}
     >
       <div
@@ -25,7 +26,7 @@ const GlobalFooter = ({ 'data-testid': dataTestId, baseId }: GlobalFooterProps =
         <div className="flex w-full items-start justify-between">
           <div className="flex w-full grow flex-wrap items-start gap-6 lg:gap-2.5">
             <FooterColumn
-              title="Company"
+              title={content.footer.columns.company}
               id={`${footerId}-company`}
               data-testid={`${footerId}-company-column`}
             >
@@ -35,7 +36,7 @@ const GlobalFooter = ({ 'data-testid': dataTestId, baseId }: GlobalFooterProps =
                 underline={false}
                 data-testid={`${footerId}-about-link`}
               >
-                About Us
+                {content.footer.links.aboutUs}
               </Link>
               <Link
                 href="/contact"
@@ -43,12 +44,12 @@ const GlobalFooter = ({ 'data-testid': dataTestId, baseId }: GlobalFooterProps =
                 underline={false}
                 data-testid={`${footerId}-contact-link`}
               >
-                Contact
+                {content.footer.links.contact}
               </Link>
             </FooterColumn>
 
             <FooterColumn
-              title="Product"
+              title={content.footer.columns.product}
               id={`${footerId}-product`}
               data-testid={`${footerId}-product-column`}
             >
@@ -58,12 +59,12 @@ const GlobalFooter = ({ 'data-testid': dataTestId, baseId }: GlobalFooterProps =
                 underline={false}
                 data-testid={`${footerId}-pricing-link`}
               >
-                Pricing
+                {content.footer.links.pricing}
               </Link>
             </FooterColumn>
 
             <FooterColumn
-              title="Legal"
+              title={content.footer.columns.legal}
               id={`${footerId}-legal`}
               data-testid={`${footerId}-legal-column`}
             >
@@ -73,7 +74,7 @@ const GlobalFooter = ({ 'data-testid': dataTestId, baseId }: GlobalFooterProps =
                 underline={false}
                 data-testid={`${footerId}-terms-link`}
               >
-                Terms of Use
+                {content.footer.links.termsOfUse}
               </Link>
               <Link
                 href="/privacy"
@@ -81,13 +82,18 @@ const GlobalFooter = ({ 'data-testid': dataTestId, baseId }: GlobalFooterProps =
                 underline={false}
                 data-testid={`${footerId}-privacy-link`}
               >
-                Privacy Policy
+                {content.footer.links.privacyPolicy}
               </Link>
             </FooterColumn>
           </div>
 
           <div className="flex h-8 w-8 shrink-0 items-center gap-2.5 overflow-hidden">
-            <Logo size="small" as="link" href="/" data-testid={`${footerId}-logo`} />
+            <Logo
+              size="small"
+              as="link"
+              href={content.links.home}
+              data-testid={`${footerId}-logo`}
+            />
           </div>
         </div>
 
@@ -98,7 +104,7 @@ const GlobalFooter = ({ 'data-testid': dataTestId, baseId }: GlobalFooterProps =
             className="typo-label-14 text-center text-nowrap text-gray-600"
             data-testid={`${footerId}-copyright`}
           >
-            © {fullYear} OpenCode. All rights reserved.
+            {content.footer.copyright(fullYear)}
           </p>
           <div className="shrink-0"></div>
         </div>

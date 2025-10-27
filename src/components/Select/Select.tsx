@@ -4,6 +4,7 @@ import clsx from 'clsx';
 import { forwardRef, useId } from 'react';
 
 import { Icon, Spinner } from '@/components';
+import { content } from '@/lib';
 
 import { useSelect } from './hooks';
 import { OptionItem } from './OptionItem';
@@ -23,7 +24,7 @@ const Select = forwardRef<HTMLButtonElement, SelectProps>(
   (
     {
       id,
-      placeholder = 'Select an option...',
+      placeholder = content.components.select.defaultPlaceholder,
       size = 'large',
       buttonSize,
       listboxSize,
@@ -96,7 +97,7 @@ const Select = forwardRef<HTMLButtonElement, SelectProps>(
             <Spinner
               size={sizeConfig[actualButtonSize].spinnerSize}
               role="status"
-              aria-label="Loading"
+              aria-label={content.components.select.loadingLabel}
             />
           ) : (
             <Icon
@@ -216,7 +217,7 @@ const Select = forwardRef<HTMLButtonElement, SelectProps>(
               ref={contentRef}
               role="listbox"
               id={listboxId}
-              aria-label={ariaLabel || 'Options'}
+              aria-label={ariaLabel || content.components.select.optionsLabel}
               data-state="open"
               style={{
                 ...(popupWidth && {
