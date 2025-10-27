@@ -8,7 +8,7 @@ const GlobalFooter = () => {
   const fullYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-background-100 border-t border-gray-400">
+    <footer className="bg-background-100 border-t border-gray-400" aria-label="Site footer">
       <div
         className="mx-auto box-border flex max-w-[var(--global-content-max-width)] flex-col items-center justify-center
           gap-9 p-4"
