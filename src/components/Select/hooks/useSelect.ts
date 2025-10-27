@@ -42,17 +42,6 @@ export const useSelect = ({
     }
   }, [value, selectedValue]);
 
-  // Reset focused index when dropdown opens/closes
-  useEffect(() => {
-    if (isOpen) {
-      // Set focus to selected option or first option
-      const selectedIndex = flatOptions.findIndex((opt) => opt.value === selectedValue);
-      setFocusedIndex(selectedIndex >= 0 ? selectedIndex : 0);
-    } else {
-      setFocusedIndex(-1);
-    }
-  }, [isOpen, selectedValue, flatOptions]);
-
   // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
