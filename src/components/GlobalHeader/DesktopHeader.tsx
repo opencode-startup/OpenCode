@@ -98,6 +98,8 @@ const DesktopHeader = ({
                 listboxSize="large"
                 popupWidth={240}
                 hideChevron
+                position={'right'}
+                disableSelection
                 placeholder={userName}
                 leftIcon={<Icon name="user" size={12} />}
                 options={userMenuOptions}
