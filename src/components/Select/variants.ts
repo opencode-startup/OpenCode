@@ -66,7 +66,6 @@ export const selectItemVariants = tv({
     'text-gray-1000 hover:bg-gray-alpha-200 hover:text-gray-1000',
     'focus:bg-gray-alpha-400 focus:text-gray-1000 focus:outline-none',
     'disabled:cursor-not-allowed disabled:opacity-50',
-    'active:bg-gray-alpha-500',
     'touch-manipulation',
   ],
   variants: {
