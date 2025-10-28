@@ -8,6 +8,7 @@ export default function useFeedback({
   onRatingSelect,
   onSubmit,
   disabled = false,
+  expandedWidth = 330,
 }: UseFeedbackProps) {
   const [rating, setRating] = useState<FeedbackRating | null>(null);
   const [state, setState] = useState<FeedbackState>('collapsed');
@@ -74,9 +75,9 @@ export default function useFeedback({
   useEffect(() => {
     if (containerRef.current && initialWidth) {
       const element = containerRef.current;
-      element.style.width = isExpanded ? `330px` : `${initialWidth}px`;
+      element.style.width = isExpanded ? `${expandedWidth}px` : `${initialWidth}px`;
     }
-  }, [initialWidth, isExpanded, state]);
+  }, [initialWidth, isExpanded, state, expandedWidth]);
 
   useEffect(() => {
     if (isExpanded && inputRef.current) {

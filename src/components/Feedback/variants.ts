@@ -17,7 +17,7 @@ export const feedbackTriggerVariants = tv({
   base: 'focus-ring relative overflow-hidden border border-solid border-gray-400 bg-transparent',
   variants: {
     expanded: {
-      true: 'w-full rounded-[0.75rem] border-gray-500',
+      true: 'rounded-[0.75rem] border-gray-500',
       false: 'rounded-[2rem]',
     },
     disabled: {

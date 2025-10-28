@@ -12,6 +12,7 @@ export interface FeedbackProps {
   textareaPlaceholder?: string;
   sendButtonText?: string;
   fullWidth?: boolean;
+  expandedWidth?: number;
   // Accessibility enhancements
   'aria-label'?: string;
   'aria-labelledby'?: string;
@@ -25,4 +26,5 @@ export interface UseFeedbackProps {
   onRatingSelect?: (rating: FeedbackRating | null) => void;
   onSubmit?: (rating: FeedbackRating, comment?: string) => void;
   disabled?: boolean;
+  expandedWidth?: number;
 }

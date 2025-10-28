@@ -21,6 +21,7 @@ const Feedback: FC<FeedbackProps> = ({
   onSubmit,
   disabled = false,
   fullWidth = false,
+  expandedWidth = 330,
   label = 'Feedback',
   textareaPlaceholder = 'Your feedback...',
   sendButtonText = 'Send',
@@ -48,6 +49,7 @@ const Feedback: FC<FeedbackProps> = ({
     onRatingSelect,
     onSubmit,
     disabled,
+    expandedWidth,
   });
 
   const renderRatingButton = (rating: FeedbackRating) => {
