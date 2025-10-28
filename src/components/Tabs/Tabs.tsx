@@ -104,7 +104,7 @@ const Tabs = forwardRef<HTMLDivElement, TabsProps>(
         <div
           className={tabIndicatorVariants({
             shouldAnimate,
-            className: shouldAnimate ? '' : 'opacity-0',
+            className: !shouldAnimate || !indicatorStyle.width ? 'opacity-0' : '',
           })}
           style={{
             left: `${indicatorStyle.left}px`,
