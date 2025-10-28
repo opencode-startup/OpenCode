@@ -17,10 +17,15 @@ export const switchContainerVariants = tv({
       true: 'cursor-not-allowed opacity-50',
       false: 'cursor-pointer',
     },
+    fullWidth: {
+      true: 'w-full',
+      false: 'w-fit',
+    },
   },
   defaultVariants: {
     size: 'medium',
     disabled: false,
+    fullWidth: false,
   },
 });
 

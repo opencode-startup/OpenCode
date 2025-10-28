@@ -16,6 +16,7 @@ const Switch = forwardRef<HTMLDivElement, SwitchProps>(
       onChange,
       size = 'medium',
       disabled = false,
+      fullWidth = false,
       className,
       'aria-label': ariaLabel,
       'aria-labelledby': ariaLabelledBy,
@@ -67,6 +68,7 @@ const Switch = forwardRef<HTMLDivElement, SwitchProps>(
         className={switchContainerVariants({
           size,
           disabled,
+          fullWidth,
           className,
         })}
         {...props}

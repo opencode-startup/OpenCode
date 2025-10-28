@@ -15,6 +15,7 @@ export interface SwitchProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onCha
   onChange?: (value: string) => void;
   size?: SwitchSize;
   disabled?: boolean;
+  fullWidth?: boolean;
   // Accessibility enhancements
   'aria-label'?: string;
   'aria-labelledby'?: string;
