@@ -15,6 +15,7 @@ const Tabs = forwardRef<HTMLDivElement, TabsProps>(
       onChange,
       size = 'medium',
       disabled = false,
+      fullWidth = false,
       className,
       'aria-label': ariaLabel,
       'aria-labelledby': ariaLabelledBy,
@@ -65,6 +66,7 @@ const Tabs = forwardRef<HTMLDivElement, TabsProps>(
         className={tabsContainerVariants({
           size,
           disabled,
+          fullWidth,
           className,
         })}
         {...props}
