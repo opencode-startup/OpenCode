@@ -21,6 +21,7 @@ export interface SwitchProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onCha
   'aria-describedby'?: string;
   // Testing support
   'data-testid'?: string;
+  id?: string;
 }
 
 export interface UseSwitchProps {
@@ -29,7 +30,7 @@ export interface UseSwitchProps {
   defaultValue?: string;
   onChange?: (value: string) => void;
   disabled?: boolean;
-  baseId?: string;
+  id?: string;
 }
 
 export interface UseSwitchAnimationProps {

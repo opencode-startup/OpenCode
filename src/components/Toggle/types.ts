@@ -14,7 +14,7 @@ export interface ToggleProps extends Omit<HTMLAttributes<HTMLButtonElement>, 'on
   'aria-describedby'?: string;
   // Testing support
   'data-testid'?: string;
-  baseId?: string;
+  id?: string;
 }
 
 export interface UseToggleProps {

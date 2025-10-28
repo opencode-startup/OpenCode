@@ -19,13 +19,13 @@ const Toggle = forwardRef<HTMLButtonElement, ToggleProps>(
       'aria-labelledby': ariaLabelledBy,
       'aria-describedby': ariaDescribedBy,
       'data-testid': dataTestId,
-      baseId,
+      id,
       ...props
     },
     ref,
   ) => {
     const generatedId = useId();
-    const toggleId = baseId || generatedId;
+    const toggleId = id || generatedId;
 
     const { currentChecked, handleToggle, handleKeyDown, shouldAnimate } = useToggle({
       checked,

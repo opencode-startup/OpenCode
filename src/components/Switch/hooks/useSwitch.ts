@@ -8,7 +8,7 @@ export const useSwitch = ({
   defaultValue,
   onChange,
   disabled = false,
-  baseId,
+  id,
 }: UseSwitchProps) => {
   const [internalValue, setInternalValue] = useState(defaultValue || options[0]?.value || '');
 
@@ -48,13 +48,13 @@ export const useSwitch = ({
       };
 
       const focusSelectedOption = (newValue: string) => {
-        if (!baseId) return;
+        if (!id) return;
 
         setTimeout(() => {
           const selectedIndex = options.findIndex((opt) => opt.value === newValue);
           if (selectedIndex === -1) return;
 
-          const optionId = `${baseId}-option-${selectedIndex}`;
+          const optionId = `${id}-option-${selectedIndex}`;
           const selectedElement = document.getElementById(optionId);
           selectedElement?.focus();
         }, 0);
@@ -115,7 +115,7 @@ export const useSwitch = ({
           break;
       }
     },
-    [disabled, options, currentValue, value, onChange, handleOptionClick, setInternalValue, baseId],
+    [disabled, options, currentValue, value, onChange, handleOptionClick, setInternalValue, id],
   );
 
   return {

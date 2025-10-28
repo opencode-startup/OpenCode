@@ -21,11 +21,13 @@ const Switch = forwardRef<HTMLDivElement, SwitchProps>(
       'aria-labelledby': ariaLabelledBy,
       'aria-describedby': ariaDescribedBy,
       'data-testid': dataTestId,
+      id,
       ...props
     },
     ref,
   ) => {
     const generatedId = useId();
+    const switchId = id || generatedId;
     const containerRef = useRef<HTMLDivElement>(null);
     const { currentValue, handleOptionClick, handleKeyDown } = useSwitch({
       options,
@@ -33,7 +35,7 @@ const Switch = forwardRef<HTMLDivElement, SwitchProps>(
       defaultValue,
       onChange,
       disabled,
-      baseId: generatedId,
+      id: switchId,
     });
     const { backgroundStyle, shouldAnimate } = useSwitchAnimation({
       options,
@@ -83,7 +85,7 @@ const Switch = forwardRef<HTMLDivElement, SwitchProps>(
         {options.map((option, index) => {
           const isSelected = currentValue === option.value;
           const isOptionDisabled = disabled || option.disabled;
-          const optionId = `${generatedId}-option-${index}`;
+          const optionId = `${switchId}-option-${index}`;
 
           return (
             <div
