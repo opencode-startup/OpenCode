@@ -1,5 +1,18 @@
 import { tv } from 'tailwind-variants';
 
+export const feedbackContainerVariants = tv({
+  base: 'flex flex-col',
+  variants: {
+    fullWidth: {
+      true: 'w-full',
+      false: 'w-fit',
+    },
+  },
+  defaultVariants: {
+    fullWidth: false,
+  },
+});
+
 export const feedbackTriggerVariants = tv({
   base: 'focus-ring relative overflow-hidden border border-solid border-gray-400 bg-transparent',
   variants: {

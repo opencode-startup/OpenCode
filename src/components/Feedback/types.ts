@@ -11,6 +11,7 @@ export interface FeedbackProps {
   label?: string;
   textareaPlaceholder?: string;
   sendButtonText?: string;
+  fullWidth?: boolean;
   // Accessibility enhancements
   'aria-label'?: string;
   'aria-labelledby'?: string;

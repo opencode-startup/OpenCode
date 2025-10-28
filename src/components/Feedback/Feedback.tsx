@@ -10,12 +10,17 @@ import { Button, Icon, Input } from '@/components';
 import { ratingIcons } from './data';
 import { useFeedback } from './hooks';
 import { FeedbackProps, FeedbackRating } from './types';
-import { feedbackRatingButtonVariants, feedbackTriggerVariants } from './variants';
+import {
+  feedbackContainerVariants,
+  feedbackRatingButtonVariants,
+  feedbackTriggerVariants,
+} from './variants';
 
 const Feedback: FC<FeedbackProps> = ({
   onRatingSelect,
   onSubmit,
   disabled = false,
+  fullWidth = false,
   label = 'Feedback',
   textareaPlaceholder = 'Your feedback...',
   sendButtonText = 'Send',
@@ -130,7 +135,7 @@ const Feedback: FC<FeedbackProps> = ({
 
   return (
     <div
-      className={'flex flex-col'}
+      className={feedbackContainerVariants({ fullWidth })}
       role="group"
       aria-label={ariaLabel || 'Feedback widget'}
       aria-labelledby={ariaLabelledBy}
