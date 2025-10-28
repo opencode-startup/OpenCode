@@ -47,7 +47,7 @@ export const tabOptionVariants = tv({
       false: 'text-gray-600 hover:text-gray-900',
     },
     disabled: {
-      true: 'cursor-not-allowed text-gray-400 opacity-50',
+      true: 'cursor-not-allowed opacity-50',
       false: 'cursor-pointer',
     },
     shouldAnimate: {
