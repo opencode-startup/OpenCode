@@ -1,6 +1,6 @@
 'use client';
 
-import './animations.css';
+import './animation.css';
 
 import clsx from 'clsx';
 import { useId } from 'react';
