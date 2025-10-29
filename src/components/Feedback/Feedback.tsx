@@ -103,7 +103,7 @@ const Feedback: FC<FeedbackProps> = ({
         );
       case 'collapsed':
         return (
-          <div>
+          <div className="min-h-[10.75rem]">
             <div className={'relative flex flex-1 flex-col p-2.5'}>
               <Input
                 ref={inputRef}
