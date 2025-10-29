@@ -12,6 +12,9 @@ export interface ToggleProps extends Omit<HTMLAttributes<HTMLButtonElement>, 'on
   'aria-label'?: string;
   'aria-labelledby'?: string;
   'aria-describedby'?: string;
+  // Testing support
+  'data-testid'?: string;
+  id?: string;
 }
 
 export interface UseToggleProps {

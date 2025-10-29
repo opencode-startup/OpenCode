@@ -2,7 +2,7 @@
 
 import './animation.css';
 
-import { forwardRef } from 'react';
+import { forwardRef, useId } from 'react';
 import { createPortal } from 'react-dom';
 import { twMerge } from 'tailwind-merge';
 
@@ -30,10 +30,15 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
       className,
       backdropClassName,
       preventBodyScroll = true,
+      'data-testid': dataTestId,
+      baseId,
       ...props
     },
     ref,
   ) => {
+    const generatedId = useId();
+    const modalId = baseId || generatedId;
+
     // Use Modal hooks
     const { backdropRef, handleBackdropClick } = useModal({
       isOpen,
@@ -47,7 +52,7 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
       preventBodyScroll,
     });
 
-    const { isVisible, isAnimating } = useModalAnimation({
+    const { isVisible, isAnimating, shouldAnimate } = useModalAnimation({
       isOpen,
     });
 
@@ -57,20 +62,21 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
       <div
         ref={backdropRef}
         className={twMerge(
-          isAnimating ? 'modal-backdrop-enter' : 'modal-backdrop-exit',
-          backdropVariants({ placement, className: backdropClassName }),
+          shouldAnimate && (isAnimating ? 'modal-backdrop-enter' : 'modal-backdrop-exit'),
+          backdropVariants({ placement, shouldAnimate, className: backdropClassName }),
         )}
         onClick={handleBackdropClick}
         data-state={isAnimating ? 'open' : 'closed'}
         role="dialog"
         aria-modal="true"
-        aria-labelledby={title ? 'modal-title' : undefined}
-        aria-describedby={subtitle ? 'modal-subtitle' : undefined}
+        aria-labelledby={title ? `${modalId}-title` : undefined}
+        aria-describedby={subtitle ? `${modalId}-subtitle` : undefined}
+        data-testid={dataTestId}
       >
         <div
           ref={ref}
           className={twMerge(
-            isAnimating ? 'modal-enter' : 'modal-exit',
+            shouldAnimate && (isAnimating ? 'modal-enter' : 'modal-exit'),
             `bg-background-200 relative flex max-h-[calc(100vh-3rem)] w-full max-w-lg flex-col overflow-hidden
             rounded-xl border border-gray-400 shadow-2xl`,
             className,
@@ -82,12 +88,12 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
           {(title || subtitle) && (
             <div className={'flex flex-col gap-3 border-b border-gray-400 p-5'}>
               {title && (
-                <h2 id="modal-title" className="typo-heading-24">
+                <h2 id={`${modalId}-title`} className="typo-heading-24">
                   {title}
                 </h2>
               )}
               {subtitle && (
-                <p id="modal-subtitle" className="typo-copy-16">
+                <p id={`${modalId}-subtitle`} className="typo-copy-16">
                   {subtitle}
                 </p>
               )}
@@ -112,8 +118,15 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
                       size = 'medium',
                       ...restProps
                     } = action;
+                    const leftActionId = `${modalId}-left-action-${index}`;
                     return (
-                      <Button key={index} size={size} variant={variant} {...restProps}>
+                      <Button
+                        key={index}
+                        id={leftActionId}
+                        size={size}
+                        variant={variant}
+                        {...restProps}
+                      >
                         {children}
                       </Button>
                     );
@@ -131,8 +144,15 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
                       size = 'medium',
                       ...restProps
                     } = action;
+                    const centerActionId = `${modalId}-center-action-${index}`;
                     return (
-                      <Button key={index} size={size} variant={variant} {...restProps}>
+                      <Button
+                        key={index}
+                        id={centerActionId}
+                        size={size}
+                        variant={variant}
+                        {...restProps}
+                      >
                         {children}
                       </Button>
                     );
@@ -145,8 +165,15 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
                 <div className={actionGroupVariants({ side: 'right' })}>
                   {rightActions.map((action, index) => {
                     const { children, variant = 'primary', size = 'medium', ...restProps } = action;
+                    const rightActionId = `${modalId}-right-action-${index}`;
                     return (
-                      <Button key={index} size={size} variant={variant} {...restProps}>
+                      <Button
+                        key={index}
+                        id={rightActionId}
+                        size={size}
+                        variant={variant}
+                        {...restProps}
+                      >
                         {children}
                       </Button>
                     );

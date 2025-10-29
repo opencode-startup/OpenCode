@@ -2,12 +2,13 @@
 
 import DesktopHeader from './DesktopHeader';
 import MobileHeader from './MobileHeader';
+import { HeaderProps } from './types';
 
-const GlobalHeader = () => {
+const GlobalHeader = (props: HeaderProps) => {
   return (
     <>
-      <DesktopHeader isLoggedIn />
-      <MobileHeader isLoggedIn />
+      <DesktopHeader {...props} />
+      <MobileHeader {...props} />
     </>
   );
 };

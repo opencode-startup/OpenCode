@@ -20,6 +20,9 @@ export interface ModalProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'
   className?: string;
   backdropClassName?: string;
   preventBodyScroll?: boolean;
+  // Testing support
+  'data-testid'?: string;
+  baseId?: string;
 }
 
 export interface UseModalProps {

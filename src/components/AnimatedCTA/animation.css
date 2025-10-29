@@ -25,3 +25,21 @@
   transform: translateY(0px) rotateX(360deg);
   transition: all 400ms ease-out;
 }
+
+/* Disable animations for users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .front-letter,
+  .back-letter,
+  .group.animating .animated-front-letter,
+  .group.animating .animated-back-letter {
+    filter: none;
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  /* Hide back letters when reduced motion is preferred */
+  .back-letter {
+    display: none;
+  }
+}

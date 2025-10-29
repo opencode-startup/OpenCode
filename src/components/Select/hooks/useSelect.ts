@@ -11,6 +11,7 @@ interface UseSelectProps {
   onOpenChange?: (open: boolean) => void;
   disabled?: boolean;
   loading?: boolean;
+  disableSelection?: boolean;
 }
 
 export const useSelect = ({
@@ -21,12 +22,14 @@ export const useSelect = ({
   onOpenChange,
   disabled = false,
   loading = false,
+  disableSelection = false,
 }: UseSelectProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedValue, setSelectedValue] = useState(value || defaultValue || '');
+  const [focusedIndex, setFocusedIndex] = useState(-1);
 
   const triggerRef = useRef<HTMLButtonElement>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLUListElement>(null);
 
   // Find selected option (flatten grouped options first)
   const flatOptions = flattenOptions(options);
@@ -69,13 +72,17 @@ export const useSelect = ({
     (optionValue: string) => {
       const option = flatOptions.find((opt) => opt.value === optionValue);
       if (option && !option.disabled) {
-        setSelectedValue(optionValue);
-        onValueChange?.(optionValue);
+        // Only update selected value if selection is enabled
+        if (!disableSelection) {
+          setSelectedValue(optionValue);
+          onValueChange?.(optionValue);
+        }
+        // Always close the dropdown
         setIsOpen(false);
         onOpenChange?.(false);
       }
     },
-    [flatOptions, onValueChange, onOpenChange],
+    [flatOptions, onValueChange, onOpenChange, disableSelection],
   );
 
   const handleKeyDown = useCallback(
@@ -89,17 +96,34 @@ export const useSelect = ({
           if (!isOpen) {
             setIsOpen(true);
             onOpenChange?.(true);
+          } else if (focusedIndex >= 0 && focusedIndex < flatOptions.length) {
+            // Select the focused option
+            const focusedOption = flatOptions[focusedIndex];
+            if (focusedOption && !focusedOption.disabled) {
+              handleSelectOption(focusedOption.value);
+            }
           }
           break;
         case 'Escape':
+          event.preventDefault();
           setIsOpen(false);
           onOpenChange?.(false);
+          triggerRef.current?.focus();
           break;
         case 'ArrowDown':
           event.preventDefault();
           if (!isOpen) {
             setIsOpen(true);
             onOpenChange?.(true);
+          } else {
+            // Navigate to next non-disabled option
+            let nextIndex = focusedIndex + 1;
+            while (nextIndex < flatOptions.length && flatOptions[nextIndex]?.disabled) {
+              nextIndex++;
+            }
+            if (nextIndex < flatOptions.length) {
+              setFocusedIndex(nextIndex);
+            }
           }
           break;
         case 'ArrowUp':
@@ -107,17 +131,49 @@ export const useSelect = ({
           if (!isOpen) {
             setIsOpen(true);
             onOpenChange?.(true);
+          } else {
+            // Navigate to previous non-disabled option
+            let prevIndex = focusedIndex - 1;
+            while (prevIndex >= 0 && flatOptions[prevIndex]?.disabled) {
+              prevIndex--;
+            }
+            if (prevIndex >= 0) {
+              setFocusedIndex(prevIndex);
+            }
+          }
+          break;
+        case 'Home':
+          if (isOpen) {
+            event.preventDefault();
+            // Jump to first non-disabled option
+            const firstIndex = flatOptions.findIndex((opt) => !opt.disabled);
+            if (firstIndex >= 0) {
+              setFocusedIndex(firstIndex);
+            }
+          }
+          break;
+        case 'End':
+          if (isOpen) {
+            event.preventDefault();
+            // Jump to last non-disabled option
+            for (let i = flatOptions.length - 1; i >= 0; i--) {
+              if (!flatOptions[i]?.disabled) {
+                setFocusedIndex(i);
+                break;
+              }
+            }
           }
           break;
       }
     },
-    [disabled, loading, isOpen, onOpenChange],
+    [disabled, loading, isOpen, focusedIndex, flatOptions, onOpenChange, handleSelectOption],
   );
 
   return {
     isOpen,
     selectedValue,
     selectedOption,
+    focusedIndex,
     triggerRef,
     contentRef,
     handleToggle,

@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
 
 export type SelectSize = 'small' | 'medium' | 'large';
+export type SelectPosition = 'left' | 'right';
 
 export interface SelectOption {
   value: string;
@@ -8,6 +9,7 @@ export interface SelectOption {
   disabled?: boolean;
   leftIcon?: ReactNode;
   rightIcon?: ReactNode;
+  onClick?: () => void;
 }
 
 export interface SelectProps {
@@ -19,16 +21,19 @@ export interface SelectProps {
   buttonSize?: SelectSize;
   listboxSize?: SelectSize;
   popupWidth?: string | number;
+  position?: SelectPosition;
   disabled?: boolean;
   loading?: boolean;
   fullWidth?: boolean;
   required?: boolean;
   className?: string;
+  contentClassName?: string;
   leftIcon?: ReactNode;
   rightIcon?: ReactNode;
   header?: ReactNode;
   footer?: ReactNode;
   hideChevron?: boolean;
+  disableSelection?: boolean;
   onValueChange?: (value: string) => void;
   onOpenChange?: (open: boolean) => void;
   id?: string;
@@ -39,6 +44,8 @@ export interface SelectProps {
   'aria-describedby'?: string;
   'aria-invalid'?: boolean;
   'aria-required'?: boolean;
+  // Testing support
+  'data-testid'?: string;
 }
 
 export interface OptionItemProps {
@@ -46,7 +53,9 @@ export interface OptionItemProps {
   index: number;
   selectId: string;
   selectedValue: string;
+  focusedIndex: number;
   size: SelectSize;
   listboxSize?: SelectSize;
+  disableSelection?: boolean;
   onSelectAction: (value: string) => void;
 }

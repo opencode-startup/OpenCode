@@ -1,2 +1,2 @@
-export { GuideCross } from './GuideCross';
-export type { GuideCrossProps, GuideCrossSize, GuideCrossThickness } from './types';
+export { default as GuideCross } from './GuideCross';
+export type * from './types';

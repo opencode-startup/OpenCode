@@ -15,10 +15,14 @@ export interface SwitchProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onCha
   onChange?: (value: string) => void;
   size?: SwitchSize;
   disabled?: boolean;
+  fullWidth?: boolean;
   // Accessibility enhancements
   'aria-label'?: string;
   'aria-labelledby'?: string;
   'aria-describedby'?: string;
+  // Testing support
+  'data-testid'?: string;
+  id?: string;
 }
 
 export interface UseSwitchProps {
@@ -27,6 +31,7 @@ export interface UseSwitchProps {
   defaultValue?: string;
   onChange?: (value: string) => void;
   disabled?: boolean;
+  id?: string;
 }
 
 export interface UseSwitchAnimationProps {

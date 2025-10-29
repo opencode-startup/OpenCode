@@ -1,50 +1,51 @@
 'use client';
 
-import { forwardRef } from 'react';
+import NextLink from 'next/link';
+import React, { forwardRef, Ref } from 'react';
 
 import { Spinner } from '@/components';
 
+import { useButton } from './hooks';
 import { ButtonProps } from './types';
-import { sizeConfig, variants } from './variants';
+import { sizeConfig } from './variants';
 
-const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+const Button = forwardRef(
   (
     {
-      variant = 'primary',
       size = 'medium',
-      shape = 'square',
       loading = false,
       leftIcon,
       rightIcon,
       children,
-      fullWidth = false,
       iconOnly = false,
+      variant,
+      shape,
+      fullWidth,
       disabled,
       className,
-      ...props
-    },
-    ref,
+      as = 'button',
+      'data-testid': dataTestId,
+      ...restProps
+    }: ButtonProps,
+    ref: Ref<HTMLButtonElement | HTMLAnchorElement>,
   ) => {
-    const isDisabled = disabled || loading;
+    const { isDisabled, commonProps, handleLinkClick, handleLinkTouchStart, handleLinkKeyDown } =
+      useButton({
+        variant,
+        size,
+        shape,
+        loading,
+        fullWidth,
+        iconOnly,
+        disabled,
+        className,
+        as,
+      } as ButtonProps);
 
-    return (
-      <button
-        ref={ref}
-        disabled={isDisabled}
-        className={variants({
-          variant,
-          size,
-          shape,
-          fullWidth,
-          loading,
-          iconOnly,
-          className,
-        })}
-        aria-busy={loading}
-        {...props}
-      >
+    const renderContent = () => (
+      <>
         {loading && (
-          <Spinner size={sizeConfig[size].spinnerSize} role={'status'} aria-label="Loading" />
+          <Spinner size={sizeConfig[size].spinnerSize} role="status" aria-label="Loading" />
         )}
 
         {!loading && !iconOnly && leftIcon && (
@@ -58,6 +59,40 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         {!loading && !iconOnly && rightIcon && (
           <span className="flex shrink-0 items-center">{rightIcon}</span>
         )}
+      </>
+    );
+
+    if (as === 'link') {
+      const { href, ...linkProps } = restProps as any;
+
+      return (
+        <NextLink
+          ref={ref as any}
+          {...commonProps}
+          href={href}
+          onClick={handleLinkClick}
+          onTouchStart={handleLinkTouchStart}
+          onKeyDown={handleLinkKeyDown}
+          data-testid={dataTestId}
+          {...linkProps}
+        >
+          {renderContent()}
+        </NextLink>
+      );
+    }
+
+    const { type = 'button', ...buttonProps } = restProps as any;
+
+    return (
+      <button
+        ref={ref as any}
+        {...commonProps}
+        type={type}
+        disabled={isDisabled}
+        data-testid={dataTestId}
+        {...buttonProps}
+      >
+        {renderContent()}
       </button>
     );
   },

@@ -4,7 +4,7 @@ import { tv } from 'tailwind-variants';
 export const toggleContainerVariants = tv({
   base: [
     'relative flex items-center justify-start overflow-hidden rounded-xl border border-solid',
-    'cursor-pointer transition-all duration-200 ease-out',
+    'cursor-pointer',
     'focus-ring',
   ],
   variants: {
@@ -20,6 +20,10 @@ export const toggleContainerVariants = tv({
     disabled: {
       true: 'cursor-not-allowed opacity-50',
       false: 'cursor-pointer',
+    },
+    shouldAnimate: {
+      true: 'transition-all duration-200 ease-out',
+      false: '',
     },
   },
   compoundVariants: [
@@ -38,12 +42,13 @@ export const toggleContainerVariants = tv({
     size: 'medium',
     checked: false,
     disabled: false,
+    shouldAnimate: true,
   },
 });
 
 // Toggle indicator variants
 export const toggleIndicatorVariants = tv({
-  base: ['bg-gray-1000 rounded-full transition-all duration-200 ease-out', 'shadow-sm'],
+  base: ['bg-gray-1000 rounded-full', 'shadow-sm'],
   variants: {
     size: {
       small: 'size-3',
@@ -58,10 +63,15 @@ export const toggleIndicatorVariants = tv({
       true: 'opacity-80',
       false: 'opacity-100',
     },
+    shouldAnimate: {
+      true: 'transition-all duration-200 ease-out',
+      false: '',
+    },
   },
   defaultVariants: {
     size: 'medium',
     checked: false,
     disabled: false,
+    shouldAnimate: true,
   },
 });

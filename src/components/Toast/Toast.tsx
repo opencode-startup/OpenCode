@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useId } from 'react';
 import { toast as sonnerToast } from 'sonner';
 
 import { Button, Icon } from '@/components';
@@ -14,10 +14,16 @@ const Toast: FC<ToastProps> = ({
   actions = [],
   onClose,
   className,
+  'data-testid': dataTestId,
+  baseId,
   ...props
 }) => {
+  const generatedId = useId();
+  const toastId = baseId || generatedId;
   return (
     <div
+      id={id?.toString()}
+      data-testid={dataTestId}
       className={containerVariants({
         type,
         className,
@@ -56,9 +62,11 @@ const Toast: FC<ToastProps> = ({
         <div className="mt-4 flex justify-end gap-3">
           {actions.map((action, index) => {
             const { label, dismiss = true, onClick, ...buttonProps } = action;
+            const actionButtonId = `${toastId}-action-${index}`;
             return (
               <Button
                 key={index}
+                id={actionButtonId}
                 size="small"
                 shape="rounded"
                 onClick={(event) => {
@@ -68,7 +76,7 @@ const Toast: FC<ToastProps> = ({
 
                   onClick?.(event, id);
                 }}
-                {...buttonProps}
+                {...(buttonProps as any)}
               >
                 {label}
               </Button>

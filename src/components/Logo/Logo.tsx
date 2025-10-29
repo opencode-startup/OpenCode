@@ -1,5 +1,7 @@
+'use client';
+
 import Link from 'next/link';
-import { forwardRef, Ref } from 'react';
+import { forwardRef } from 'react';
 
 import { Icon } from '@/components';
 
@@ -7,10 +9,18 @@ import { useTypingAnimation } from './hooks';
 import { LogoProps } from './types';
 import { iconSizes, logoIconVariants, logoTextVariants, logoVariants } from './variants';
 
-const Logo = forwardRef(
+const Logo = forwardRef<HTMLElement, LogoProps>(
   (
-    { size = 'large', className, animated = true, text, as = 'div', ...props }: LogoProps,
-    ref: Ref<HTMLDivElement | HTMLAnchorElement>,
+    {
+      size = 'large',
+      className,
+      animated = true,
+      text,
+      as = 'div',
+      'data-testid': dataTestId,
+      ...props
+    },
+    ref,
   ) => {
     const showText = Boolean(text);
     const iconSize = iconSizes[size];
@@ -21,7 +31,7 @@ const Logo = forwardRef(
     const renderContent = () => (
       <>
         <div className={logoIconVariants({ size })}>
-          <Icon name={'logo'} {...iconSize} />
+          <Icon name={'logo'} {...iconSize} aria-label="Logo icon" />
         </div>
         {showText && (
           <div className={logoTextVariants({ size })}>
@@ -62,6 +72,7 @@ const Logo = forwardRef(
           ref={ref as any}
           href={href}
           className={logoVariants({ size, showText, className })}
+          data-testid={dataTestId}
           {...linkProps}
         >
           {renderContent()}
@@ -73,6 +84,7 @@ const Logo = forwardRef(
       <div
         ref={ref as any}
         className={logoVariants({ size, showText, className })}
+        data-testid={dataTestId}
         {...(props as any)}
       >
         {renderContent()}

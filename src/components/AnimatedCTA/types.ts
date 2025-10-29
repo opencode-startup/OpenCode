@@ -13,6 +13,7 @@ interface BaseAnimatedCTAProps {
   rightIcon?: IconName;
   fullWidth?: boolean;
   as?: AnimatedCTAAs;
+  'data-testid'?: string;
 }
 
 // Button variant props
@@ -29,5 +30,11 @@ interface LinkAnimatedCTAProps
   as: 'link';
   href: string;
 }
+
+export interface UseAnimatedCTAParams {
+  text: string;
+}
+
+export type AnimationState = 'idle' | 'animating' | 'completed';
 
 export type AnimatedCTAProps = ButtonAnimatedCTAProps | LinkAnimatedCTAProps;

@@ -9,6 +9,8 @@ export const selectTriggerVariants = tv({
     'transition-all duration-200',
     'focus-ring',
     'disabled:cursor-not-allowed disabled:opacity-50',
+    'touch-manipulation [-webkit-tap-highlight-color:transparent] [-webkit-text-size-adjust:100%]',
+    'active:border-gray-600',
   ],
   variants: {
     size: {
@@ -34,8 +36,8 @@ export const selectTriggerVariants = tv({
 
 export const selectContentVariants = tv({
   base: [
-    'absolute top-full right-0 z-50 mt-2',
-    'min-w-full overflow-hidden rounded-xl border',
+    'absolute top-full z-50 mt-2',
+    'max-h-80 min-w-full overflow-x-hidden overflow-y-auto rounded-xl border',
     'bg-background-100 border-gray-alpha-400 shadow-lg',
     'data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95',
     'data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95',
@@ -47,9 +49,14 @@ export const selectContentVariants = tv({
       medium: 'py-2',
       large: 'py-2',
     },
+    position: {
+      left: 'left-0',
+      right: 'right-0',
+    },
   },
   defaultVariants: {
     size: 'large',
+    position: 'left',
   },
 });
 
@@ -59,6 +66,7 @@ export const selectItemVariants = tv({
     'text-gray-1000 hover:bg-gray-alpha-200 hover:text-gray-1000',
     'focus:bg-gray-alpha-400 focus:text-gray-1000 focus:outline-none',
     'disabled:cursor-not-allowed disabled:opacity-50',
+    'touch-manipulation',
   ],
   variants: {
     size: {
@@ -70,6 +78,10 @@ export const selectItemVariants = tv({
       true: 'bg-gray-alpha-400 hover:bg-gray-alpha-400 text-gray-1000',
       false: '',
     },
+    focused: {
+      true: 'bg-gray-alpha-300',
+      false: '',
+    },
     disabled: {
       true: 'cursor-not-allowed opacity-50',
       false: 'cursor-pointer',
@@ -78,6 +90,7 @@ export const selectItemVariants = tv({
   defaultVariants: {
     size: 'large',
     selected: false,
+    focused: false,
     disabled: false,
   },
 });

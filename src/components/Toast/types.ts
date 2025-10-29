@@ -18,4 +18,7 @@ export interface ToastProps
   withCloseButton?: boolean;
   actions?: ToastActionProps[];
   onClose?: () => void;
+  // Testing support
+  'data-testid'?: string;
+  baseId?: string;
 }

@@ -1,5 +1,6 @@
 'use client';
 
+import clsx from 'clsx';
 import { forwardRef, Ref, useCallback, useId, useRef } from 'react';
 
 import { useSwitch, useSwitchAnimation } from './hooks';
@@ -15,15 +16,19 @@ const Switch = forwardRef<HTMLDivElement, SwitchProps>(
       onChange,
       size = 'medium',
       disabled = false,
+      fullWidth = false,
       className,
       'aria-label': ariaLabel,
       'aria-labelledby': ariaLabelledBy,
       'aria-describedby': ariaDescribedBy,
+      'data-testid': dataTestId,
+      id,
       ...props
     },
     ref,
   ) => {
     const generatedId = useId();
+    const switchId = id || generatedId;
     const containerRef = useRef<HTMLDivElement>(null);
     const { currentValue, handleOptionClick, handleKeyDown } = useSwitch({
       options,
@@ -31,6 +36,7 @@ const Switch = forwardRef<HTMLDivElement, SwitchProps>(
       defaultValue,
       onChange,
       disabled,
+      id: switchId,
     });
     const { backgroundStyle, shouldAnimate } = useSwitchAnimation({
       options,
@@ -58,17 +64,20 @@ const Switch = forwardRef<HTMLDivElement, SwitchProps>(
         aria-label={ariaLabel}
         aria-labelledby={ariaLabelledBy}
         aria-describedby={ariaDescribedBy}
+        data-testid={dataTestId}
         className={switchContainerVariants({
-          size,
           disabled,
+          fullWidth,
           className,
         })}
         {...props}
       >
         {/* Moving background indicator */}
         <div
-          className={`pointer-events-none absolute top-1 bottom-1 rounded-[0.125rem] bg-gray-100
-            ${shouldAnimate ? 'transition-all duration-200 ease-out' : ''}`}
+          className={clsx(
+            'pointer-events-none absolute top-1 bottom-1 rounded-[0.125rem] bg-gray-100',
+            shouldAnimate && 'transition-all duration-200 ease-out',
+          )}
           style={{
             left: `${backgroundStyle.left}px`,
             width: `${backgroundStyle.width}px`,
@@ -77,7 +86,7 @@ const Switch = forwardRef<HTMLDivElement, SwitchProps>(
         {options.map((option, index) => {
           const isSelected = currentValue === option.value;
           const isOptionDisabled = disabled || option.disabled;
-          const optionId = `${generatedId}-option-${index}`;
+          const optionId = `${switchId}-option-${index}`;
 
           return (
             <div
@@ -96,7 +105,7 @@ const Switch = forwardRef<HTMLDivElement, SwitchProps>(
               onKeyDown={handleKeyDown(option.value)}
             >
               <div className="relative flex shrink-0 flex-col justify-center text-nowrap">
-                <p className="whitespace-pre">{option.label}</p>
+                <span className="whitespace-pre">{option.label}</span>
               </div>
             </div>
           );

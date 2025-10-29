@@ -15,15 +15,19 @@ const Tabs = forwardRef<HTMLDivElement, TabsProps>(
       onChange,
       size = 'medium',
       disabled = false,
+      fullWidth = false,
       className,
       'aria-label': ariaLabel,
       'aria-labelledby': ariaLabelledBy,
       'aria-describedby': ariaDescribedBy,
+      'data-testid': dataTestId,
+      baseId,
       ...props
     },
     ref,
   ) => {
     const generatedId = useId();
+    const tabsId = baseId || generatedId;
     const containerRef = useRef<HTMLDivElement>(null);
     const { currentValue, handleTabClick, handleKeyDown } = useTabs({
       tabs,
@@ -58,9 +62,11 @@ const Tabs = forwardRef<HTMLDivElement, TabsProps>(
         aria-label={ariaLabel}
         aria-labelledby={ariaLabelledBy}
         aria-describedby={ariaDescribedBy}
+        data-testid={dataTestId}
         className={tabsContainerVariants({
           size,
           disabled,
+          fullWidth,
           className,
         })}
         {...props}
@@ -68,7 +74,7 @@ const Tabs = forwardRef<HTMLDivElement, TabsProps>(
         {tabs.map((tab, index) => {
           const isSelected = currentValue === tab.value;
           const isTabDisabled = disabled || tab.disabled;
-          const tabId = `${generatedId}-tab-${index}`;
+          const tabId = `${tabsId}-tab-${index}`;
 
           return (
             <div
@@ -82,6 +88,7 @@ const Tabs = forwardRef<HTMLDivElement, TabsProps>(
                 size,
                 selected: isSelected,
                 disabled: isTabDisabled,
+                shouldAnimate,
               })}
               onClick={handleTabClick(tab.value)}
               onKeyDown={handleKeyDown(tab.value)}
@@ -96,7 +103,8 @@ const Tabs = forwardRef<HTMLDivElement, TabsProps>(
         {/* Animated indicator */}
         <div
           className={tabIndicatorVariants({
-            className: shouldAnimate ? '' : 'opacity-0',
+            shouldAnimate,
+            className: !shouldAnimate || !indicatorStyle.width ? 'opacity-0' : '',
           })}
           style={{
             left: `${indicatorStyle.left}px`,

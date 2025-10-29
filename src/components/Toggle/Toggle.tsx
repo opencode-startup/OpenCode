@@ -1,6 +1,6 @@
 'use client';
 
-import { forwardRef } from 'react';
+import { forwardRef, useId } from 'react';
 
 import { useToggle } from './hooks';
 import { ToggleProps } from './types';
@@ -18,11 +18,16 @@ const Toggle = forwardRef<HTMLButtonElement, ToggleProps>(
       'aria-label': ariaLabel,
       'aria-labelledby': ariaLabelledBy,
       'aria-describedby': ariaDescribedBy,
+      'data-testid': dataTestId,
+      id,
       ...props
     },
     ref,
   ) => {
-    const { currentChecked, handleToggle, handleKeyDown } = useToggle({
+    const generatedId = useId();
+    const toggleId = id || generatedId;
+
+    const { currentChecked, handleToggle, handleKeyDown, shouldAnimate } = useToggle({
       checked,
       defaultChecked,
       onChange,
@@ -32,17 +37,20 @@ const Toggle = forwardRef<HTMLButtonElement, ToggleProps>(
     return (
       <button
         ref={ref}
+        id={toggleId}
         type="button"
         role="switch"
         aria-checked={currentChecked}
         aria-label={ariaLabel}
         aria-labelledby={ariaLabelledBy}
         aria-describedby={ariaDescribedBy}
+        data-testid={dataTestId}
         disabled={disabled}
         className={toggleContainerVariants({
           size,
           checked: currentChecked,
           disabled,
+          shouldAnimate,
           className,
         })}
         onClick={handleToggle}
@@ -54,6 +62,7 @@ const Toggle = forwardRef<HTMLButtonElement, ToggleProps>(
             size,
             checked: currentChecked,
             disabled,
+            shouldAnimate,
           })}
         />
       </button>

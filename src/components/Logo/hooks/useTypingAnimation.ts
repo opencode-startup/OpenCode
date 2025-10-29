@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from 'react';
 
+import { usePrefersReducedMotion } from '@/hooks';
+
 interface UseTypingAnimationOptions {
   text?: string;
   speed?: number;
@@ -76,9 +78,22 @@ export function useTypingAnimation({
   const [stepIndex, setStepIndex] = useState(0);
   const [typingSteps, setTypingSteps] = useState<TypingStep[]>([]);
 
+  // Detect user's motion preference
+  const prefersReducedMotion = usePrefersReducedMotion();
+
+  // If user prefers reduced motion, show text immediately
+  useEffect(() => {
+    if (prefersReducedMotion && text) {
+      setDisplayText(text);
+      setIsComplete(true);
+      setShowCursorState(false);
+      return;
+    }
+  }, [prefersReducedMotion, text]);
+
   // Generate human-like typing steps with mistakes
   useEffect(() => {
-    if (!humanLike || !text) {
+    if (!humanLike || !text || prefersReducedMotion) {
       return;
     }
 
@@ -155,22 +170,22 @@ export function useTypingAnimation({
     }
 
     setTypingSteps(steps);
-  }, [text, speed, humanLike]);
+  }, [text, speed, humanLike, prefersReducedMotion]);
 
   // Start typing animation after delay
   useEffect(() => {
-    if (!text) return;
+    if (!text || prefersReducedMotion) return;
 
     const startTimeout = setTimeout(() => {
       setShowCursorState(true);
     }, 0);
 
     return () => clearTimeout(startTimeout);
-  }, [text]);
+  }, [text, prefersReducedMotion]);
 
   // Execute typing steps (human-like mode)
   useEffect(() => {
-    if (!humanLike || !showCursorState || stepIndex >= typingSteps.length) {
+    if (prefersReducedMotion || !humanLike || !showCursorState || stepIndex >= typingSteps.length) {
       if (stepIndex >= typingSteps.length && typingSteps.length > 0) {
         setIsComplete(true);
       }
@@ -188,12 +203,12 @@ export function useTypingAnimation({
     }, currentStep.duration);
 
     return () => clearTimeout(stepTimeout);
-  }, [stepIndex, typingSteps, humanLike, showCursorState]);
+  }, [stepIndex, typingSteps, humanLike, showCursorState, prefersReducedMotion]);
 
   // Simple typing effect (non-human-like mode)
   const [currentIndex, setCurrentIndex] = useState(0);
   useEffect(() => {
-    if (humanLike || !showCursorState || currentIndex >= text.length) {
+    if (prefersReducedMotion || humanLike || !showCursorState || currentIndex >= text.length) {
       if (!humanLike && currentIndex >= text.length) {
         setIsComplete(true);
       }
@@ -206,19 +221,19 @@ export function useTypingAnimation({
     }, speed);
 
     return () => clearTimeout(typingTimeout);
-  }, [currentIndex, text, speed, showCursorState, humanLike]);
+  }, [currentIndex, text, speed, showCursorState, humanLike, prefersReducedMotion]);
 
   // Cursor blinking effect
   const [cursorVisible, setCursorVisible] = useState(true);
   useEffect(() => {
-    if (!showCursorState) return;
+    if (prefersReducedMotion || !showCursorState) return;
 
     const cursorInterval = setInterval(() => {
       setCursorVisible((prev) => !prev);
     }, 530); // Terminal-like cursor blink speed
 
     return () => clearInterval(cursorInterval);
-  }, [showCursorState]);
+  }, [showCursorState, prefersReducedMotion]);
 
   return {
     displayText,

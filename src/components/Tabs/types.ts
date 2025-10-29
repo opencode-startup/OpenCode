@@ -15,10 +15,14 @@ export interface TabsProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChang
   onChange?: (value: string) => void;
   size?: TabsSize;
   disabled?: boolean;
+  fullWidth?: boolean;
   // Accessibility enhancements
   'aria-label'?: string;
   'aria-labelledby'?: string;
   'aria-describedby'?: string;
+  // Testing support
+  'data-testid'?: string;
+  baseId?: string;
 }
 
 export interface UseTabsProps {

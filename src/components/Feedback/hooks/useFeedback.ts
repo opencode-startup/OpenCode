@@ -1,11 +1,14 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 
+import { usePrefersReducedMotion } from '@/hooks';
+
 import { FeedbackRating, FeedbackState, UseFeedbackProps } from '../types';
 
 export default function useFeedback({
   onRatingSelect,
   onSubmit,
   disabled = false,
+  expandedWidth = 330,
 }: UseFeedbackProps) {
   const [rating, setRating] = useState<FeedbackRating | null>(null);
   const [state, setState] = useState<FeedbackState>('collapsed');
@@ -14,6 +17,10 @@ export default function useFeedback({
   const [initialWidth, setInitialWidth] = useState<number | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
+
+  // Detect user's motion preference for accessibility
+  const prefersReducedMotion = usePrefersReducedMotion();
+  const shouldAnimate = !prefersReducedMotion;
 
   const handleRatingSelect = useCallback(
     (newRating: FeedbackRating) => {
@@ -68,9 +75,9 @@ export default function useFeedback({
   useEffect(() => {
     if (containerRef.current && initialWidth) {
       const element = containerRef.current;
-      element.style.width = isExpanded ? `330px` : `${initialWidth}px`;
+      element.style.width = isExpanded ? `${expandedWidth}px` : `${initialWidth}px`;
     }
-  }, [initialWidth, isExpanded, state]);
+  }, [initialWidth, isExpanded, state, expandedWidth]);
 
   useEffect(() => {
     if (isExpanded && inputRef.current) {
@@ -114,5 +121,6 @@ export default function useFeedback({
     reset,
     containerRef,
     inputRef,
+    shouldAnimate,
   };
 }

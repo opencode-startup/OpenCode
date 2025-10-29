@@ -33,3 +33,14 @@
     fade-in 500ms ease-in-out 400ms both,
     slide-up 500ms ease-in-out 400ms both;
 }
+
+/* Respect user's motion preferences for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-slide-up,
+  .animate-fade-slide-up.delay-200,
+  .animate-fade-slide-up.delay-400 {
+    animation: none;
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

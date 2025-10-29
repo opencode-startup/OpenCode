@@ -4,7 +4,10 @@ import { InputSize } from './types';
 
 // Container variants for the input wrapper
 export const inputContainerVariants = tv({
-  base: ['bg-background-100 flex overflow-hidden rounded transition-shadow duration-200 ease-out'],
+  base: [
+    'bg-background-100 flex overflow-hidden rounded transition-shadow duration-200 ease-out',
+    'touch-manipulation [-webkit-tap-highlight-color:transparent] [-webkit-text-size-adjust:100%]',
+  ],
   variants: {
     size: {
       small: 'min-h-8 text-sm',
@@ -23,11 +26,13 @@ export const inputContainerVariants = tv({
         'shadow-[0px_0px_0px_1px_var(--gray-alpha-400)]',
         'focus-within:!shadow-[0px_0px_0px_1px_var(--gray-alpha-800),0px_0px_0px_4px_var(--gray-alpha-400)]',
         'hover:shadow-[0px_0px_0px_1px_var(--gray-alpha-500)]',
+        'active:shadow-[0px_0px_0px_1px_var(--gray-alpha-600)]',
       ],
       true: [
         'shadow-[0px_0px_0px_1px_var(--red-800),0px_0px_0px_4px_var(--red-400)]',
         'focus-within:shadow-[0px_0px_0px_1px_var(--red-900),0px_0px_0px_4px_var(--red-500)]',
         'hover:shadow-[0px_0px_0px_1px_var(--red-900),0px_0px_0px_4px_#df434880]',
+        'active:shadow-[0px_0px_0px_1px_var(--red-950),0px_0px_0px_4px_var(--red-600)]',
       ],
     },
   },
@@ -56,6 +61,9 @@ export const inputFieldVariants = tv({
   base: [
     'text-gray-1000 flex-1 bg-transparent leading-5 font-normal outline-none',
     'px-3 placeholder:text-gray-700',
+    'autofill:[-webkit-box-shadow:0_0_0_1000px_var(--background-100)_inset]',
+    'autofill:[-webkit-text-fill-color:var(--gray-1000)]',
+    'select-text [-webkit-user-select:text]',
   ],
   variants: {
     disabled: {

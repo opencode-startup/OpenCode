@@ -117,3 +117,23 @@
     opacity: 0;
   }
 }
+
+/* Respect user's motion preferences for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .modal-animate-in,
+  .modal-animate-out,
+  .modal-enter,
+  .modal-exit,
+  .modal-backdrop-enter,
+  .modal-backdrop-exit {
+    animation: none;
+    animation-duration: 0s;
+  }
+
+  .modal-fade-in,
+  .modal-fade-out,
+  .modal-zoom-in-95,
+  .modal-zoom-out-95 {
+    animation: none;
+  }
+}

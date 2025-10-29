@@ -1,5 +1,7 @@
 import { KeyboardEvent, useCallback, useState } from 'react';
 
+import { usePrefersReducedMotion } from '@/hooks';
+
 import { UseToggleProps } from '../types';
 
 export const useToggle = ({
@@ -12,6 +14,10 @@ export const useToggle = ({
 
   // Use controlled value if provided, otherwise use internal state
   const currentChecked = checked !== undefined ? checked : internalChecked;
+
+  // Detect user's motion preference for accessibility
+  const prefersReducedMotion = usePrefersReducedMotion();
+  const shouldAnimate = !prefersReducedMotion;
 
   const handleToggle = useCallback(() => {
     if (disabled) return;
@@ -41,5 +47,6 @@ export const useToggle = ({
     currentChecked,
     handleToggle,
     handleKeyDown,
+    shouldAnimate,
   };
 };

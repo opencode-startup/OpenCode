@@ -5,7 +5,6 @@ export const backdropVariants = tv({
     'fixed inset-0 z-50',
     'bg-black/30 backdrop-blur-[2px] backdrop-filter',
     'flex items-center justify-center',
-    'transition-all duration-200 ease-out',
   ],
   variants: {
     placement: {
@@ -13,9 +12,14 @@ export const backdropVariants = tv({
       top: 'items-start p-6 pt-24',
       bottom: 'items-end p-6 pb-24',
     },
+    shouldAnimate: {
+      true: 'transition-all duration-200 ease-out',
+      false: '',
+    },
   },
   defaultVariants: {
     placement: 'center',
+    shouldAnimate: true,
   },
 });
 

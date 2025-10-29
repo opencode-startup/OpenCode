@@ -2,23 +2,38 @@
 
 import './animation.css';
 
-import { FC } from 'react';
+import clsx from 'clsx';
+import { FC, useId } from 'react';
 
 import { Button, Icon, Input } from '@/components';
 
 import { ratingIcons } from './data';
 import { useFeedback } from './hooks';
 import { FeedbackProps, FeedbackRating } from './types';
-import { feedbackRatingButtonVariants, feedbackTriggerVariants } from './variants';
+import {
+  feedbackContainerVariants,
+  feedbackRatingButtonVariants,
+  feedbackTriggerVariants,
+} from './variants';
 
 const Feedback: FC<FeedbackProps> = ({
   onRatingSelect,
   onSubmit,
   disabled = false,
+  fullWidth = false,
+  expandedWidth = 330,
   label = 'Feedback',
   textareaPlaceholder = 'Your feedback...',
   sendButtonText = 'Send',
+  'aria-label': ariaLabel,
+  'aria-labelledby': ariaLabelledBy,
+  'aria-describedby': ariaDescribedBy,
+  'data-testid': dataTestId,
+  baseId,
 }) => {
+  const generatedId = useId();
+  const feedbackId = baseId || generatedId;
+
   const {
     rating: currentRating,
     state,
@@ -29,27 +44,35 @@ const Feedback: FC<FeedbackProps> = ({
     setComment,
     containerRef,
     inputRef,
+    shouldAnimate,
   } = useFeedback({
     onRatingSelect,
     onSubmit,
     disabled,
+    expandedWidth,
   });
 
   const renderRatingButton = (rating: FeedbackRating) => {
     const isButtonDisabled = disabled || state === 'submitted';
+    const ratingButtonId = `${feedbackId}-rating-${rating}`;
+    const isSelected = currentRating === rating;
 
     return (
       <Button
         key={rating}
+        id={ratingButtonId}
         iconOnly
         size={'small'}
         disabled={isButtonDisabled}
         shape={'rounded'}
         onClick={() => handleRatingSelect(rating)}
         className={feedbackRatingButtonVariants({
-          selected: currentRating === rating,
+          selected: isSelected,
           disabled: isButtonDisabled,
+          shouldAnimate,
         })}
+        role="radio"
+        aria-checked={isSelected}
         aria-label={`Rate ${rating} out of 4`}
       >
         <Icon name={ratingIcons[rating]} size={16} />
@@ -61,7 +84,14 @@ const Feedback: FC<FeedbackProps> = ({
     switch (state) {
       case 'submitted':
         return (
-          <div className="flex h-[10.75rem] flex-col items-center justify-center gap-2 overflow-hidden p-10 transition-all">
+          <div
+            className={clsx(
+              'flex h-[10.75rem] flex-col items-center justify-center gap-2 overflow-hidden p-10',
+              shouldAnimate && 'transition-all',
+            )}
+            role="status"
+            aria-live="polite"
+          >
             <Icon name="check-circle-fill" size={32} className="animate-fade-slide-up" />
             <p className="text-gray-1000 typo-label-14 animate-fade-slide-up text-center delay-200">
               Your feedback has been received!
@@ -73,7 +103,7 @@ const Feedback: FC<FeedbackProps> = ({
         );
       case 'collapsed':
         return (
-          <div>
+          <div className="min-h-[10.75rem]">
             <div className={'relative flex flex-1 flex-col p-2.5'}>
               <Input
                 ref={inputRef}
@@ -106,15 +136,23 @@ const Feedback: FC<FeedbackProps> = ({
   };
 
   return (
-    <div className={'flex flex-col'}>
+    <div
+      className={feedbackContainerVariants({ fullWidth })}
+      role="group"
+      aria-label={ariaLabel || 'Feedback widget'}
+      aria-labelledby={ariaLabelledBy}
+      aria-describedby={ariaDescribedBy}
+      data-testid={dataTestId}
+    >
       <div
         ref={containerRef}
         className={feedbackTriggerVariants({
           expanded: isExpanded,
           disabled,
+          shouldAnimate,
         })}
       >
-        <div className={isExpanded || state === 'submitted' ? 'flex w-full flex-col' : ''}>
+        <div className={clsx((isExpanded || state === 'submitted') && 'flex w-full flex-col')}>
           <div className="flex items-center justify-center gap-2 overflow-hidden px-4 py-2">
             <div
               className="typo-label-14 relative flex shrink-0 flex-col justify-center text-sm leading-none font-normal
@@ -122,14 +160,21 @@ const Feedback: FC<FeedbackProps> = ({
             >
               <p className="leading-5 whitespace-pre">{label}</p>
             </div>
-            <div className="relative flex shrink-0 items-center gap-0.5">
+            <div
+              className="relative flex shrink-0 items-center gap-0.5"
+              role="radiogroup"
+              aria-label="Rating options"
+            >
               {([1, 2, 3, 4] as FeedbackRating[]).map(renderRatingButton)}
             </div>
           </div>
 
           <div
-            className={`overflow-hidden transition-all duration-400 ease-in-out ${
-              isExpanded ? 'max-h-[14.4rem] opacity-100' : 'max-h-0 opacity-0' }`}
+            className={clsx(
+              'overflow-hidden',
+              shouldAnimate && 'transition-all duration-400 ease-in-out',
+              isExpanded ? 'max-h-[14.4rem] opacity-100' : 'max-h-0 opacity-0',
+            )}
           >
             {renderContent()}
           </div>

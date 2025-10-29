@@ -1,8 +1,10 @@
 'use client';
 
+import clsx from 'clsx';
 import { forwardRef, useId } from 'react';
 
 import { Icon, Spinner } from '@/components';
+import { content } from '@/lib';
 
 import { useSelect } from './hooks';
 import { OptionItem } from './OptionItem';
@@ -22,16 +24,19 @@ const Select = forwardRef<HTMLButtonElement, SelectProps>(
   (
     {
       id,
-      placeholder = 'Select an option...',
+      placeholder = content.components.select.defaultPlaceholder,
       size = 'large',
       buttonSize,
       listboxSize,
       popupWidth,
+      position = 'left',
       className,
+      contentClassName,
       disabled = false,
       loading = false,
       fullWidth = false,
       required = false,
+      disableSelection = false,
       options = [],
       value,
       defaultValue,
@@ -46,6 +51,7 @@ const Select = forwardRef<HTMLButtonElement, SelectProps>(
       'aria-required': ariaRequired,
       'aria-label': ariaLabel,
       'aria-labelledby': ariaLabelledBy,
+      'data-testid': dataTestId,
       ...props
     },
     ref,
@@ -60,6 +66,7 @@ const Select = forwardRef<HTMLButtonElement, SelectProps>(
       isOpen,
       selectedValue,
       selectedOption,
+      focusedIndex,
       triggerRef,
       contentRef,
       handleToggle,
@@ -73,6 +80,7 @@ const Select = forwardRef<HTMLButtonElement, SelectProps>(
       onOpenChange,
       disabled,
       loading,
+      disableSelection,
     });
 
     const displayText = selectedOption?.label || placeholder;
@@ -89,7 +97,7 @@ const Select = forwardRef<HTMLButtonElement, SelectProps>(
             <Spinner
               size={sizeConfig[actualButtonSize].spinnerSize}
               role="status"
-              aria-label="Loading"
+              aria-label={content.components.select.loadingLabel}
             />
           ) : (
             <Icon
@@ -129,8 +137,10 @@ const Select = forwardRef<HTMLButtonElement, SelectProps>(
                     index={currentFlatIndex}
                     selectId={selectId}
                     selectedValue={selectedValue}
+                    focusedIndex={focusedIndex}
                     size={actualButtonSize}
                     listboxSize={actualListboxSize}
+                    disableSelection={disableSelection}
                     onSelectAction={handleSelectOption}
                   />
                 );
@@ -147,8 +157,10 @@ const Select = forwardRef<HTMLButtonElement, SelectProps>(
             index={index}
             selectId={selectId}
             selectedValue={selectedValue}
+            focusedIndex={focusedIndex}
             size={actualButtonSize}
             listboxSize={actualListboxSize}
+            disableSelection={disableSelection}
             onSelectAction={handleSelectOption}
           />
         ));
@@ -162,10 +174,12 @@ const Select = forwardRef<HTMLButtonElement, SelectProps>(
       'aria-expanded': isOpen,
       'aria-haspopup': 'listbox' as const,
       'aria-owns': isOpen ? listboxId : undefined,
+      'aria-activedescendant':
+        isOpen && focusedIndex >= 0 ? `${selectId}-option-${focusedIndex}` : undefined,
     };
 
     return (
-      <div className="flex flex-col gap-1">
+      <div className="flex max-w-fit flex-col gap-1">
         <div className="relative">
           <button
             ref={ref || triggerRef}
@@ -183,12 +197,15 @@ const Select = forwardRef<HTMLButtonElement, SelectProps>(
             onKeyDown={handleKeyDown}
             aria-label={ariaLabel}
             aria-labelledby={ariaLabelledBy}
+            data-testid={dataTestId}
             {...ariaAttributes}
             {...props}
           >
             <div className="flex min-w-0 flex-1 items-center gap-2">
               {leftIcon && <span className="flex shrink-0 items-center">{leftIcon}</span>}
-              <span className={`truncate ${sizeConfig[actualButtonSize].text}`}>{displayText}</span>
+              <span className={clsx('truncate', sizeConfig[actualButtonSize].text)}>
+                {displayText}
+              </span>
               {rightIcon && <span className="flex shrink-0 items-center">{rightIcon}</span>}
             </div>
 
@@ -196,11 +213,11 @@ const Select = forwardRef<HTMLButtonElement, SelectProps>(
           </button>
 
           {isOpen && (
-            <div
+            <ul
               ref={contentRef}
               role="listbox"
               id={listboxId}
-              aria-label={ariaLabel || 'Options'}
+              aria-label={ariaLabel || content.components.select.optionsLabel}
               data-state="open"
               style={{
                 ...(popupWidth && {
@@ -209,6 +226,8 @@ const Select = forwardRef<HTMLButtonElement, SelectProps>(
               }}
               className={selectContentVariants({
                 size: actualListboxSize,
+                position,
+                className: contentClassName,
               })}
             >
               {header && (
@@ -230,7 +249,7 @@ const Select = forwardRef<HTMLButtonElement, SelectProps>(
                   {footer}
                 </div>
               )}
-            </div>
+            </ul>
           )}
         </div>
       </div>

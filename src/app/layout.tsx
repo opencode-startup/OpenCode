@@ -16,7 +16,7 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
   return (
     <html lang="en" className={geistSans.className}>
       <body>
-        <GlobalHeader />
+        <GlobalHeader isLoggedIn />
         <main className="pt-[var(--global-header-height)]">{children}</main>
         <GlobalFooter />
         <Toaster />

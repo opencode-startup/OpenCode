@@ -4,8 +4,7 @@ import { AnimatedCTASize } from './types';
 
 export const variants = tv({
   base: [
-    `relative inline-flex min-w-fit cursor-pointer items-center justify-between overflow-clip
-    rounded-full`,
+    'relative inline-flex min-w-fit cursor-pointer items-center overflow-clip rounded-full',
     'bg-background-200 border-gray-alpha-400 hover:bg-background-100 border',
     'focus-ring',
   ],
@@ -38,8 +37,8 @@ export const variants = tv({
       },
     },
     fullWidth: {
-      true: 'w-full',
-      false: 'w-auto',
+      true: 'w-full justify-center',
+      false: 'w-auto justify-between',
     },
   },
   compoundVariants: [
