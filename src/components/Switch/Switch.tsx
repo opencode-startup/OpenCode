@@ -66,7 +66,6 @@ const Switch = forwardRef<HTMLDivElement, SwitchProps>(
         aria-describedby={ariaDescribedBy}
         data-testid={dataTestId}
         className={switchContainerVariants({
-          size,
           disabled,
           fullWidth,
           className,

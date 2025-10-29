@@ -3,16 +3,11 @@ import { tv } from 'tailwind-variants';
 // Switch container variants
 export const switchContainerVariants = tv({
   base: [
-    'relative flex min-h-fit items-start justify-start overflow-hidden rounded-[0.375rem] border',
+    'relative flex min-h-fit items-start justify-start overflow-hidden rounded-[0.375rem] border p-1',
     'border-solid border-gray-400',
     'transition-all duration-200 ease-out',
   ],
   variants: {
-    size: {
-      small: 'p-1',
-      medium: 'p-1',
-      large: 'p-1.5',
-    },
     disabled: {
       true: 'cursor-not-allowed opacity-50',
       false: 'cursor-pointer',
@@ -23,7 +18,6 @@ export const switchContainerVariants = tv({
     },
   },
   defaultVariants: {
-    size: 'medium',
     disabled: false,
     fullWidth: false,
   },
